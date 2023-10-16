@@ -102,6 +102,7 @@ A live preview can be seen here: [Github Pages](https://msalig.github.io/Web-Eng
 * [![Next][Next.js]][Next-url]
 * [![Angular][Angular.io]][Angular-url]
 * [![ExpressJS][ExpressJS.com]][ExpressJS-url]
+* [![MySQL][MySQL.com]][MySQL-url]
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -157,3 +158,6 @@ Distributed under the MIT License. See [LICENSE](./LICENSE) for more information
 
 [ExpressJS.com]: https://img.shields.io/badge/express-000000?style=for-the-badge&logo=express&logoColor=white
 [ExpressJS-url]: https://expressjs.com/
+
+[MySQL.com]: https://img.shields.io/badge/mysql-4479A1?style=for-the-badge&logo=mysql&logoColor=white
+[MySQL-url]: https://mysql.com/
