@@ -15,6 +15,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { HomeComponent } from './home/home.component';
 import { BlogsComponent } from './blogs/blogs.component';
 import { RatingsComponent } from './ratings/ratings.component';
+import { PreviewBlogComponent } from './preview-blog/preview-blog.component';
 
 
 const myRoutes: Routes =[
@@ -39,7 +40,8 @@ const myRoutes: Routes =[
     NavbarComponent,
     HomeComponent,
     BlogsComponent,
-    RatingsComponent
+    RatingsComponent,
+    // PreviewBlogComponent
   ],
   imports: [
     RouterModule.forRoot(myRoutes),

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {getBlogEntrys} from "../../MockData/mockblogEntry";
 
 @Component({
   selector: 'app-blogs',
@@ -6,5 +7,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./blogs.component.scss']
 })
 export class BlogsComponent {
+
+  protected readonly getBlogEntrys = getBlogEntrys;
 
 }
