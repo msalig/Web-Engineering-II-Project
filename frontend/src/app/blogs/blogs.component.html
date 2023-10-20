@@ -1,7 +1,13 @@
 <p>blogs works!</p>
-<li *ngFor="let blog of getBlogEntrys()">
-  <div class="component">
+<li *ngFor="let blog of getBlogEntrys()" class="allblogs">
+  <div class="oneblog">
+    <div class="title">{{blog.title}}</div>
+    <p>{{blog.blogentryShort}}</p>
+    <div>
+      <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="home"></mat-icon>
 
+      <div>{{blog.author.displayName}}</div>
+    </div>
   </div>
-  <p>{{blog.blogentryShort}}</p>
+
 </li>
