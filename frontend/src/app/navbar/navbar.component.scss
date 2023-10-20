@@ -1,0 +1,114 @@
+header {
+  padding: 12px 0;
+  //background-color: rgb(53, 122, 159);
+  //background-image: url("../../assets/urlaubsfotos/strand.jpeg");
+}
+
+.logoimg{
+  margin-left: 48px;
+  //max-width: 10px;
+  //display: inline-block;
+  //position: relative;
+  //right: 0;
+  //top: 20px;
+}
+
+.menu {
+  //margin-top: 20px;
+  padding-top: 20px;
+  margin-right: 40px;
+  text-align: right;
+
+
+
+
+  ul {
+    padding: 0;
+    margin: 0;
+
+    li {
+      list-style-type: none;
+      display: inline-block;
+      margin-left: 24px;
+      text-transform: uppercase;
+
+      a {
+        list-style: none;
+        text-decoration: none;
+        color: #333;
+        font-family: C059;
+        font-size: 24px;
+
+
+
+        &:hover {
+          color: #2ca7e9;
+          cursor: pointer;
+          transition: 0.4s ease-in-out;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 699px) {
+  .menu {
+    position: fixed;
+    right: -340px;
+    top: 64;
+    width: 280px;
+    height: 100%;
+    background: #222;
+    transition: 0.4s ease-in-out;
+
+    ul {
+      li {
+        display: block;
+        text-align: left;
+        margin: 0;
+        padding: 10px 0 10px 26px;
+        border-bottom: 1px solid #312f2f;
+      }
+    }
+  }
+  .menu_icon {
+    display: inline-block;
+    position: relative;
+    right: 0;
+    top: 80px;
+    margin-left: 20px;
+
+
+    span {
+      width: 32px;
+      height: 3px;
+      background: #ffffff;
+      display: block;
+      transition: 0.2s ease-in-out;
+
+      &:nth-child(2) {
+        margin: 4px 0;
+      }
+    }
+  }
+  .menu_iconClass {
+    span {
+      &:nth-child(2) {
+        display: none;
+      }
+
+      &:nth-child(1) {
+        transform: rotate(40deg);
+      }
+
+      &:nth-child(3) {
+        transform: rotate(-40deg);
+        margin-top: -3px;
+      }
+    }
+  }
+  .menuClasse {
+    right: 0;
+    transition: 0.4s ease-in-out;
+  }
+}
