@@ -1,3 +1,5 @@
+$main-color: #3f7a74;
+
 
 .tag {
   font-size: smaller;
@@ -6,16 +8,16 @@
   padding-right: 5px;
   color: white;
   font-weight: bold;
-  background-color: #77e7da;
+  background-color: $main-color;
   border-style: solid;
   border-radius: 5px;
   border-width: 1px;
 
 
   &:hover {
-    color: #000000;
+    color: $main-color;
     background-color: white;
-    border-color: #77e7da;
+    border-color: $main-color;
 
     transition: 0.3s ease-in-out;
 

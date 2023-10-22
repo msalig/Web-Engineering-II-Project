@@ -1,7 +1,12 @@
+<div>
+  Filter zeugs kommt hierhin
+</div>
+
+
 <li *ngFor="let blog of getBlogEntrys()" class="allblogs">
 
-  <div  onclick="location.href='blogs/newblog';" class="oneblog2">
-    <div class="oneblog" >
+  <div onclick="location.href='blogs/newblog';" class="oneblog2">
+    <div class="oneblog">
       <div class="title">{{blog.title}}</div>
       <p>{{blog.blogentryShort}}</p>
       <div class="blogpreview">
