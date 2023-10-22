@@ -10,4 +10,5 @@ export class BlogsComponent {
 
   protected readonly getBlogEntrys = getBlogEntrys;
 
+  protected readonly location = location;
 }

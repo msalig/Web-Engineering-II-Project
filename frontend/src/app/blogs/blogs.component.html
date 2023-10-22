@@ -1,8 +1,6 @@
-<p>blogs works!</p>
-
 <li *ngFor="let blog of getBlogEntrys()" class="allblogs">
 
-  <div class="oneblog2">
+  <div  onclick="location.href='blogs/newblog';" class="oneblog2">
     <div class="oneblog" >
       <div class="title">{{blog.title}}</div>
       <p>{{blog.blogentryShort}}</p>

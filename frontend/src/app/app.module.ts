@@ -16,6 +16,7 @@ import { HomeComponent } from './home/home.component';
 import { BlogsComponent } from './blogs/blogs.component';
 import { RatingsComponent } from './ratings/ratings.component';
 import { PreviewBlogComponent } from './preview-blog/preview-blog.component';
+import { BlogComponent } from './blog/blog.component';
 
 
 const myRoutes: Routes =[
@@ -27,6 +28,11 @@ const myRoutes: Routes =[
     path:'blogs',
     component:BlogsComponent
   },
+  {
+    path:'blogs/newblog',
+    component:BlogComponent
+  },
+
   {
     path:'ratings',
     component:RatingsComponent
@@ -41,6 +47,7 @@ const myRoutes: Routes =[
     HomeComponent,
     BlogsComponent,
     RatingsComponent,
+    BlogComponent,
     // PreviewBlogComponent
   ],
   imports: [

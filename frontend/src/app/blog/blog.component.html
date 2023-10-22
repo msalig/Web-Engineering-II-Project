@@ -1,0 +1,33 @@
+<li *ngFor="let blog of getBlogEntrys()" class="wholeblog">
+
+  <div class="title">{{blog.title}}</div>
+  <div class="subtitle">{{blog.blogentryShort}}</div>
+  <ul class = infos>
+    <li>
+
+      {{blog.author}}
+    </li>
+    <li>
+      {{blog.location.place}}, {{blog.location.country}} |{{blog.location.coordinates}}
+    </li>
+
+    <li *ngFor="let tag of blog.tags">
+      <div class="tag">{{tag}}</div>
+    </li>
+  </ul>
+
+
+  <div class="blogentry">{{blog.blogentry}}</div>
+
+  <ul *ngFor="let comment of blog.comments">
+    <li>
+      {{comment.title}},{{comment.author}}
+    </li>
+    <li>{{comment.review}}
+    </li>
+    <li>
+      {{comment.comment}}
+    </li>
+
+  </ul>
+</li>

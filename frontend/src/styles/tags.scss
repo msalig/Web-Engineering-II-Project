@@ -1,0 +1,23 @@
+
+.tag {
+  font-size: smaller;
+  padding: 2px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: white;
+  font-weight: bold;
+  background-color: #77e7da;
+  border-style: solid;
+  border-radius: 5px;
+  border-width: 1px;
+
+
+  &:hover {
+    color: #000000;
+    background-color: white;
+    border-color: #77e7da;
+
+    transition: 0.3s ease-in-out;
+
+  }
+}
