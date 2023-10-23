@@ -96,13 +96,14 @@ A live preview can be seen here: [Github Pages](https://msalig.github.io/Web-Eng
 
 ### Built With
 
-* [![Bootstrap][Bootstrap.com]][Bootstrap-url]
-* [![NodeJS][NodeJS.org]][NodeJS-url]
 * [![MongoDB][MongoDB.com]][MongoDB-url]
-* [![Next][Next.js]][Next-url]
-* [![Angular][Angular.io]][Angular-url]
 * [![ExpressJS][ExpressJS.com]][ExpressJS-url]
-* [![MySQL][MySQL.com]][MySQL-url]
+* [![Angular][Angular.io]][Angular-url]
+* [![NodeJS][NodeJS.org]][NodeJS-url]
+
+* [![Passport][PassportJS.org]][PassportJS-url]
+* [![QuillJS][QuillJS.com]][QuillJS-url]
+
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -113,13 +114,22 @@ A live preview can be seen here: [Github Pages](https://msalig.github.io/Web-Eng
 
 To get a local copy up and running follow these simple example steps.
 
+### Pre-requisites
+
+- git - [Installation guide](https://www.linode.com/docs/development/version-control/how-to-install-git-on-linux-mac-and-windows/) .
+- node.js - [Download page](https://nodejs.org/en/download/) .
+- npm - comes with node or download yarn - [Download page](https://yarnpkg.com/lang/en/docs/install) .
+- mongodb - [Download page](https://www.mongodb.com/download-center/community) .
+
 ### Installation
 
-1. Clone the repo
    ```sh
    git clone https://github.com/msalig/Web-Engineering-II-Project.git
+   
+   npm install
+   
+   npm start
    ```
-2. Open the index.html in your web browser.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -132,6 +142,7 @@ Use this space to show useful examples of how a project can be used. Additional 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
+
 <!-- LICENSE -->
 ## License
 
@@ -139,11 +150,19 @@ Distributed under the MIT License. See [LICENSE](./LICENSE) for more information
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
+
+<!-- ACKNOWLEDGMENTS -->
+## Acknowledgments
+
+* [Best-README-Template](https://github.com/othneildrew/Best-README-Template)
+* [Choose an Open Source License](https://choosealicense.com)
+* [Img Shields](https://shields.io)
+* [GitHub Pages](https://pages.github.com)
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[Bootstrap.com]: https://img.shields.io/badge/Bootstrap-563D7C?style=for-the-badge&logo=bootstrap&logoColor=white
-[Bootstrap-url]: https://getbootstrap.com
-
 [NodeJS.org]: https://img.shields.io/badge/Nodejs-339933?style=for-the-badge&logo=nodedotjs&logoColor=white
 [NodeJS-url]: https://nodejs.org
 
@@ -153,11 +172,11 @@ Distributed under the MIT License. See [LICENSE](./LICENSE) for more information
 [Angular.io]: https://img.shields.io/badge/Angular-DD0031?style=for-the-badge&logo=angular&logoColor=white
 [Angular-url]: https://angular.io/
 
-[Next.js]: https://img.shields.io/badge/next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white
-[Next-url]: https://nextjs.org/
-
 [ExpressJS.com]: https://img.shields.io/badge/express-000000?style=for-the-badge&logo=express&logoColor=white
 [ExpressJS-url]: https://expressjs.com/
 
-[MySQL.com]: https://img.shields.io/badge/mysql-4479A1?style=for-the-badge&logo=mysql&logoColor=white
-[MySQL-url]: https://mysql.com/
+[PassportJS.org]: https://img.shields.io/badge/passport-34E27A?style=for-the-badge&logo=passport&logoColor=white
+[PassportJS-url]: https://passportjs.org
+
+[QuillJS.com]: https://img.shields.io/badge/quilljs-1d1e30?style=for-the-badge&logo=quilljs.com/assets/images/logo.svg&logoColor=white
+[QuillJS-url]: https://quilljs.com
