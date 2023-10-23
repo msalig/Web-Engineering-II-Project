@@ -1,0 +1,19 @@
+{
+  "name": "web-enginerring-ii-project",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "angular": "^1.6.10",
+    "draft.js": "^0.2.0",
+    "express": "^4.18.2",
+    "mongoose": "^7.6.3",
+    "password.js": "^0.5.0",
+    "quill": "^1.3.7"
+  }
+}
