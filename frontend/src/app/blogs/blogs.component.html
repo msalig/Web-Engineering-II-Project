@@ -1,0 +1,35 @@
+<div>
+  Filter zeugs kommt hierhin
+</div>
+
+
+<li *ngFor="let blog of getBlogEntrys()" class="allblogs">
+
+  <div onclick="location.href='blogs/newblog';" class="oneblog2">
+    <div class="oneblog">
+      <div class="title">{{blog.title}}</div>
+      <p>{{blog.blogentryShort}}</p>
+      <div class="blogpreview">
+        {{blog.blogentry}}
+      </div>
+      <ul class="blogfooter">
+        <li>
+          <div class="author">
+            <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="user"></mat-icon>
+            {{blog.author.displayName}}
+          </div>
+        </li>
+        <li class="location">
+          {{blog.location.place}}, {{blog.location.country}}
+        </li>
+        <li>
+          comments(icons): {{blog.comments.length}}
+        </li>
+        <li *ngFor="let tag of blog.tags">
+          <div class="tag">{{tag}}</div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+</li>

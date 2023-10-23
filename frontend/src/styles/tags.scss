@@ -1,0 +1,25 @@
+$main-color: #3f7a74;
+
+
+.tag {
+  font-size: smaller;
+  padding: 2px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: white;
+  font-weight: bold;
+  background-color: $main-color;
+  border-style: solid;
+  border-radius: 5px;
+  border-width: 1px;
+
+
+  &:hover {
+    color: $main-color;
+    background-color: white;
+    border-color: $main-color;
+
+    transition: 0.3s ease-in-out;
+
+  }
+}
