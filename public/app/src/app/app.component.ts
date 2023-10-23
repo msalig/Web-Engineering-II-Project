@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {IBlogEntry} from "../interfaces/blogEntry";
 import {getBlogEntrys} from "../MockData/mockblogEntry";
+import { HttpClient } from '@angular/common/http';
+
 
 var blogEntrys:IBlogEntry[];
 
@@ -14,8 +16,12 @@ export class AppComponent implements OnInit{
 
   ngOnInit() {
     blogEntrys=getBlogEntrys();
+
+
     console.log(blogEntrys);
   }
+
+
 
 
 
