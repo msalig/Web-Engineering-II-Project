@@ -12,24 +12,20 @@ app.listen(config.port, () => {
 });
 
 app.use(cors());
-app.use(express.urlencoded({ extended: true }));
-
+app.use(express.urlencoded({extended: true}));
 
 
 module.exports = app;
 
 
-app.get('/api',(req,res)=>{
-  // res.set('Access-Control-Allow-Origin', 'http://localhost:4040/api');
-  // res.send('hope this works');
-    res.json({'candy':'bubble-gum'})
+app.get('/api', (req, res) => {
+
+  res.json({'candy': 'bubble-gum'})
+  console.log('get request');
+
 })
 
 app.get('/', (req, res) => {
-  res.send('hello');
+  res.json({'title':'hello'})
   console.log('get request');
 });
-
-// app.listen(port,()=>{
-//   console.log("Server us ready to process http-requests!")
-// })
