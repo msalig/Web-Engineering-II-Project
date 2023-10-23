@@ -11,27 +11,27 @@
         }
       },
       "root": "",
-      "sourceRoot": "src",
+      "sourceRoot": "public/app/src",
       "prefix": "app",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
             "outputPath": "dist/frontend",
-            "index": "src/index.html",
-            "main": "src/main.ts",
+            "index": "public/app/src/index.html",
+            "main": "public/app/src/main.ts",
             "polyfills": [
               "zone.js"
             ],
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": [
-              "src/favicon.ico",
-              "src/assets"
+              "public/app/src/favicon.ico",
+              "public/app/src/assets"
             ],
             "styles": [
               "@angular/material/prebuilt-themes/indigo-pink.css",
-              "src/styles.scss"
+              "public/app/src/styles.scss"
             ],
             "scripts": []
           },
@@ -90,17 +90,20 @@
             "tsConfig": "tsconfig.spec.json",
             "inlineStyleLanguage": "scss",
             "assets": [
-              "src/favicon.ico",
-              "src/assets"
+              "public/app/src/favicon.ico",
+              "public/app/src/assets"
             ],
             "styles": [
               "@angular/material/prebuilt-themes/indigo-pink.css",
-              "src/styles.scss"
+              "public/app/src/styles.scss"
             ],
             "scripts": []
           }
         }
       }
     }
+  },
+  "cli": {
+    "analytics": false
   }
 }
