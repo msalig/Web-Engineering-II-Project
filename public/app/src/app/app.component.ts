@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {IBlogEntry} from "../interfaces/blogEntry";
-import {getBlogEntrys} from "../MockData/mockblogEntry";
+import {getBlogEntrys} from "../MockData/mockblogEntrys";
 import { HttpClient } from '@angular/common/http';
 
 

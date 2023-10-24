@@ -1,5 +1,7 @@
 <div>
   Filter zeugs kommt hierhin
+  <i class="fa-solid fa-comment"></i>
+
 </div>
 
 
@@ -16,14 +18,15 @@
         <li>
           <div class="author">
             <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="user"></mat-icon>
-            {{blog.author.displayName}}
+            {{blog.author.displayname}}
           </div>
         </li>
         <li class="location">
           {{blog.location.place}}, {{blog.location.country}}
         </li>
         <li>
-          comments(icons): {{blog.comments.length}}
+          <fa-icon [icon]="faComment"></fa-icon>
+          {{blog.comments.length}}
         </li>
         <li *ngFor="let tag of blog.tags">
           <div class="tag">{{tag}}</div>

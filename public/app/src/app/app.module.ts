@@ -18,11 +18,14 @@ import { BlogsComponent } from './blogs/blogs.component';
 import { RatingsComponent } from './ratings/ratings.component';
 import { PreviewBlogComponent } from './preview-blog/preview-blog.component';
 import { BlogComponent } from './blog/blog.component';
-
+import {NotfoundComponent} from "./notfound/notfound.component";
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 const myRoutes: Routes =[
+
   {
     path:'',
+    pathMatch:"full",
     component:HomeComponent
   },
   {
@@ -33,10 +36,18 @@ const myRoutes: Routes =[
     path:'blogs/newblog',
     component:BlogComponent
   },
+  {
+    path:'blog/:identifier',
+    component:BlogComponent
+  },
+
 
   {
     path:'ratings',
     component:RatingsComponent
+  },{
+    path:'**',
+    component:NotfoundComponent
   }
 
 ];
@@ -61,7 +72,8 @@ const myRoutes: Routes =[
     MatIconModule,
     MatButtonModule,
     MatMenuModule,
-    HttpClientModule
+    HttpClientModule,
+    FontAwesomeModule
   ],
   providers: [],
   bootstrap: [AppComponent]

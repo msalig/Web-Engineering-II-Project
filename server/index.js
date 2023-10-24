@@ -7,6 +7,7 @@ const app = express();
 const cors = require('cors');
 
 
+
 app.listen(config.port, () => {
   console.info(`server started on port ${config.port} (${config.env})`);
 });
@@ -16,6 +17,10 @@ app.use(express.urlencoded({extended: true}));
 
 
 module.exports = app;
+
+
+
+
 
 
 app.get('/api', (req, res) => {
