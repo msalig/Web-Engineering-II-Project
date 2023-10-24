@@ -6,20 +6,74 @@
   margin-top: 50px;
   margin-right: 20%;
   margin-left: 20%;
-  list-style: none;
+  //list-style: none;
+  //list-style-type: georgian;
+
 }
 
-infos {
+.infos {
   list-style: none;
+  display: inline;
+  text-align: right;
+}
+
+.author {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.location {
+  font-style: italic;
+  color: #424242;
+  margin-bottom: 20px;
+
 }
 
 .title {
   font-weight: bold;
-  font-size: xx-large;
+  font-size: x-large;
   margin-bottom: 20px;
+  //padding: 10px;
+  //margin: 10px;
 }
 
 .subtitle {
   font-size: larger;
   color: #555555
+}
+
+.tagAbove {
+  list-style: none;
+  display: inline;
+}
+
+.tag {
+  list-style: none;
+  display: inline;
+  font-size: small;
+  margin-bottom: 30px;
+}
+
+.blogentry {
+  margin-bottom: 40px;
+}
+
+.comments {
+  margin-left: 5%;
+  margin-right: 20%;
+
+  list-style: none;
+  border-style: solid;
+  border-radius: 10px;
+  border-width: 2px;
+  border-color: #777777;
+}
+
+.commentTitle {
+  font-size: large;
+}
+
+.commentAuthor {
+  font-size: medium;
+  border-color: #777777;
 }

@@ -20,6 +20,7 @@ import { PreviewBlogComponent } from './preview-blog/preview-blog.component';
 import { BlogComponent } from './blog/blog.component';
 import {NotfoundComponent} from "./notfound/notfound.component";
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+// import {convertToStars} from "../assets/convert-to-stars.pipe";
 
 const myRoutes: Routes =[
 
@@ -37,7 +38,7 @@ const myRoutes: Routes =[
     component:BlogComponent
   },
   {
-    path:'blog/:identifier',
+    path:'blog/:author/:identifier',
     component:BlogComponent
   },
 
@@ -53,15 +54,15 @@ const myRoutes: Routes =[
 ];
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    NavbarComponent,
-    HomeComponent,
-    BlogsComponent,
-    RatingsComponent,
-    BlogComponent,
-    // PreviewBlogComponent
-  ],
+    declarations: [
+        AppComponent,
+        NavbarComponent,
+        HomeComponent,
+        BlogsComponent,
+        RatingsComponent,
+        BlogComponent,
+        // convertToStars,
+    ],
   imports: [
     RouterModule.forRoot(myRoutes),
     BrowserModule,

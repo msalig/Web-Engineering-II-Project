@@ -3,6 +3,7 @@ import {getBlogEntrys} from "../../MockData/mockblogEntrys";
 import {mockBlogEntry} from "../../MockData/mockblogEntry";
 import {ActivatedRoute} from "@angular/router";
 import {IBlogEntry} from "../../interfaces/blogEntry";
+import {faUser} from "@fortawesome/free-solid-svg-icons";
 
 @Component({
   selector: 'app-blog',
@@ -23,8 +24,12 @@ export class BlogComponent implements OnInit {
   }
 
   getBlog(): IBlogEntry {
-    const identifier = String(this.route.snapshot.paramMap.get('identifier'));
+    const blogIdentifier = String(this.route.snapshot.paramMap.get('identifier'));
+    const authorIdentifier=String(this.route.snapshot.paramMap.get('author'));
+    console.log(blogIdentifier);
+    console.log(authorIdentifier);
     return mockBlogEntry();
   }
 
+  protected readonly faUser = faUser;
 }

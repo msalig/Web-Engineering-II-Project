@@ -1,26 +1,31 @@
-
+<div class="wholeblog">
   <div class="title">{{blog.title}}</div>
-  <div class="subtitle">{{blog.blogentryShort}}</div>
-  <ul class = infos>
-    <li>
-
-      {{blog.author}}
+  <!--  <div class="subtitle">{{blog.blogentryShort}}</div>-->
+  <li *ngFor="let tag of blog.tags" class="tagAbove">
+    <div class="tag">{{tag}}</div>
+  </li>
+  <ul class=infos>
+    <li class=author>
+      <fa-icon [icon]="faUser"></fa-icon>
+      {{blog.author.displayname}}
     </li>
-    <li>
-      {{blog.location.place}}, {{blog.location.country}} |{{blog.location.coordinates}}
-    </li>
-
-    <li *ngFor="let tag of blog.tags">
-      <div class="tag">{{tag}}</div>
+    <li class="location">
+      {{blog.location.place}}, {{blog.location.country}} | {{blog.location.coordinates.x}}
+      °N, {{blog.location.coordinates.y}}°E
     </li>
   </ul>
 
 
   <div class="blogentry">{{blog.blogentry}}</div>
 
-  <ul *ngFor="let comment of blog.comments">
-    <li>
-      {{comment.title}},{{comment.author}}
+
+  <ul *ngFor="let comment of blog.comments" class="comments">
+    <li class="commentTitle">
+      {{comment.title}}
+      <div class="commentAuthor">
+        <fa-icon [icon]="faUser"></fa-icon>
+
+        {{comment.author.name}}</div>
     </li>
     <li>{{comment.review}}
     </li>
@@ -29,3 +34,4 @@
     </li>
 
   </ul>
+</div>
