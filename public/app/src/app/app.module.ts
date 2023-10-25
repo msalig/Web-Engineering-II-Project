@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import {RouterModule, Routes} from "@angular/router";
+import {HttpClientModule} from "@angular/common/http";
 
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -17,11 +18,15 @@ import { BlogsComponent } from './blogs/blogs.component';
 import { RatingsComponent } from './ratings/ratings.component';
 import { PreviewBlogComponent } from './preview-blog/preview-blog.component';
 import { BlogComponent } from './blog/blog.component';
-
+import {NotfoundComponent} from "./notfound/notfound.component";
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+// import {convertToStars} from "../assets/convert-to-stars.pipe";
 
 const myRoutes: Routes =[
+
   {
     path:'',
+    pathMatch:"full",
     component:HomeComponent
   },
   {
@@ -32,24 +37,32 @@ const myRoutes: Routes =[
     path:'blogs/newblog',
     component:BlogComponent
   },
+  {
+    path:'blog/:author/:identifier',
+    component:BlogComponent
+  },
+
 
   {
     path:'ratings',
     component:RatingsComponent
+  },{
+    path:'**',
+    component:NotfoundComponent
   }
 
 ];
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    NavbarComponent,
-    HomeComponent,
-    BlogsComponent,
-    RatingsComponent,
-    BlogComponent,
-    // PreviewBlogComponent
-  ],
+    declarations: [
+        AppComponent,
+        NavbarComponent,
+        HomeComponent,
+        BlogsComponent,
+        RatingsComponent,
+        BlogComponent,
+        // convertToStars,
+    ],
   imports: [
     RouterModule.forRoot(myRoutes),
     BrowserModule,
@@ -59,7 +72,9 @@ const myRoutes: Routes =[
     MatToolbarModule,
     MatIconModule,
     MatButtonModule,
-    MatMenuModule
+    MatMenuModule,
+    HttpClientModule,
+    FontAwesomeModule
   ],
   providers: [],
   bootstrap: [AppComponent]

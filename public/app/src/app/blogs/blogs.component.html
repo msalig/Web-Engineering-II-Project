@@ -1,29 +1,33 @@
 <div>
   Filter zeugs kommt hierhin
+  ★
+
+
 </div>
 
 
 <li *ngFor="let blog of getBlogEntrys()" class="allblogs">
 
-  <div onclick="location.href='blogs/newblog';" class="oneblog2">
+  <div routerLink="/blog/{{blog.author.displayname}}/{{blog.displayname}}" class="oneblog2">
     <div class="oneblog">
       <div class="title">{{blog.title}}</div>
-      <p>{{blog.blogentryShort}}</p>
+<!--      <p>{{blog.blogentryShort}}</p>-->
       <div class="blogpreview">
-        {{blog.blogentry}}
+        {{blog.blogentry|slice: 0:200}}...
       </div>
       <ul class="blogfooter">
-        <li>
+        <li class="blogfooter">
           <div class="author">
-            <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="user"></mat-icon>
-            {{blog.author.displayName}}
+            <fa-icon [icon]="faUser"></fa-icon>
+            {{blog.author.name}}
           </div>
-        </li>
+        </li >
         <li class="location">
           {{blog.location.place}}, {{blog.location.country}}
         </li>
         <li>
-          comments(icons): {{blog.comments.length}}
+          <fa-icon [icon]="faComment"></fa-icon>
+          {{blog.comments.length}}
         </li>
         <li *ngFor="let tag of blog.tags">
           <div class="tag">{{tag}}</div>
