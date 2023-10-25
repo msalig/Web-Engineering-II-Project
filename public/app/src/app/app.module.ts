@@ -20,6 +20,7 @@ import { PreviewBlogComponent } from './preview-blog/preview-blog.component';
 import { BlogComponent } from './blog/blog.component';
 import {NotfoundComponent} from "./notfound/notfound.component";
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import {FormsModule} from "@angular/forms";
 // import {convertToStars} from "../assets/convert-to-stars.pipe";
 
 const myRoutes: Routes =[
@@ -74,7 +75,8 @@ const myRoutes: Routes =[
     MatButtonModule,
     MatMenuModule,
     HttpClientModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
