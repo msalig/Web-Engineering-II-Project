@@ -1,0 +1,10 @@
+<div class="title">unsere werten Blogger:innen:</div>
+
+
+<li *ngFor="let author of authors" class="author">
+  <div routerLink="/blogger/{{author.displayname}}">
+    <div class="authorName">{{author.name}}</div>
+    <div class="publishedBlogs">published Blogs: {{author.publishedblogs}}</div>
+
+
+  </div>
