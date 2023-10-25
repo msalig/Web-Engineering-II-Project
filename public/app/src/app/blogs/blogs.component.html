@@ -2,11 +2,11 @@
   Filter zeugs kommt hierhin
   ★
 
-
+  <th>Filter: <input [(ngModel)]="listFilter"/>  ></th>
 </div>
 
 
-<li *ngFor="let blog of getBlogEntrys()" class="allblogs">
+<li *ngFor="let blog of filteredBlogEntrys" class="allblogs">
 
   <div routerLink="/blog/{{blog.author.displayname}}/{{blog.displayname}}" class="oneblog2">
     <div class="oneblog">
