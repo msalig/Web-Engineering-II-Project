@@ -5,7 +5,7 @@
     <div class="tag">{{tag}}</div>
   </li>
   <ul class=infos>
-    <li class=author>
+    <li class=author routerLink="/blogger/{{blog.author.displayname}}">
       <fa-icon [icon]="faUser"></fa-icon>
       {{blog.author.displayname}}
     </li>

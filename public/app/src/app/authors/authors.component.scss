@@ -1,0 +1,37 @@
+.author{
+  text-align: center;
+  font-family: "Droid Sans Georgian";
+  padding: 30px;
+  cursor: pointer;
+  display: compact;
+
+
+
+  border-bottom-style: solid;
+  border-width: 2px;
+  border-color: #777777;
+
+
+  &:hover{
+    //background-color: #dadada;
+  color:#2ca7e9;
+  }
+}
+
+
+.title{
+  font-size: x-large;
+  font-style: italic;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.authorName{
+  font-size: large;
+font-weight: bold;
+}
+.publishedBlogs{
+  font-style: italic;
+
+
+}

@@ -7,7 +7,8 @@ export function mockBlogEntry(): IBlogEntry{
     "author": {
       "displayname": "Max Mustermann",
         "name": "max_muster",
-        "mail": "max.mustermann@email.com"
+        "mail": "max.mustermann@email.com",
+      publishedblogs: 3
     },
     "blogentry": "Sinsheim, eine charmante Stadt in Deutschland, hat viel mehr zu bieten, als man auf den ersten Blick erwarten würde. Ein Tag in dieser Stadt, die reich an Geschichte, Kultur und faszinierenden Sehenswürdigkeiten ist, reicht kaum aus, um alles zu entdecken. Doch ich habe es versucht und möchte meine Erfahrungen gerne mit Ihnen teilen.\n" +
       "\n" +
@@ -43,7 +44,8 @@ export function mockBlogEntry(): IBlogEntry{
         "author": {
           "displayname": "Lisa Muster",
           "name": "lisa_m",
-          "mail": "lisa.muster@email.com"
+          "mail": "lisa.muster@email.com",
+          publishedblogs:3
         },
         "review":3,
         "title": "Toller Beitrag!",

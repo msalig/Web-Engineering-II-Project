@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
-import {getBlogEntrys} from "../../MockData/mockblogEntrys";
+import {Component, Input} from '@angular/core';
+import {getBlogEntrys, getBlogEntrysByAuthor} from "../../MockData/mockblogEntrys";
 import {faComment, faUser} from "@fortawesome/free-solid-svg-icons";
 import {IBlogEntry} from "../../interfaces/blogEntry";
+import {ActivatedRoute} from "@angular/router";
 // import location from "$GLOBAL$";
 // import location from "$GLOBAL$";
 // import {convertToStars} from "../../assets/convert-to-stars.pipe";
@@ -14,24 +15,26 @@ import {IBlogEntry} from "../../interfaces/blogEntry";
 
 export class BlogsComponent {
 
-  constructor() {
-    this.blogEntrys = getBlogEntrys();
-    this.filteredBlogEntrys = this.blogEntrys;
-  }
+  // @Input() author:string;
 
-  protected readonly getBlogEntrys = getBlogEntrys;
-
+  filteredBlogEntrys: IBlogEntry[] = [];
   protected readonly location = location;
   protected readonly faComment = faComment;
   protected readonly faUser = faUser;
-    // protected readonly convertToStars = convertToStars;
-    // protected readonly convertToStars = convertToStars;
+  // protected readonly convertToStars = convertToStars;
+  // protected readonly convertToStars = convertToStars;
+  private blogEntrys: IBlogEntry[];
+
+  constructor(private route: ActivatedRoute) {
+    this.blogEntrys = this.getBlogEntrys();
+    this.filteredBlogEntrys = this.blogEntrys;
+  }
 
 //
-  private _listFilter:string='';
-  private blogEntrys: IBlogEntry[];
-  filteredBlogEntrys:IBlogEntry[]=[];
+  private _listFilter: string = '';
+
 //
+
   get listFilter(): string {
     return this._listFilter;
   }
@@ -41,12 +44,20 @@ export class BlogsComponent {
     this.performFilter(value);
   }
 
-  performFilter(filterBy:string):void{
-    filterBy = filterBy.toLowerCase();
-    this.filteredBlogEntrys = this.blogEntrys.filter((blog:IBlogEntry)=>
-    blog.title.toLowerCase().includes(filterBy));
+  getBlogEntrys(): IBlogEntry[] {
+    const authorIdentifier = String(this.route.snapshot.paramMap.get('author'))
+    if (authorIdentifier.length != 4) {
+      console.log(authorIdentifier.length);
+      return getBlogEntrysByAuthor(authorIdentifier);
+    }
+    return getBlogEntrys();
   }
 
+  performFilter(filterBy: string): void {
+    filterBy = filterBy.toLowerCase();
+    this.filteredBlogEntrys = this.blogEntrys.filter((blog: IBlogEntry) =>
+      blog.title.toLowerCase().includes(filterBy));
+  }
 
 
 }
