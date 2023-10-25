@@ -21,9 +21,10 @@ import {RatingsComponent} from './ratings/ratings.component';
 import {PreviewBlogComponent} from './preview-blog/preview-blog.component';
 import {BlogComponent} from './blog/blog.component';
 import {NotfoundComponent} from "./notfound/notfound.component";
-// import {convertToStars} from "../assets/convert-to-stars.pipe";
+// import {ConvertToStarsPipe} from "../assets/convert-to-stars.pipe";
 import {AuthorsComponent} from "./authors/authors.component";
 import {AuthorComponent} from "./author/author.component";
+// import {StarPipe} from "./Pipes/star.pipe";
 
 const myRoutes: Routes = [
 
@@ -73,9 +74,10 @@ const myRoutes: Routes = [
     RatingsComponent,
     BlogComponent,
     AuthorsComponent,
-    AuthorComponent
+    AuthorComponent,
+    // StarPipe,
 
-    // convertToStars,
+    // ConvertToStarsPipe,
   ],
   imports: [
     RouterModule.forRoot(myRoutes),

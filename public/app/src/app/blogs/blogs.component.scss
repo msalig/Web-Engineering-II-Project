@@ -39,6 +39,12 @@ $borderRadius: 30px;
   }
 }
 
+.textfield{
+  border-radius: 10px;
+  border-color: #2ca7e9;
+}
+
+
 
 ul {
   padding: 0;
@@ -88,4 +94,9 @@ ul {
 
 .blogpreview{
   font-style: italic;
+}
+
+.filter{
+ //align-items: center;
+  margin-left: 20%;
 }
