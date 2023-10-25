@@ -1,8 +1,5 @@
 <div>
-  Filter zeugs kommt hierhin
-  ★
-
-  <th>Filter: <input [(ngModel)]="listFilter"/>  ></th>
+    <th>Filter: <input [(ngModel)]="listFilter"/>  </th>
 </div>
 
 
@@ -11,8 +8,8 @@
   <div routerLink="/blog/{{blog.author.displayname}}/{{blog.displayname}}" class="oneblog2">
     <div class="oneblog">
       <div class="title">{{blog.title}}</div>
-<!--      <p>{{blog.blogentryShort}}</p>-->
       <div class="blogpreview">
+<!--        {{blog.blogentryShort|slice: 0:200}}...-->
         {{blog.blogentry|slice: 0:200}}...
       </div>
       <ul class="blogfooter">
