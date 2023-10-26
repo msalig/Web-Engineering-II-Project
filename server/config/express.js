@@ -5,7 +5,8 @@ const logger = require('morgan');
 const config = require('./config');
 const routes = require('../routes');
 const swaggerUi = require('swagger-ui-express');
-const swaggerDocument = require('./swagger');
+const swaggerOptions = require('./swagger');
+const swaggerJsDoc = require('swagger-jsdoc');
 
 const app = express();
 
@@ -18,7 +19,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 
 app.use(cors());
 
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerJsDoc(swaggerOptions)));
 
 app.use('/api/', routes);
 
