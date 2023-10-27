@@ -76,7 +76,7 @@ const myRoutes: Routes = [
     AuthorsComponent,
     AuthorComponent,
     // StarPipe,
-
+/**/
     // ConvertToStarsPipe,
   ],
   imports: [
