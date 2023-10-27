@@ -17,6 +17,7 @@ getBlogByID(uuid: Number): BlogEntry, 4xx
 
 getBlogsByAuthor(authorID: Number): List<BlogEntryShort>
 
+
 getAllAuthors(): List<Author>
 
 getAuthorByID(uuid: Number): Author, 4xx
@@ -55,7 +56,7 @@ uuid: Number,
 author: Author,
 title: String,
 location: Location,
-description: String,
+text: String,
 review: Number,
 tags: List<String>
 )
@@ -65,7 +66,7 @@ uuid: Number,
 author: Author,
 title: String,
 location: Location,
-description: String,
+text: String,
 review: Number,
 tags: List<String>
 comments: List<Comment>
