@@ -16,6 +16,7 @@ import {filter} from "rxjs";
 
 export class BlogsComponent {
 
+
   // @Input() author:string;
 
   filteredBlogEntrys: IBlogEntry[] = [];

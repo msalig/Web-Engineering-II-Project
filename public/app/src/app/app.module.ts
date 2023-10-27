@@ -25,6 +25,7 @@ import {NotfoundComponent} from "./notfound/notfound.component";
 import {AuthorsComponent} from "./authors/authors.component";
 import {AuthorComponent} from "./author/author.component";
 // import {StarPipe} from "./Pipes/star.pipe";
+import {BlogtileComponent}from "./blogtile/blogtile.component"
 
 const myRoutes: Routes = [
 
@@ -75,6 +76,7 @@ const myRoutes: Routes = [
     BlogComponent,
     AuthorsComponent,
     AuthorComponent,
+    BlogtileComponent
     // StarPipe,
 /**/
     // ConvertToStarsPipe,
