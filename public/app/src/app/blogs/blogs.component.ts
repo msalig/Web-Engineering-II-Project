@@ -3,6 +3,7 @@ import {getBlogEntrys, getBlogEntrysByAuthor} from "../../MockData/mockblogEntry
 import {faComment, faUser} from "@fortawesome/free-solid-svg-icons";
 import {IBlogEntry} from "../../interfaces/blogEntry";
 import {ActivatedRoute} from "@angular/router";
+import {filter} from "rxjs";
 // import location from "$GLOBAL$";
 // import location from "$GLOBAL$";
 // import {convertToStars} from "../../assets/convert-to-stars.pipe";
@@ -56,7 +57,8 @@ export class BlogsComponent {
   performFilter(filterBy: string): void {
     filterBy = filterBy.toLowerCase();
     this.filteredBlogEntrys = this.blogEntrys.filter((blog: IBlogEntry) =>
-      blog.title.toLowerCase().includes(filterBy));
+      blog.author.name.toLowerCase().includes(filterBy) || blog.title.toLowerCase().includes(filterBy) || blog.tags.toLocaleString().toLowerCase().includes(filterBy) || blog.location.country.toLowerCase().includes(filterBy) || blog.location.place.toLowerCase().includes(filterBy));
+
   }
 
 
