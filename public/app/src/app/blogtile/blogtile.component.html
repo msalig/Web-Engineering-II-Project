@@ -1,0 +1,31 @@
+ <div routerLink="/blog/{{blog.author.displayname}}/{{blog.displayname}}" class="oneblog2">
+    <div class="oneblog">
+      <div class="title">{{blog.title}}</div>
+      <div class="blogpreview">
+<!--        {{blog.blogentryShort|slice: 0:200}}...-->
+        {{blog.blogentry|slice: 0:200}}...
+      </div>
+      <ul class="blogfooter">
+        <li class="blogfooter">
+          <div class="author">
+            <fa-icon [icon]="faUser"></fa-icon>
+            {{blog.author.name}}
+          </div>
+        </li >
+        <li class="location">
+          {{blog.location.place}}, {{blog.location.country}}
+        </li>
+        <li>
+          <fa-icon [icon]="faComment"></fa-icon>
+          {{blog.comments.length}}
+        </li>
+        <li>
+          {{blog.review}}
+        </li>
+        <li *ngFor="let tag of blog.tags">
+          <div class="tag">{{tag}}</div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
