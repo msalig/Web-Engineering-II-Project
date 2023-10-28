@@ -4,6 +4,7 @@ import {mockBlogEntry} from "../../MockData/mockblogEntry";
 import {ActivatedRoute} from "@angular/router";
 import {IBlogEntry} from "../../interfaces/blogEntry";
 import {faUser} from "@fortawesome/free-solid-svg-icons";
+import {BlogService}from '../Service/blog-service'
 
 @Component({
   selector: 'app-blog',

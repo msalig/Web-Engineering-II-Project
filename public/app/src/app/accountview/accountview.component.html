@@ -1,0 +1,23 @@
+<div class="userDisplay">
+  <li class="name">
+    <ul>bearbeiten</ul>
+    <ul class="name">Dein Name: link</ul>
+  </li>
+</div>
+
+
+<div class="blogsfromauthor">
+  <div class="filter">
+    <th>Filter: <input [(ngModel)]="listFilter" placeholder="Titles, Authors, Tags, Places" class="textfield"/></th>
+  </div>
+
+  <li *ngFor="let blog of filteredBlogEntrys" class="allblogs">
+    <ul class="singleblogentry">
+      <fa-icon [icon]="faEdit" class="iconedit" routerLink="/editblog/{{blog.displayname}}"></fa-icon>
+    </ul>
+    <ul class="oneblog">
+      <app-blogtile [blog]=blog></app-blogtile>
+    </ul>
+  </li>
+
+</div>

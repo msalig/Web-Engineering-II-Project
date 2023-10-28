@@ -25,7 +25,11 @@ import {NotfoundComponent} from "./notfound/notfound.component";
 import {AuthorsComponent} from "./authors/authors.component";
 import {AuthorComponent} from "./author/author.component";
 // import {StarPipe} from "./Pipes/star.pipe";
-import {BlogtileComponent}from "./blogtile/blogtile.component"
+import {BlogtileComponent}from "./blogtile/blogtile.component";
+import { AccountviewComponent } from './accountview/accountview.component';
+import { EditblogComponent } from './editblog/editblog.component'
+
+import {BlogService}from './Service/blog-service'
 
 const myRoutes: Routes = [
 
@@ -54,6 +58,14 @@ const myRoutes: Routes = [
     path: 'blogger/:author',
     component: AuthorComponent
   },
+  {
+    path: 'my-account',
+    component: AccountviewComponent
+  },
+  {
+    path: 'editblog/:blogtitle',
+    component: EditblogComponent
+  },
 
 
   {
@@ -76,7 +88,10 @@ const myRoutes: Routes = [
     BlogComponent,
     AuthorsComponent,
     AuthorComponent,
-    BlogtileComponent
+    BlogtileComponent,
+    AccountviewComponent,
+    EditblogComponent,
+
     // StarPipe,
 /**/
     // ConvertToStarsPipe,
@@ -93,7 +108,7 @@ const myRoutes: Routes = [
     MatMenuModule,
     HttpClientModule,
     FontAwesomeModule,
-    FormsModule
+    FormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
