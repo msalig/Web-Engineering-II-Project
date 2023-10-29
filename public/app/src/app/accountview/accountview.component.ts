@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import {IBlogEntry} from "../../interfaces/blogEntry";
 import {getBlogEntrys, getBlogEntrysByAuthor} from "../../MockData/mockblogEntrys";
 import {faEdit, faUser} from "@fortawesome/free-solid-svg-icons";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-accountview',
@@ -11,13 +12,18 @@ import {faEdit, faUser} from "@fortawesome/free-solid-svg-icons";
 export class AccountviewComponent {
   filteredBlogEntrys: IBlogEntry[] = [];
   private blogEntrys: IBlogEntry[];
+  protected readonly faUser = faUser;
+  protected readonly faEdit = faEdit;
+  userName: any;
+  private _listFilter: string = '';
 
-  constructor() {
+  constructor(private route: ActivatedRoute) {
     this.blogEntrys = getBlogEntrys();
     this.filteredBlogEntrys = this.blogEntrys;
+    this.userName="muss durch authentifizierung abgefragt werden";
   }
 
-  private _listFilter: string = '';
+
 
   get listFilter(): string {
     return this._listFilter;
@@ -34,6 +40,8 @@ export class AccountviewComponent {
       blog.author.name.toLowerCase().includes(filterBy) || blog.title.toLowerCase().includes(filterBy) || blog.tags.toLocaleString().toLowerCase().includes(filterBy) || blog.location.country.toLowerCase().includes(filterBy) || blog.location.place.toLowerCase().includes(filterBy));
   }
 
-  protected readonly faUser = faUser;
-  protected readonly faEdit = faEdit;
+  saveInfos(){
+    console.log("save Infos");
+  }
+
 }

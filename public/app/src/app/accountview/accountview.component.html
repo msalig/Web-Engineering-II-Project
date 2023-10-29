@@ -1,7 +1,12 @@
 <div class="userDisplay">
   <li class="name">
-    <ul>bearbeiten</ul>
-    <ul class="name">Dein Name: link</ul>
+    <ul class="name">Account from <input class="textfieldusername" [(ngModel)]="userName" ></ul>
+    <ul>hier kann man die mail bearbeiten</ul>
+    <ul>
+      <button class="button" (click)="saveInfos()"  mat-raised-button>Save</button>
+
+    </ul>
+
   </li>
 </div>
 
@@ -12,10 +17,8 @@
   </div>
 
   <li *ngFor="let blog of filteredBlogEntrys" class="allblogs">
-    <ul class="singleblogentry">
-      <fa-icon [icon]="faEdit" class="iconedit" routerLink="/editblog/{{blog.displayname}}"></fa-icon>
-    </ul>
-    <ul class="oneblog">
+
+    <ul class="oneblog" routerLink="/editblog/{{blog.displayname}}" >
       <app-blogtile [blog]=blog></app-blogtile>
     </ul>
   </li>

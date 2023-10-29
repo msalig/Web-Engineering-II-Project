@@ -1,3 +1,15 @@
+.name {
+  text-align: center;
+  font-size: large;
+font-style: italic;
+}
+
+.textfieldusername{
+  font-size: x-large;
+  border-color: white;
+}
+
+
 .allblogs {
 
   //list-style: none;
@@ -12,7 +24,8 @@
 .iconedit {
   //vertical-align: center;
   font-size: x-large;
-  margin-bottom: -50px;
+  cursor: pointer;
+  display: inline-flex;
 }
 
 
@@ -20,4 +33,8 @@
   margin-right: 20%;
   margin-left: 20%;
   margin-top: 50px;
+}
+
+.filter{
+  margin-left: 20%;
 }
