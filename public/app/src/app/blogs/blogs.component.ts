@@ -1,9 +1,10 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {getBlogEntrys, getBlogEntrysByAuthor} from "../../MockData/mockblogEntrys";
 import {faComment, faUser} from "@fortawesome/free-solid-svg-icons";
 import {IBlogEntry} from "../../interfaces/blogEntry";
 import {ActivatedRoute} from "@angular/router";
 import {filter} from "rxjs";
+import {HttpClient} from "@angular/common/http";
 // import location from "$GLOBAL$";
 // import location from "$GLOBAL$";
 // import {convertToStars} from "../../assets/convert-to-stars.pipe";
@@ -14,10 +15,12 @@ import {filter} from "rxjs";
   styleUrls: ['./blogs.component.scss']
 })
 
-export class BlogsComponent {
+export class BlogsComponent implements OnInit{
 
 
-  // @Input() author:string;
+
+
+    // @Input() author:string;
 
   filteredBlogEntrys: IBlogEntry[] = [];
   protected readonly location = location;
@@ -27,11 +30,17 @@ export class BlogsComponent {
   // protected readonly convertToStars = convertToStars;
   private blogEntrys: IBlogEntry[];
 
-  constructor(private route: ActivatedRoute) {
+  constructor(private route: ActivatedRoute, private http:HttpClient) {
     this.blogEntrys = this.getBlogEntrys();
     this.filteredBlogEntrys = this.blogEntrys;
   }
-
+    ngOnInit() {
+        console.log("Versuche Verbindung aufzubauen....");
+        this.http.get('http://localhost:3000/api/blogEntries/').subscribe(response => {
+            console.log("received message: ");
+            console.log(response);
+        })
+    }
 //
   private _listFilter: string = '';
 
