@@ -14,7 +14,7 @@ if (config.env === "development") {
       console.log('Database connection error: ' + JSON.stringify(err, undefined, 2));
     });
 } else {
-  mongoose.connect(`mongodb+srv://blog:KN0wbjKXy3SRfa7Q@cluster0.cssuugf.mongodb.net/?retryWrites=true&w=majority`)
+  mongoose.connect(`mongodb+srv://blog:KN0wbjKXy3SRfa7Q@cluster0.cssuugf.mongodb.net/travel-blog?retryWrites=true&w=majority`)
     .then(() => {
       console.log('Database connection successful');
     })
