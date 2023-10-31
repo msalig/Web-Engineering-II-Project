@@ -1,26 +1,30 @@
-<div class="userDisplay">
-  <li class="name">
-    <ul class="name">Account from <input class="textfieldusername" [(ngModel)]="userName" ></ul>
-    <ul>hier kann man die mail bearbeiten</ul>
-    <ul>
-      <button class="button" (click)="saveInfos()"  mat-raised-button>Save</button>
+<!--<<app-login></app-login>-->
 
-    </ul>
+<!--<div *ngIf="authenticationService.currentUser!=undefined">Hallo</div>-->
 
-  </li>
-</div>
+<!--<div class="userDisplay">-->
+<!--  <li class="name">-->
+<!--    <ul class="name">Account from <input class="textfieldusername" [(ngModel)]="userName" ></ul>-->
+<!--    <ul>hier kann man die mail bearbeiten</ul>-->
+<!--    <ul>-->
+<!--      <button class="button" (click)="saveInfos()"  mat-raised-button>Save</button>-->
+
+<!--    </ul>-->
+
+<!--  </li>-->
+<!--</div>-->
 
 
-<div class="blogsfromauthor">
-  <div class="filter">
-    <th>Filter: <input [(ngModel)]="listFilter" placeholder="Titles, Authors, Tags, Places" class="textfield"/></th>
-  </div>
+<!--<div class="blogsfromauthor">-->
+<!--  <div class="filter">-->
+<!--    <th>Filter: <input [(ngModel)]="listFilter" placeholder="Titles, Authors, Tags, Places" class="textfield"/></th>-->
+<!--  </div>-->
 
-  <li *ngFor="let blog of filteredBlogEntrys" class="allblogs">
+<!--  <li *ngFor="let blog of filteredBlogEntrys" class="allblogs">-->
 
-    <ul class="oneblog" routerLink="/editblog/{{blog.displayname}}" >
-      <app-blogtile [blog]=blog></app-blogtile>
-    </ul>
-  </li>
+<!--    <ul class="oneblog" routerLink="/editblog/{{blog.displayname}}" >-->
+<!--      <app-blogtile [blog]=blog></app-blogtile>-->
+<!--    </ul>-->
+<!--  </li>-->
 
-</div>
+<!--</div>-->

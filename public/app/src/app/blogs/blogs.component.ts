@@ -47,11 +47,22 @@ export class BlogsComponent {
   }
 
   getBlogEntrys(): IBlogEntry[] {
+    //if it is part of the author-page
     const authorIdentifier = String(this.route.snapshot.paramMap.get('author'))
     if (authorIdentifier.length != 4) {
       console.log(authorIdentifier.length);
       return getBlogEntrysByAuthor(authorIdentifier);
     }
+
+    //if it is part of the search for tags-page
+    const tagIdentifier = String(this.route.snapshot.paramMap.get('tag'))
+    if(tagIdentifier.length >0){
+      console.log(tagIdentifier);
+      return getBlogEntrys();
+    }
+
+
+    //if it is part of the regular blogs-page
     return getBlogEntrys();
   }
 

@@ -3,6 +3,7 @@ import {IBlogEntry} from "../../interfaces/blogEntry";
 import {getBlogEntrys, getBlogEntrysByAuthor} from "../../MockData/mockblogEntrys";
 import {faEdit, faUser} from "@fortawesome/free-solid-svg-icons";
 import {ActivatedRoute} from "@angular/router";
+import {AuthenticationService} from "../Service/authentication.service";
 
 @Component({
   selector: 'app-accountview',
@@ -16,13 +17,14 @@ export class AccountviewComponent {
   protected readonly faEdit = faEdit;
   userName: any;
   private _listFilter: string = '';
+  private authenticationService: AuthenticationService;
 
   constructor(private route: ActivatedRoute) {
     this.blogEntrys = getBlogEntrys();
     this.filteredBlogEntrys = this.blogEntrys;
     this.userName="muss durch authentifizierung abgefragt werden";
+    this.authenticationService = new AuthenticationService();
   }
-
 
 
   get listFilter(): string {

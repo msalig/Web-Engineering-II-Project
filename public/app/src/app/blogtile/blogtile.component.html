@@ -23,7 +23,7 @@
           {{blog.review}}
         </li>
         <li *ngFor="let tag of blog.tags">
-          <div class="tag">{{tag}}</div>
+          <div class="tag" routerLink="/blogs/search/tags/{{tag}}">{{tag}}  </div>
         </li>
       </ul>
     </div>

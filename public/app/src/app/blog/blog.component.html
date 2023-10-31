@@ -2,7 +2,7 @@
   <div class="title">{{blog.title}}</div>
   <!--  <div class="subtitle">{{blog.blogentryShort}}</div>-->
   <li *ngFor="let tag of blog.tags" class="tagAbove">
-    <div class="tag">{{tag}}</div>
+    <div class="tag" routerLink="#/blogs/search/tags/{{tag}}">{{tag}}</div>
   </li>
   <ul class=infos>
     <li class=author routerLink="/blogger/{{blog.author.displayname}}">

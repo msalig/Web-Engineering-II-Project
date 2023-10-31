@@ -29,7 +29,9 @@ import {BlogtileComponent}from "./blogtile/blogtile.component";
 import { AccountviewComponent } from './accountview/accountview.component';
 import { EditblogComponent } from './editblog/editblog.component'
 
-import {BlogService}from './Service/blog-service'
+import {BlogService}from './Service/blog-service';
+import { TagsearchComponent } from './tagsearch/tagsearch.component';
+import { LoginComponent } from './login/login.component'
 
 const myRoutes: Routes = [
 
@@ -66,6 +68,10 @@ const myRoutes: Routes = [
     path: 'editblog/:blogtitle',
     component: EditblogComponent
   },
+  {
+    path: 'blogs/search/tags/:tag',
+    component: TagsearchComponent
+  },
 
 
   {
@@ -91,6 +97,8 @@ const myRoutes: Routes = [
     BlogtileComponent,
     AccountviewComponent,
     EditblogComponent,
+    TagsearchComponent,
+    LoginComponent,
 
     // StarPipe,
 /**/
