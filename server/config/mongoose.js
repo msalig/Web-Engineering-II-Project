@@ -14,7 +14,12 @@ if (config.env === "development") {
       console.log('Database connection error: ' + JSON.stringify(err, undefined, 2));
     });
 } else {
-  mongoose.connect(`mongodb+srv://blog:KN0wbjKXy3SRfa7Q@cluster0.cssuugf.mongodb.net/travel-blog?retryWrites=true&w=majority`)
+  mongoose.connect(`mongodb+srv://${config.mongo.host}`, {
+    tlsAllowInvalidCertificates: false,
+    tlsCertificateKeyFile: `${__dirname}\\X509-cert-4442997764144961123.pem`,
+    authMechanism: 'MONGODB-X509',
+    authSource: '$external'
+  })
     .then(() => {
       console.log('Database connection successful');
     })
