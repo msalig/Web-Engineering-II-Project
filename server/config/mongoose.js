@@ -16,7 +16,7 @@ if (config.env === "development") {
 } else {
   mongoose.connect(`mongodb+srv://${config.mongo.host}`, {
     tlsAllowInvalidCertificates: false,
-    tlsCertificateKeyFile: `${__dirname}\\X509-cert-4442997764144961123.pem`,
+    tlsCertificateKeyFile: `${__dirname}/X509-cert-4442997764144961123.pem`,
     authMechanism: 'MONGODB-X509',
     authSource: '$external'
   })
