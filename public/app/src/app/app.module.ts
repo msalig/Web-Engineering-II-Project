@@ -38,7 +38,7 @@ const myRoutes: Routes = [
   {
     path: '',
     pathMatch: "full",
-    component: HomeComponent
+    redirectTo: '/blogs'
   },
   {
     path: 'blogs',

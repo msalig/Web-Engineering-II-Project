@@ -20,7 +20,8 @@
           {{blog.comments.length}}
         </li>
         <li>
-          {{blog.review}}
+            <fa-icon [icon]="faStar"></fa-icon>
+            {{blog.review}}
         </li>
         <li *ngFor="let tag of blog.tags">
           <div class="tag" routerLink="/blogs/search/tags/{{tag}}">{{tag}}  </div>
