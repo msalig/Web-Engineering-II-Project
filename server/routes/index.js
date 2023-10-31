@@ -1,7 +1,7 @@
 const express = require('express');
 const userRoutes = require('./user');
 const blogEntryRoutes = require('./blogentry');
-//const authRoutes = require('./auth.route');
+const authRoutes = require('./auth');
 
 const router = express.Router();
 
@@ -16,7 +16,7 @@ const router = express.Router();
  */
 router.get('/health-check', (req, res) => res.send('OK'));
 
-//router.use('/auth', authRoutes);
+router.use('/auth', authRoutes);
 router.use('/users', userRoutes);
 router.use('/blogEntries', blogEntryRoutes);
 

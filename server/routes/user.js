@@ -25,7 +25,8 @@ const router = express.Router();
  */
 router.route('/{id}')
   .put(asyncHandler(update))
-  .delete(asyncHandler(deleteUser));
+  .delete(asyncHandler(deleteUser))
+  .get(asyncHandler(readUsername));
 
 /**
  * @openapi
@@ -46,7 +47,7 @@ router.route('/{id}')
  *      - users
  */
 router.route('/')
-  .post(asyncHandler(insert))
+  //.post(asyncHandler(insert))
   .get(asyncHandler(read))
 
 module.exports = router;
@@ -59,6 +60,11 @@ async function insert(req, res) {
 async function read(req, res) {
   let users = await userCtrl.read();
   res.json(users);
+}
+
+async function readUsername(req, res) {
+  let user = await userCtrl.readUsername();
+  res.json(user);
 }
 
 async function update(req, res) {

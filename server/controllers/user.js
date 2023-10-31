@@ -4,13 +4,15 @@ const User = require('../models/user');
 
 const userSchema = Joi.object({
   fullname: Joi.string().required(),
+  username: Joi.string().required(),
   email: Joi.string().email(),
   mobileNumber: Joi.string().regex(/^[1-9][0-9]{9}$/),
-  password: Joi.string().required()
+  password: Joi.string().required(),
+  hashedPassword: Joi.string()
 });
 
 module.exports = {
-  insert, read, update, deleteUser
+  insert, read, readUsername, update, deleteUser
 };
 
 async function insert(user) {
@@ -22,6 +24,10 @@ async function insert(user) {
 
 async function read() {
   return User.find();
+}
+
+async function readUsername(username) {
+  return User.find({username: username}, 'fullname username email');
 }
 
 async function update(user) {
