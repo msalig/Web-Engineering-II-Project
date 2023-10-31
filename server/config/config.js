@@ -15,7 +15,6 @@ const envVarsSchema = Joi.object({
     otherwise: Joi.boolean().default(false),
   }),
   MONGO_HOST: Joi.string().required().description('Mongo DB host url'),
-  MONGO_PORT: Joi.number().default(27017),
 })
   .unknown()
   .required();
@@ -31,7 +30,6 @@ const config = {
   mongooseDebug: envVars.MONGOOSE_DEBUG,
   mongo: {
     host: envVars.MONGO_HOST,
-    port: envVars.MONGO_PORT,
   },
 };
 
