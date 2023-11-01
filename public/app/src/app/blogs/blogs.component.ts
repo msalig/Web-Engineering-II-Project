@@ -9,9 +9,7 @@ import {IBlogEntryFromBackend} from "../../interfaces/IBlogEntryFromBackend";
 import {IUser} from "../../interfaces/user";
 import {ILocation} from "../../interfaces/Iocation";
 import {IComment} from "../../interfaces/comment";
-// import location from "$GLOBAL$";
-// import location from "$GLOBAL$";
-// import {convertToStars} from "../../assets/convert-to-stars.pipe";
+
 
 @Component({
   selector: 'app-blogs',
@@ -79,11 +77,8 @@ export class BlogsComponent implements OnInit {
     //if it is part of the regular blogs-page
     let blogs: IBlogEntry[]=[];
     console.log("Versuche Verbindung aufzubauen....");
-    this.http.get<IBlogEntryFromBackend[]>('http://localhost:3000/api/blogEntries/').subscribe(response => {
-      console.log("received message: ");
-      console.log(response.length);
-
-
+    this.http.get<IBlogEntryFromBackend[]>('http://localhost:3000/api/blogEntries/')
+      .subscribe(response => {
       response.forEach(blogBE => {
           let blog: IBlogEntry = {
             displayname: blogBE._id.toString(),
@@ -109,12 +104,9 @@ export class BlogsComponent implements OnInit {
             review: blogBE.review,
           }
           blogs.push(blog);
-          //console.log(blog);
         }
       )
       console.log(blogs);
-      //this.blogEntrys=
-      //this.backendRespond.map
 
 
     })
