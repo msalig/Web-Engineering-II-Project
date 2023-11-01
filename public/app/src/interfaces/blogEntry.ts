@@ -12,9 +12,6 @@ export interface IBlogEntry{
   comments: IComment[];
   tags: string[];
   review:number;
-
-
-
 }
 
 

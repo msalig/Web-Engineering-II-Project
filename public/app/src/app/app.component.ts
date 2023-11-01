@@ -22,7 +22,7 @@ export class AppComponent implements OnInit{
     blogEntrys=getBlogEntrys();
 
 
-    console.log(blogEntrys);
+    //console.log(blogEntrys);
   }
 }
 

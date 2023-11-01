@@ -18,20 +18,16 @@ import {NavbarComponent} from './navbar/navbar.component';
 import {HomeComponent} from './home/home.component';
 import {BlogsComponent} from './blogs/blogs.component';
 import {RatingsComponent} from './ratings/ratings.component';
-import {PreviewBlogComponent} from './preview-blog/preview-blog.component';
 import {BlogComponent} from './blog/blog.component';
 import {NotfoundComponent} from "./notfound/notfound.component";
-// import {ConvertToStarsPipe} from "../assets/convert-to-stars.pipe";
 import {AuthorsComponent} from "./authors/authors.component";
 import {AuthorComponent} from "./author/author.component";
-// import {StarPipe} from "./Pipes/star.pipe";
 import {BlogtileComponent}from "./blogtile/blogtile.component";
 import { AccountviewComponent } from './accountview/accountview.component';
 import { EditblogComponent } from './editblog/editblog.component'
-
-// import {BlogService}from './Service/blog-service';
 import { TagsearchComponent } from './tagsearch/tagsearch.component';
 import { LoginComponent } from './login/login.component'
+
 
 const myRoutes: Routes = [
 
