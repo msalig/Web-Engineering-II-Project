@@ -45,24 +45,29 @@ export class AccountviewComponent implements OnInit{
     if(AuthorizationService._User==null)
       this.router.navigateByUrl('/login');
   }
-  //
-  // get listFilter(): string {
-  //   return this._listFilter;
-  // }
-  //
-  // set listFilter(value: string) {
-  //   this._listFilter = value;
-  //   this.performFilter(value);
-  // }
-  //
-  // performFilter(filterBy: string): void {
-  //   filterBy = filterBy.toLowerCase();
-  //   this.filteredBlogEntrys = this.blogEntrys.filter((blog: IBlogEntry) =>
-  //     blog.author.name.toLowerCase().includes(filterBy) || blog.title.toLowerCase().includes(filterBy) || blog.tags.toLocaleString().toLowerCase().includes(filterBy) || blog.location.country.toLowerCase().includes(filterBy) || blog.location.place.toLowerCase().includes(filterBy));
-  // }
+
+  get listFilter(): string {
+    return this._listFilter;
+  }
+
+  set listFilter(value: string) {
+    this._listFilter = value;
+    this.performFilter(value);
+  }
+
+  performFilter(filterBy: string): void {
+    filterBy = filterBy.toLowerCase();
+    this.filteredBlogEntrys = this.blogEntrys.filter((blog: IBlogEntry) =>
+      blog.author.name.toLowerCase().includes(filterBy) || blog.title.toLowerCase().includes(filterBy) || blog.tags.toLocaleString().toLowerCase().includes(filterBy) || blog.location.country.toLowerCase().includes(filterBy) || blog.location.place.toLowerCase().includes(filterBy));
+  }
   //
   // saveInfos(){
   //   console.log("save Infos");
 
   // }
+  saveInfos() {
+
+  }
+
+  protected readonly AuthorizationService = AuthorizationService;
 }

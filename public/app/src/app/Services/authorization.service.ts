@@ -5,14 +5,14 @@ import {IUser} from "../../interfaces/user";
   providedIn: 'root'
 })
 export class AuthorizationService {
-  // static _User:IUser={
-  //   displayname:  "this",
-  //   mail:"this.email",
-  //   name: "this.displayName.toLowerCase().trim()",
-  //   publishedblogs: 0
-  // };
+  static _User:IUser={
+    displayname:  "Kaninchen Stiermann",
+    mail:"kaninchen@stiermann.de",
+    name: "kaninchenstiermann",
+    publishedblogs: 0
+  };
 
-  static _User:IUser;
+  // static _User:IUser;
 
  public static get User(): IUser {
     return this._User;
