@@ -24,7 +24,7 @@ const router = express.Router();
  *               schema:
  *                 $ref: '#/components/schemas/Comment'
  *       tags:
- *        - blogEntries
+ *        - comment
  */
 router.route('/:id')
   .get(asyncHandler(read));

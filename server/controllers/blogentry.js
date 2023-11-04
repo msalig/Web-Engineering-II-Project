@@ -20,6 +20,7 @@ module.exports = {
   getBlogsByAuthor,
   getBlogsByTag,
   getBlogsByCountry,
+  getBlogsByUrl,
   addComment,
   update,
   deleteBlogEntry
@@ -55,6 +56,10 @@ async function getBlogById(id) {
 
 async function getBlogsByAuthor(author) {
   return BlogEntry.find({authorId: author});
+}
+
+async function getBlogsByUrl(url) {
+  return BlogEntry.findOne({url: url});
 }
 
 async function addComment(blogID, commentID) {

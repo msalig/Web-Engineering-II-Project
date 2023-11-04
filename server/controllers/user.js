@@ -11,7 +11,7 @@ const userSchema = Joi.object({
 });
 
 module.exports = {
-  insert, readAll, read, update, deleteUser, checkCred
+  insert, readAll, read, update, deleteUser, getUserByUsername
 };
 
 async function insert(user) {
@@ -22,16 +22,21 @@ async function insert(user) {
 }
 
 async function readAll() {
-  return User.find({}, '_id displayname username '); //+Count BlogEntries
+  return User.find({}, '_id displayname username'); //+Count BlogEntries
 }
 
 async function read(id) {
-  return User.findById(id);
+  return User.findById(id, '-hashedPassword');
 }
 
-async function checkCred(req) {
-  let user =  User.findOne({ username: req.body.username }, {lean: true});
-  return bcrypt.compareSync(req.body.password, user.hashedPassword);
+async function getUserByUsername(username, withPWD) {
+  let projection;
+  if (!withPWD) {
+    projection = '-hashedPassword'
+  } else {
+    projection = undefined
+  }
+  return User.findOne({username: username}, projection, {lean: true});
 }
 
 async function update(user) {
@@ -39,5 +44,5 @@ async function update(user) {
 }
 
 async function deleteUser(user) {
-  return User.deleteOne({ email: user.email});
+  return User.deleteOne({email: user.email});
 }
