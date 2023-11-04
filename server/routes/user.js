@@ -101,7 +101,7 @@ router.post('/login', asyncHandler(checkUserCred));
  *       tags:
  *         - user
  */
-router.route('/{id}')
+router.route('/:id')
   .get(asyncHandler(read))
   .put(asyncHandler(update))
   .delete(asyncHandler(deleteUser));

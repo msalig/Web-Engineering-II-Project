@@ -222,8 +222,8 @@ async function getBlogsByCountry(req, res) {
 }
 
 async function getBlogByID(req, res) {
-  let blogs = await blogEntryCtrl.getBlogById(req.params.id);
-  res.send(blogs);
+  let blog = await blogEntryCtrl.getBlogById(req.params.id);
+  res.send(blog);
 }
 
 async function getBlogsByAuthor(req, res) {
