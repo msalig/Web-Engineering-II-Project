@@ -5,15 +5,27 @@ import {IUser} from "../../interfaces/user";
   providedIn: 'root'
 })
 export class AuthorizationService {
-  static get User(): IUser {
+  // static _User:IUser={
+  //   displayname:  "this",
+  //   mail:"this.email",
+  //   name: "this.displayName.toLowerCase().trim()",
+  //   publishedblogs: 0
+  // };
+
+  static _User:IUser;
+
+ public static get User(): IUser {
     return this._User;
   }
 
-  static set User(value: IUser) {
+
+  public static set User(value: IUser) {
     this._User = value;
   }
-
-
-  private static _User:IUser;
   constructor() { }
+
+
+  public getUser(){
+   return(AuthorizationService._User);
+  }
 }

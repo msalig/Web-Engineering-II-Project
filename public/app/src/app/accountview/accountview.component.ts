@@ -27,18 +27,24 @@ export class AccountviewComponent implements OnInit{
   userName: any;
   private _listFilter: string = '';
 
+  protected readonly authorizationService = AuthorizationService;
+  // private authorizationService:AuthorizationService|undefined;
+
   constructor(private route: ActivatedRoute, private router:Router) {
     this.blogEntrys = getBlogEntrys();
+    // this.authorizationService=new AuthorizationService();
     this.filteredBlogEntrys = this.blogEntrys;
     this.userName="muss durch authentifizierung abgefragt werden";
   }
 
+
   ngOnInit() {
-    if(AuthorizationService.User==null)
+
+    // this.authorizationService.
+
+    if(AuthorizationService._User==null)
       this.router.navigateByUrl('/login');
   }
-
-
   //
   // get listFilter(): string {
   //   return this._listFilter;
@@ -57,7 +63,6 @@ export class AccountviewComponent implements OnInit{
   //
   // saveInfos(){
   //   console.log("save Infos");
-  // }
 
-  protected readonly AuthorizationService = AuthorizationService;
+  // }
 }
