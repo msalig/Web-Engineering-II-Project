@@ -155,6 +155,8 @@ router.route('/:id')
  */
 router.get('/byAuthor/:author', asyncHandler(getBlogsByAuthor));
 
+router.get('/byUrl/:url', asyncHandler(getBlogsByUrl));
+
 /**
  * @openapi
  * /blogEntries:
@@ -226,6 +228,11 @@ async function getBlogByID(req, res) {
 
 async function getBlogsByAuthor(req, res) {
   let blogs = await blogEntryCtrl.getBlogsByAuthor(req.params.author);
+  res.send(blogs);
+}
+
+async function getBlogsByUrl(req, res) {
+  let blogs = await blogEntryCtrl.getBlogsByUrl(req.params.url);
   res.send(blogs);
 }
 
