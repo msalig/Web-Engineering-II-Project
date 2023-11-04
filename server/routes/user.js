@@ -157,7 +157,7 @@ async function readAll(req, res) {
 }
 
 async function read(req, res) {
-  let user = await userCtrl.read(req.param.id);
+  let user = await userCtrl.read(req.params.id);
   res.json(user);
 }
 
