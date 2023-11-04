@@ -126,9 +126,9 @@ router.get('/byCountry/:country', asyncHandler(getBlogsByCountry));
  *        - blogEntries
  */
 router.route('/:id')
-  .get(asyncHandler(getBlogByID))
-  .put(asyncHandler(updateBlogByID))
-  .delete(asyncHandler(deleteBlogByID));
+  .get(asyncHandler(getBlogById))
+  .put(asyncHandler(updateBlog))
+  .delete(asyncHandler(deleteBlogById));
 
 /**
  * @openapi
@@ -221,27 +221,27 @@ async function getBlogsByCountry(req, res) {
   res.send(blogs);
 }
 
-async function getBlogByID(req, res) {
+async function getBlogById(req, res) {
   let blog = await blogEntryCtrl.getBlogById(req.params.id);
   res.send(blog);
 }
 
 async function getBlogsByAuthor(req, res) {
-  let blogs = await blogEntryCtrl.getBlogsByAuthor(req.params.author);
+  let blogs = await blogEntryCtrl.getBlogsByAuthor(req.params.authorId);
   res.send(blogs);
 }
 
 async function getBlogsByUrl(req, res) {
-  let blogs = await blogEntryCtrl.getBlogsByUrl(req.params.url);
+  let blogs = await blogEntryCtrl.getByUrl(req.params.url);
   res.send(blogs);
 }
 
-async function updateBlogByID(req, res) {
-  let user = await blogEntryCtrl.update(req.params.id);
+async function updateBlog(req, res) {
+  let user = await blogEntryCtrl.update(req.params.id, req.body);
   res.json(user);
 }
 
-async function deleteBlogByID(req, res) {
+async function deleteBlogById(req, res) {
   let success = await blogEntryCtrl.deleteBlogEntry(req.params.id);
   res.json(success);
 }

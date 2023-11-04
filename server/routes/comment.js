@@ -85,11 +85,11 @@ async function read(req, res) {
 }
 
 async function update(req, res) {
-  let comment = await commentCtrl.update(req.body);
+  let comment = await commentCtrl.update(req.params.id, req.body);
   res.json(comment);
 }
 
 async function deleteComment(req, res) {
-  let success = await commentCtrl.deleteComment(req.body);
+  let success = await commentCtrl.deleteComment(req.params.id);
   res.json(success);
 }
