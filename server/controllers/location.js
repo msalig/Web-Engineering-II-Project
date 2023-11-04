@@ -9,7 +9,7 @@ const locationSchema = Joi.object({
 });
 
 module.exports = {
-  insert, read
+  insert, readAll, read
 };
 
 async function insert(location) {
@@ -17,6 +17,10 @@ async function insert(location) {
   return await new Location(location).save();
 }
 
-async function read() {
+async function readAll() {
   return Location.find();
+}
+
+async function read(id) {
+  return Location.findById(id);
 }

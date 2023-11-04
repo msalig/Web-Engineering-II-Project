@@ -7,6 +7,30 @@ const router = express.Router();
 
 /**
  * @openapi
+ * /comments/{id}:
+ *    get:
+ *       summary: Get a comment by Id
+ *       parameters:
+ *         - name: id
+ *           in: path
+ *           required: true
+ *           schema:
+ *             type: string
+ *       responses:
+ *         '200':
+ *           description: OK
+ *           content:
+ *             application/json:
+ *               schema:
+ *                 $ref: '#/components/schemas/Comment'
+ *       tags:
+ *        - blogEntries
+ */
+router.route('/:id')
+  .get(asyncHandler(read));
+
+/**
+ * @openapi
  * /comments:
  *   post:
  *     summary: Fügt einen neuen Kommentar hinzu
@@ -50,9 +74,14 @@ async function insert(req, res) {
   res.json(blogEntry);
 }
 
-async function read(req, res) {
-  let comments = await commentCtrl.read();
+async function readAll(req, res) {
+  let comments = await commentCtrl.readAll();
   res.json(comments);
+}
+
+async function read(req, res) {
+  let comment = await commentCtrl.read(req.body.id);
+  res.json(comment);
 }
 
 async function update(req, res) {
