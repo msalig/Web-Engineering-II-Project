@@ -77,7 +77,7 @@ router.get('/byCountry/:country', asyncHandler(getBlogsByCountry));
  * @openapi
  * /blogEntries/{id}:
  *   get:
- *       summary: Get a blog entry by ID
+ *       summary: Get a blog entry by Id
  *       parameters:
  *         - name: id
  *           in: path
@@ -94,7 +94,7 @@ router.get('/byCountry/:country', asyncHandler(getBlogsByCountry));
  *       tags:
  *        - blogEntries
  *   put:
- *       summary: Update a blog entry by ID
+ *       summary: Update a blog entry by Id
  *       parameters:
  *         - name: id
  *           in: path
@@ -112,7 +112,7 @@ router.get('/byCountry/:country', asyncHandler(getBlogsByCountry));
  *       tags:
  *        - blogEntries
  *   delete:
- *       summary: Delete a blog entry by ID
+ *       summary: Delete a blog entry by Id
  *       parameters:
  *         - name: id
  *           in: path
