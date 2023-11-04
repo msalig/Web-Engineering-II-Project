@@ -1,0 +1,220 @@
+[
+  {
+    "authorID": 6,
+    "title": "Adventures in Rome",
+    "locationID": 18,
+    "text": "Rome, the eternal city, is a treasure trove of history and art. From the Colosseum to the Vatican, and from the Roman Forum to the delicious Italian cuisine, Rome is a city that will transport you back in time.",
+    "review": 5,
+    "tags": [
+      "Rome",
+      "Italy",
+      "Travel",
+      "History"
+    ],
+    "commentIDs": [
+      201,
+      202,
+      203,
+      204
+    ]
+  },
+  {
+    "authorID": 2,
+    "title": "Discovering London's Charm",
+    "locationID": 12,
+    "text": "London, with its iconic red buses and historic landmarks, is a city that seamlessly blends the old and the new. Whether you're visiting Buckingham Palace, exploring the British Museum, or enjoying a pint in a traditional pub, London has something for every traveler.",
+    "review": 4,
+    "tags": [
+      "London",
+      "United Kingdom",
+      "Travel",
+      "Culture"
+    ],
+    "commentIDs": [
+      301,
+      302,
+      303,
+      304
+    ]
+  },
+  {
+    "authorID": 7,
+    "title": "A Journey to Paris",
+    "locationID": 15,
+    "text": "Paris, the 'City of Love,' is famous for its romantic ambiance, world-class art, and delectable pastries. From the enchanting Eiffel Tower to the charming Montmartre, Paris is a dream destination for many.",
+    "review": 5,
+    "tags": [
+      "Paris",
+      "France",
+      "Travel",
+      "Romance"
+    ],
+    "commentIDs": [
+      401,
+      402
+    ]
+  },
+  {
+    "authorID": 1,
+    "title": "Exploring Barcelona",
+    "locationID": 22,
+    "text": "Barcelona, with its Gaudí architecture and beautiful beaches, is a city that captivates visitors with its unique charm. Stroll down La Rambla, visit Park Güell, and savor authentic tapas in this Spanish gem.",
+    "review": 4,
+    "tags": [
+      "Barcelona",
+      "Spain",
+      "Travel",
+      "Art"
+    ],
+    "commentIDs": [
+      501,
+      502
+    ]
+  },
+  {
+    "authorID": 5,
+    "title": "Mysteries of Istanbul",
+    "locationID": 9,
+    "text": "Istanbul, where East meets West, is a city steeped in history and culture. Explore the grand Hagia Sophia, cruise along the Bosphorus, and indulge in flavorful Turkish delights on your journey through this fascinating city.",
+    "review": 5,
+    "tags": [
+      "Istanbul",
+      "Turkey",
+      "Travel",
+      "History"
+    ],
+    "commentIDs": [
+      601,
+      602,
+      603
+    ]
+  },
+  {
+    "authorID": 4,
+    "title": "San Francisco Adventures",
+    "locationID": 10,
+    "text": "San Francisco, known for its iconic Golden Gate Bridge and hilly streets, offers a diverse cultural experience. Discover the beauty of Alcatraz Island, explore Fisherman's Wharf, and take in the stunning views from Twin Peaks.",
+    "review": 4,
+    "tags": [
+      "San Francisco",
+      "USA",
+      "Travel",
+      "Culture"
+    ],
+    "commentIDs": [
+      701,
+      702,
+      703
+    ]
+  },
+  {
+    "authorID": 8,
+    "title": "Venice: City of Canals",
+    "locationID": 20,
+    "text": "Venice, a city built on water, is a place of enchantment. Glide along the picturesque canals, visit St. Mark's Basilica, and savor exquisite Italian cuisine in this unique and romantic city.",
+    "review": 5,
+    "tags": [
+      "Venice",
+      "Italy",
+      "Travel",
+      "Romance"
+    ],
+    "commentIDs": [
+      801,
+      802,
+      803,
+      804
+    ]
+  },
+  {
+    "authorID": 3,
+    "title": "The Beauty of Kyoto",
+    "locationID": 6,
+    "text": "Kyoto, the ancient capital of Japan, is a treasure trove of traditional culture and serene temples. Walk through the Arashiyama Bamboo Grove, visit the historic Kinkaku-ji, and experience the elegance of a tea ceremony in Kyoto.",
+    "review": 4,
+    "tags": [
+      "Kyoto",
+      "Japan",
+      "Travel",
+      "Culture"
+    ],
+    "commentIDs": [
+      901,
+      902,
+      903
+    ]
+  },
+  {
+    "authorID": 7,
+    "title": "Discovering Sydney",
+    "locationID": 14,
+    "text": "Sydney, with its stunning Opera House and beautiful beaches, is a city of natural beauty and urban sophistication. Climb the Sydney Harbour Bridge, relax on Bondi Beach, and enjoy the vibrant arts and culture scene.",
+    "review": 5,
+    "tags": [
+      "Sydney",
+      "Australia",
+      "Travel",
+      "Nature"
+    ],
+    "commentIDs": [
+      1001,
+      1002,
+      1003,
+      1004
+    ]
+  },
+  {
+    "authorID": 6,
+    "title": "Adventures in Athens",
+    "locationID": 19,
+    "text": "Athens, the cradle of Western civilization, is a city that transports you to ancient times. Explore the Acropolis, visit the National Archaeological Museum, and savor Greek cuisine in the heart of Athens.",
+    "review": 4,
+    "tags": [
+      "Athens",
+      "Greece",
+      "Travel",
+      "History"
+    ],
+    "commentIDs": [
+      1101,
+      1102
+    ]
+  },
+  {
+    "authorID": 2,
+    "title": "Mystical Marrakech",
+    "locationID": 23,
+    "text": "Marrakech, with its bustling souks and stunning palaces, is a city that immerses you in Moroccan culture. Lose yourself in the medina, admire the Bahia Palace, and savor the flavors of Moroccan cuisine.",
+    "review": 5,
+    "tags": [
+      "Marrakech",
+      "Morocco",
+      "Travel",
+      "Culture"
+    ],
+    "commentIDs": [
+      1201,
+      1202,
+      1203,
+      1204
+    ]
+  },
+  {
+    "authorID": 4,
+    "title": "A Visit to Berlin",
+    "locationID": 8,
+    "text": "Berlin, with its rich history and modern vibe, is a city of contrasts. Explore the remnants of the Berlin Wall, visit the Brandenburg Gate, and indulge in the city's thriving arts and nightlife scenes.",
+    "review": 4,
+    "tags": [
+      "Berlin",
+      "Germany",
+      "Travel",
+      "History"
+    ],
+    "commentIDs": [
+      1301,
+      1302,
+      1303
+    ]
+  }
+]
