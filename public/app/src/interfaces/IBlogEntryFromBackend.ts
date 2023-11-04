@@ -3,7 +3,12 @@ export interface IBlogEntryFromBackend {
   review:number;
   tags:string[];
   text:string;
+  textShort:string;
   title:string;
+  url:string;
+  authorId:string;
+  locationId:string;
+  __v:number;
 }
 
 export interface IBlogEntryFromBackendShort {

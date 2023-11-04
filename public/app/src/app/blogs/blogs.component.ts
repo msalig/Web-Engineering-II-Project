@@ -33,9 +33,7 @@ export class BlogsComponent {
   constructor(private route: ActivatedRoute, private http: HttpClient) {
     // this.blogEntrys = this.getBlogEntrys();
     this.getblogsService = new GetblogsService(http);
-
-    // this.blogEntrys =
-      this.getblogsService.getBlogsShort().subscribe(response =>
+     this.getblogsService.getBlogsShort().subscribe(response =>
     response.forEach(blog =>{
       this.blogEntrys.push(<IBlogEntry>this.getblogsService?.mapBlogShort(blog));
     }))

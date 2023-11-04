@@ -24,22 +24,13 @@ export class BlogComponent implements OnInit {
   protected readonly faUser = faUser;
 
   async ngOnInit() {
-    if (this.getblogsService != null) {
 
-
-      this.blog = await this.getblogsService.getBlogByID("6541857521062a5ec9abe2a2");
-      const blogIdentifier = String(this.route.snapshot.paramMap.get('identifier'));
-
-
-      console.log("inBlog")
-
-      console.log(this.blog);
-    }
   }
 
   constructor(private route: ActivatedRoute, private http: HttpClient) {
     this.getblogsService = new GetblogsService(http);
 
+    // this.getblogsService.getBlogById()
 
     // console.log("BlogEntrys:" && getblogsService.getBlogEntrys());
 
@@ -50,16 +41,15 @@ export class BlogComponent implements OnInit {
   }
 
 
-
   getBlog() {
     const blogIdentifier = String(this.route.snapshot.paramMap.get('identifier'));
     const authorIdentifier = String(this.route.snapshot.paramMap.get('author'));
     let receivedblog: IBlogEntry[] = [];
-    let receivedfirstblog:IBlogEntry;
+    let receivedfirstblog: IBlogEntry;
 
     this.http.get<IBlogEntryFromBackend>('http://localhost:3000/api/blogEntries/' + blogIdentifier)
       .subscribe(response => {
-        return{
+        return {
           displayname: response._id.toString(),
           author: {
             displayname: "kreuzfahrtfan",
