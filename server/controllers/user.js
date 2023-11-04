@@ -3,10 +3,11 @@ const Joi = require('joi');
 const User = require('../models/user');
 
 const userSchema = Joi.object({
-  fullname: Joi.string().required(),
-  email: Joi.string().email(),
-  mobileNumber: Joi.string().regex(/^[1-9][0-9]{9}$/),
-  password: Joi.string().required()
+  displayname: Joi.string().required(),
+  username: Joi.string().required().length(5),
+  email: Joi.string().email().required(),
+  password: Joi.string().required().length(5),
+  hashedPassword: Joi.string()
 });
 
 module.exports = {

@@ -28,9 +28,7 @@ const config = {
   env: envVars.NODE_ENV,
   port: envVars.SERVER_PORT,
   mongooseDebug: envVars.MONGOOSE_DEBUG,
-  mongo: {
-    host: envVars.MONGO_HOST,
-  },
+  mongoHost: envVars.MONGO_HOST,
 };
 
 module.exports = config;

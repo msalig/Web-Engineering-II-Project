@@ -73,10 +73,6 @@ router.get('/byTag/:tag', asyncHandler(getBlogsByTag));
  */
 router.get('/byCountry/:country', asyncHandler(getBlogsByCountry));
 
-/*router.route('/{id}/comments')
-  .get(asyncHandler(getBlogComments))
-  .post(asyncHandler(insertComment));*/
-
 /**
  * @openapi
  * /blogEntries/{id}:
@@ -163,24 +159,24 @@ router.get('/byAuthor/:author', asyncHandler(getBlogsByAuthor));
  * @openapi
  * /blogEntries:
  *   post:
- *       summary: Insert a new blog entry
- *       requestBody:
+ *      summary: Insert a new blog entry
+ *      requestBody:
  *         content:
  *           application/json:
  *             schema:
  *               $ref: '#/components/schemas/BlogEntry'
- *       responses:
+ *      responses:
  *         '200':
  *           description: OK
  *           content:
  *             application/json:
  *               schema:
  *                 $ref: '#/components/schemas/BlogEntry'
- *       tags:
+ *      tags:
  *        - blogEntries
  *   get:
- *       summary: Get all blog entries
- *       responses:
+ *      summary: Get all blog entries
+ *      responses:
  *         '200':
  *           description: OK
  *           content:
@@ -189,7 +185,7 @@ router.get('/byAuthor/:author', asyncHandler(getBlogsByAuthor));
  *                 type: array
  *                 items:
  *                   $ref: '#/components/schemas/BlogEntry'
- *       tags:
+ *      tags:
  *        - blogEntries
  */
 router.route('/')
@@ -224,7 +220,7 @@ async function getBlogsByCountry(req, res) {
 }
 
 async function getBlogByID(req, res) {
-  let blogs = await blogEntryCtrl.getBlogByID(req.params.id);
+  let blogs = await blogEntryCtrl.getBlogById(req.params.id);
   res.send(blogs);
 }
 
