@@ -30,6 +30,10 @@ export class BlogComponent implements OnInit {
   constructor(private route: ActivatedRoute, private http: HttpClient) {
     this.getblogsService = new GetblogsService(http);
 
+
+    const blogIdentifier = String(this.route.snapshot.paramMap.get('identifier'));
+    const authorIdentifier = String(this.route.snapshot.paramMap.get('author'));
+
     // this.getblogsService.getBlogById()
 
     // console.log("BlogEntrys:" && getblogsService.getBlogEntrys());
