@@ -17,10 +17,7 @@ import {IComment} from "../../interfaces/comment";
   styleUrls: ['./blogs.component.scss']
 })
 
-export class BlogsComponent implements OnInit {
-
-
-  // @Input() author:string;
+export class BlogsComponent {
 
   filteredBlogEntrys: IBlogEntry[] = [];
   protected readonly location = location;
@@ -28,33 +25,24 @@ export class BlogsComponent implements OnInit {
   protected readonly faUser = faUser;
   private blogEntrys: IBlogEntry[];
   private backendRespond: IBlogEntryFromBackend[] | undefined;
+  private _listFilter: string = '';
 
   constructor(private route: ActivatedRoute, private http: HttpClient) {
     this.blogEntrys = this.getBlogEntrys();
     this.filteredBlogEntrys = this.blogEntrys;
   }
 
-//
-  private _listFilter: string = '';
 
   get listFilter(): string {
     return this._listFilter;
   }
 
-//
 
   set listFilter(value: string) {
     this._listFilter = value;
     this.performFilter(value);
   }
 
-  ngOnInit() {
-    // console.log("Versuche Verbindung aufzubauen....");
-    // this.http.get('http://localhost:3000/api/blogEntries/').subscribe(response => {
-    //   console.log("received message: ");
-    //   console.log(response);
-    // })
-  }
 
   getBlogEntrys(): IBlogEntry[] {
 
@@ -75,54 +63,47 @@ export class BlogsComponent implements OnInit {
 
 
     //if it is part of the regular blogs-page
-    let blogs: IBlogEntry[]=[];
+    let blogs: IBlogEntry[] = [];
     console.log("Versuche Verbindung aufzubauen....");
     this.http.get<IBlogEntryFromBackend[]>('http://localhost:3000/api/blogEntries/')
       .subscribe(response => {
-      response.forEach(blogBE => {
-          let blog: IBlogEntry = {
-            displayname: blogBE._id.toString(),
-            author: {
-              displayname: "kreuzfahrtfan",
-              name: "cruiselover222",
-              mail: "cruiselover222@example.com",
-              publishedblogs: 7,
-            },
-            title: blogBE.title,
-            location: {
-              "country": "Deutschland",
-              "place": "Berlin",
-              "coordinates": {
-                "x": 52.5200,
-                "y": 13.4050
-              }
-            },
-            blogentryShort: blogBE.text,
-            blogentry: blogBE.text,
-            comments: [],
-            tags: blogBE.tags,
-            review: blogBE.review,
+        response.forEach(blogBE => {
+            let blog: IBlogEntry = {
+              displayname: blogBE._id.toString(),
+              author: {
+                displayname: "kreuzfahrtfan",
+                name: "cruiselover222",
+                mail: "cruiselover222@example.com",
+                publishedblogs: 7,
+              },
+              title: blogBE.title,
+              location: {
+                "country": "Deutschland",
+                "place": "Berlin",
+                "coordinates": {
+                  "x": 52.5200,
+                  "y": 13.4050
+                }
+              },
+              blogentryShort: blogBE.text,
+              blogentry: blogBE.text,
+              comments: [],
+              tags: blogBE.tags,
+              review: blogBE.review,
+            }
+            blogs.push(blog);
           }
-          blogs.push(blog);
-        }
-      )
-      console.log(blogs);
+        )
+        console.log(blogs);
 
 
-    })
+      })
     return blogs;
   }
 
-  performFilter(filterBy
-                  :
-                  string
-  ):
-    void {
+  performFilter(filterBy: string): void {
     filterBy = filterBy.toLowerCase();
     this.filteredBlogEntrys = this.blogEntrys.filter((blog: IBlogEntry) =>
       blog.author.name.toLowerCase().includes(filterBy) || blog.title.toLowerCase().includes(filterBy) || blog.tags.toLocaleString().toLowerCase().includes(filterBy) || blog.location.country.toLowerCase().includes(filterBy) || blog.location.place.toLowerCase().includes(filterBy));
-
   }
-
-
 }

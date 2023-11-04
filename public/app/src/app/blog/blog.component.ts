@@ -7,6 +7,8 @@ import {faUser} from "@fortawesome/free-solid-svg-icons";
 import {HttpClient} from "@angular/common/http";
 import {IBlogEntryFromBackend} from "../../interfaces/IBlogEntryFromBackend";
 import {response} from "express";
+import {GetblogsService} from "../Services/CommunicationService/getblogs.service";
+import {async} from "rxjs";
 
 // import {BlogService}from '../Service/blog-service'
 
@@ -16,25 +18,48 @@ import {response} from "express";
   styleUrls: ['./blog.component.scss']
 })
 export class BlogComponent implements OnInit {
-  blog: IBlogEntry;
+  blog: IBlogEntry | undefined;
+  anotherBlog: IBlogEntry | undefined;
+  private getblogsService: GetblogsService | undefined;
   protected readonly faUser = faUser;
 
+  async ngOnInit() {
+    if (this.getblogsService != null) {
+
+
+      this.blog = await this.getblogsService.getBlogByID("6541857521062a5ec9abe2a2");
+      const blogIdentifier = String(this.route.snapshot.paramMap.get('identifier'));
+
+
+      console.log("inBlog")
+
+      console.log(this.blog);
+    }
+  }
+
   constructor(private route: ActivatedRoute, private http: HttpClient) {
-    this.blog = this.getBlog();
+    this.getblogsService = new GetblogsService(http);
+
+
+    // console.log("BlogEntrys:" && getblogsService.getBlogEntrys());
+
+    // this.blog = this.getBlog()[1];
+    // this.blog=mockBlogEntry();
+
+
   }
 
 
-  ngOnInit() {
-    // this.blog = this.getBlog();
-  }
 
   getBlog() {
     const blogIdentifier = String(this.route.snapshot.paramMap.get('identifier'));
     const authorIdentifier = String(this.route.snapshot.paramMap.get('author'));
     let receivedblog: IBlogEntry[] = [];
+    let receivedfirstblog:IBlogEntry;
+
     this.http.get<IBlogEntryFromBackend>('http://localhost:3000/api/blogEntries/' + blogIdentifier)
       .subscribe(response => {
-        receivedblog.push({
+        return{
           displayname: response._id.toString(),
           author: {
             displayname: "kreuzfahrtfan",
@@ -56,14 +81,18 @@ export class BlogComponent implements OnInit {
           comments: [],
           tags: response.tags,
           review: response.review
-        });
+        };
         console.log(receivedblog);
+        console.log(receivedblog[0]);
+        return receivedblog[0];
       })
 
 
     console.log(blogIdentifier);
     console.log(authorIdentifier);
+    console.log(receivedblog);
     return receivedblog[0];
+
   }
 
 

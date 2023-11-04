@@ -61,6 +61,10 @@ const myRoutes: Routes = [
     component: AccountviewComponent
   },
   {
+    path: 'login',
+    component: LoginComponent
+  },
+  {
     path: 'editblog/:blogtitle',
     component: EditblogComponent
   },

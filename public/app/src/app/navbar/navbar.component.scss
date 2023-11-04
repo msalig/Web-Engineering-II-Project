@@ -1,4 +1,4 @@
-
+@import "../../styles/vars";
 
 
 header {
@@ -56,7 +56,7 @@ header {
 
 
         &:hover {
-          color: #2ca7e9;
+          color: $main-color;
           cursor: pointer;
           transition: 0.4s ease-in-out;
         }
@@ -97,7 +97,7 @@ header {
     span {
       width: 32px;
       height: 3px;
-      background: #000000;
+      background: $main-font-color;
       display: block;
       transition: 0.2s ease-in-out;
 

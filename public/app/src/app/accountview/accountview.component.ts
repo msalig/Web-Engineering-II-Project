@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {IBlogEntry} from "../../interfaces/blogEntry";
 import {getBlogEntrys, getBlogEntrysByAuthor} from "../../MockData/mockblogEntrys";
 import {faEdit, faUser} from "@fortawesome/free-solid-svg-icons";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
+import {AuthorizationService} from "../Services/authorization.service";
 // import {AuthenticationService} from "../Service/authentication.service";
 
 @Component({
@@ -10,22 +11,34 @@ import {ActivatedRoute} from "@angular/router";
   templateUrl: './accountview.component.html',
   styleUrls: ['./accountview.component.scss']
 })
-export class AccountviewComponent {
-  // filteredBlogEntrys: IBlogEntry[] = [];
-  // private blogEntrys: IBlogEntry[];
-  // protected readonly faUser = faUser;
-  // protected readonly faEdit = faEdit;
-  // userName: any;
-  // private _listFilter: string = '';
-  // private authenticationService: AuthenticationService;
-  //
-  // constructor(private route: ActivatedRoute) {
-  //   this.blogEntrys = getBlogEntrys();
-  //   this.filteredBlogEntrys = this.blogEntrys;
-  //   this.userName="muss durch authentifizierung abgefragt werden";
-  //   this.authenticationService = new AuthenticationService();
-  // }
-  //
+export class AccountviewComponent implements OnInit{
+
+
+
+
+
+
+
+
+  filteredBlogEntrys: IBlogEntry[] = [];
+  private blogEntrys: IBlogEntry[];
+  protected readonly faUser = faUser;
+  protected readonly faEdit = faEdit;
+  userName: any;
+  private _listFilter: string = '';
+
+  constructor(private route: ActivatedRoute, private router:Router) {
+    this.blogEntrys = getBlogEntrys();
+    this.filteredBlogEntrys = this.blogEntrys;
+    this.userName="muss durch authentifizierung abgefragt werden";
+  }
+
+  ngOnInit() {
+    if(AuthorizationService.User==null)
+      this.router.navigateByUrl('/login');
+  }
+
+
   //
   // get listFilter(): string {
   //   return this._listFilter;
@@ -46,4 +59,5 @@ export class AccountviewComponent {
   //   console.log("save Infos");
   // }
 
+  protected readonly AuthorizationService = AuthorizationService;
 }
