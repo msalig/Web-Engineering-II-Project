@@ -1,18 +1,25 @@
-import {Component} from '@angular/core';
-import {mockBlogEntry} from "../../MockData/mockblogEntry";
-
-// import {AuthenticationService} from "../Service/authentication.service";
+import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  selector: 'app-register',
+  templateUrl: './register.component.html',
+  styleUrls: ['./register.component.scss']
 })
-export class LoginComponent {
+export class RegisterComponent {
 
   private _displayName = '';
   private _password = '';
+  private _email='';
+
   errorText = ""
+
+  get email(): string {
+    return this._email;
+  }
+
+  set email(value: string) {
+    this._email = value;
+  }
 
   get displayName(): any {
     return this._displayName;
@@ -44,16 +51,17 @@ export class LoginComponent {
 
 
   login() {
-    if (this._displayName.length < 5) {
-      this.errorText = "Username should have at least 5 characters";
-    }
     if (this._password.length < 5) {
       this.errorText = "Password should have at least 5 characters";
+
+
+      if (this._displayName.length < 5) {
+        this.errorText = "Username should have at least 5 characters";
+
+
+      }
     }
     console.log(this.errorText)
 
-    if(this._displayName.length < 5 && this._password.length < 5){
-
-    }
   }
 }

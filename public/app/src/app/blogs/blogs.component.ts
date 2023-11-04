@@ -9,6 +9,7 @@ import {IBlogEntryFromBackend} from "../../interfaces/IBlogEntryFromBackend";
 import {IUser} from "../../interfaces/user";
 import {ILocation} from "../../interfaces/Iocation";
 import {IComment} from "../../interfaces/comment";
+import {GetblogsService} from "../Services/communication/getblogs.service";
 
 
 @Component({
@@ -23,12 +24,23 @@ export class BlogsComponent {
   protected readonly location = location;
   protected readonly faComment = faComment;
   protected readonly faUser = faUser;
-  private blogEntrys: IBlogEntry[];
+  private blogEntrys: IBlogEntry[]=[];
   private backendRespond: IBlogEntryFromBackend[] | undefined;
   private _listFilter: string = '';
+  private getblogsService: GetblogsService | undefined;
+
 
   constructor(private route: ActivatedRoute, private http: HttpClient) {
-    this.blogEntrys = this.getBlogEntrys();
+    // this.blogEntrys = this.getBlogEntrys();
+    this.getblogsService = new GetblogsService(http);
+
+    // this.blogEntrys =
+      this.getblogsService.getBlogsShort().subscribe(response =>
+    response.forEach(blog =>{
+      this.blogEntrys.push(<IBlogEntry>this.getblogsService?.mapBlogShort(blog));
+    }))
+
+
     this.filteredBlogEntrys = this.blogEntrys;
   }
 
@@ -85,8 +97,8 @@ export class BlogsComponent {
                   "y": 13.4050
                 }
               },
-              blogentryShort: blogBE.text,
-              blogentry: blogBE.text,
+              blogentryShort: atob(blogBE.text),
+              blogentry: atob(blogBE.text),
               comments: [],
               tags: blogBE.tags,
               review: blogBE.review,

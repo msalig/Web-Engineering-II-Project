@@ -26,7 +26,8 @@ import {BlogtileComponent}from "./blogtile/blogtile.component";
 import { AccountviewComponent } from './accountview/accountview.component';
 import { EditblogComponent } from './editblog/editblog.component'
 import { TagsearchComponent } from './tagsearch/tagsearch.component';
-import { LoginComponent } from './login/login.component'
+import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component'
 
 
 const myRoutes: Routes = [
@@ -65,6 +66,10 @@ const myRoutes: Routes = [
     component: LoginComponent
   },
   {
+    path: 'register',
+    component: RegisterComponent
+  },
+  {
     path: 'editblog/:blogtitle',
     component: EditblogComponent
   },
@@ -99,6 +104,7 @@ const myRoutes: Routes = [
     EditblogComponent,
     TagsearchComponent,
     LoginComponent,
+    RegisterComponent,
 
     // StarPipe,
 /**/

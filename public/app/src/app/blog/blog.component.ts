@@ -7,7 +7,7 @@ import {faUser} from "@fortawesome/free-solid-svg-icons";
 import {HttpClient} from "@angular/common/http";
 import {IBlogEntryFromBackend} from "../../interfaces/IBlogEntryFromBackend";
 import {response} from "express";
-import {GetblogsService} from "../Services/CommunicationService/getblogs.service";
+import {GetblogsService} from "../Services/communication/getblogs.service";
 import {async} from "rxjs";
 
 // import {BlogService}from '../Service/blog-service'
