@@ -1,6 +1,7 @@
 const bcrypt = require('bcrypt');
 const Joi = require('joi');
 const User = require('../models/user');
+const BlogEntry = require("../models/blogentry");
 
 const userSchema = Joi.object({
   displayname: Joi.string().required(),
@@ -36,13 +37,13 @@ async function getUserByUsername(username, withPWD) {
   } else {
     projection = undefined
   }
-  return User.findOne({username: username}, projection, {lean: true});
+  return User.findOne({username: username}, projection);
 }
 
-async function update(user) {
-
+async function update(userId, user) {
+  return User.findByIdAndUpdate(userId, user, {new:true}).select('-hashedPassword');
 }
 
-async function deleteUser(user) {
-  return User.deleteOne({email: user.email});
+async function deleteUser(userId) {
+  return User.findByIdAndDelete(userId);
 }
