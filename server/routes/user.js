@@ -2,10 +2,41 @@ const express = require('express');
 const passport = require('passport');
 const asyncHandler = require('express-async-handler');
 const userCtrl = require('../controllers/user');
+const bcrypt = require("bcrypt");
 
 const router = express.Router();
 
 //router.use(passport.authenticate('jwt', { session: false }));
+
+/**
+ * @openapi
+ * /users/login:
+ *   post:
+ *       summary: Login
+ *       requestBody:
+ *         required: true
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 username:
+ *                   type: string
+ *                 password:
+ *                   type: string
+ *       responses:
+ *         '200':
+ *           description: Erfolgreiche Anfrage
+ *           content:
+ *             application/json:
+ *               schema:
+ *                 $ref: '#/components/schemas/User'
+ *         '401':
+ *           description: Ungültige Anmeldedaten
+ *       tag:
+ *        - user
+ */
+router.post('/login', asyncHandler(checkUserCred));
 
 /**
  * @openapi
@@ -26,7 +57,7 @@ const router = express.Router();
  *               schema:
  *                 $ref: '#/components/schemas/User'
  *       tags:
- *        - blogEntries
+ *        - user
  *   put:
  *       summary: Aktualisieren eines Benutzers anhand der ID
  *       parameters:
@@ -128,6 +159,17 @@ async function readAll(req, res) {
 async function read(req, res) {
   let user = await userCtrl.read(req.body.id);
   res.json(user);
+}
+
+async function checkUserCred(req, res) {
+  let user = await userCtrl.getUserByUsername(req.body.username, true);
+  if (user != null) {
+    if (bcrypt.compareSync(req.body.password, user.hashedPassword)) {
+      user = await userCtrl.getUserByUsername(req.body.username, false);
+      res.status(201).json(user);
+    }
+  }
+  res.status(401).json({message: "Invalid Credentials"});
 }
 
 async function update(req, res) {

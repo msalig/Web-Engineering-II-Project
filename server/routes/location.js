@@ -23,7 +23,7 @@ const router = express.Router();
  *               schema:
  *                 $ref: '#/components/schemas/Location'
  *       tags:
- *        - blogEntries
+ *        - location
  */
 router.route('/:id')
   .get(asyncHandler(read));
