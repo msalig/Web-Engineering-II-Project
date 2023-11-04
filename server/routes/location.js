@@ -79,6 +79,6 @@ async function readAll(req, res) {
 }
 
 async function read(req, res) {
-  let location = await locationCtrl.read(req.body.id);
+  let location = await locationCtrl.read(req.params.id);
   res.json(location);
 }

@@ -20,7 +20,7 @@ module.exports = {
   getBlogsByAuthor,
   getBlogsByTag,
   getBlogsByCountry,
-  getBlogsByUrl,
+  getByUrl: getBlogsByUrl,
   addComment,
   update,
   deleteBlogEntry
@@ -45,12 +45,10 @@ async function getBlogsByTag(tag) {
 }
 
 async function getBlogsByCountry(country) {
-  console.log('Get blogs by country: ' + JSON.stringify(country, undefined, 2));
   return BlogEntry.find({location: {country: country}});
 }
 
 async function getBlogById(id) {
-  console.log('Get blog by Id: ' + JSON.stringify(id, undefined, 2));
   return BlogEntry.findById(id);
 }
 
@@ -62,14 +60,14 @@ async function getBlogsByUrl(url) {
   return BlogEntry.findOne({url: url});
 }
 
-async function addComment(blogID, commentID) {
-  return BlogEntry.findOneAndUpdate({_id: blogID}, {$push: {comments: commentID}}, {new: true})
+async function addComment(blogEntryId, commentId) {
+  return BlogEntry.findOneAndUpdate(blogEntryId.id, {$push: {comments: commentId}}, {new: true})
 }
 
-async function update(blog) {
-  return BlogEntry.findOneAndUpdate({_id: blog.id}, blog);
+async function update(blogEntryId, blogEntry) {
+  return BlogEntry.findByIdAndUpdate(blogEntryId, blogEntry, {new:true});
 }
 
-async function deleteBlogEntry(blogEntry) {
-  return BlogEntry.findOneAndDelete({email: blogEntry.email});
+async function deleteBlogEntry(blogEntryId) {
+  return BlogEntry.findByIdAndDelete(blogEntryId);
 }

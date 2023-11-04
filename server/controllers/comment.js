@@ -1,5 +1,6 @@
 const Joi = require('joi-oid')
 const Comment = require('../models/comment');
+const BlogEntry = require("../models/blogentry");
 
 const commentSchema = Joi.object({
   authorId: Joi.objectId().required(),
@@ -25,8 +26,8 @@ async function read(id) {
   return Comment.findById(id);
 }
 
-async function update(user) {
-
+async function update(commentId, comment) {
+  return Comment.findByIdAndUpdate(commentId, comment, {new:true});
 }
 
 async function deleteComment(commentId) {

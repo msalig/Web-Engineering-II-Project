@@ -173,11 +173,11 @@ async function checkUserCred(req, res) {
 }
 
 async function update(req, res) {
-  let user = await userCtrl.update(req.body);
+  let user = await userCtrl.update(req.params.id, req.body);
   res.json(user);
 }
 
 async function deleteUser(req, res) {
-  let success = await userCtrl.deleteUser(req.body);
+  let success = await userCtrl.deleteUser(req.body.id);
   res.json(success);
 }
