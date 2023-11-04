@@ -7,6 +7,7 @@ import {Observable} from "rxjs";
 import {IUser} from "../../../interfaces/user";
 import {UserService} from "./user.service";
 import {response} from "express";
+import {coerceStringArray} from "@angular/cdk/coercion";
 
 @Injectable({
   providedIn: 'root'
@@ -81,7 +82,7 @@ export class GetblogsService {
   // }
 
 
-  mapBlogShort(blog: IBlogEntryFromBackendShort):IBlogEntry
+  mapBlogShort(blog: IBlogEntryFromBackendShort)
   {
 
     let author:IUser={
@@ -91,33 +92,39 @@ export class GetblogsService {
       publishedblogs:5,
     }
 
-    this.userService?.getUserById(blog.authorId).subscribe(response =>{
-      author=<IUser>this.userService?.mapUser(response)
-    })
+    return this.userService?.getUserById(blog.authorId)
 
-    // while(author.name=='string'){
-    //   console.log('wait');
-    // }
 
-    return{
-      author: author,
-      blogentry: '',
-      blogentryShort: atob(blog.textShort),
-      comments: [],
-      displayname: blog.url,
-      location: {
-        country: '',
-        place: '',
-        coordinates: {
-          x: 0,
-          y: 0
-        }
-      },
-      review: blog.review,
-      tags: blog.tags,
-      title: blog.title
+    //   .subscribe(response =>{
+    //   author=<IUser>this.userService?.mapUser(response)
+    //   console.log(response);
+    //   console.log(author);
+    //   return{
+    //     author: author,
+    //     blogentry: '',
+    //     blogentryShort: atob(blog.textShort),
+    //     comments: [],
+    //     displayname: blog.url,
+    //     location: {
+    //       country: '',
+    //       place: '',
+    //       coordinates: {
+    //         x: 0,
+    //         y: 0
+    //       }
+    //     },
+    //     review: blog.review,
+    //     tags: blog.tags,
+    //     title: blog.title
+    //
+    //   }
+    //   console.log(author);
+    // })
 
-    }
+
+
+
+
   }
 
 

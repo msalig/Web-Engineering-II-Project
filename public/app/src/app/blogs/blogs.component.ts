@@ -10,6 +10,8 @@ import {IUser} from "../../interfaces/user";
 import {ILocation} from "../../interfaces/Iocation";
 import {IComment} from "../../interfaces/comment";
 import {GetblogsService} from "../Services/communication/getblogs.service";
+import {UserService} from "../Services/communication/user.service";
+import {LocationService} from "../Services/communication/location.service";
 
 
 @Component({
@@ -24,19 +26,53 @@ export class BlogsComponent {
   protected readonly location = location;
   protected readonly faComment = faComment;
   protected readonly faUser = faUser;
-  private blogEntrys: IBlogEntry[]=[];
+  private blogEntrys: IBlogEntry[] = [];
   private backendRespond: IBlogEntryFromBackend[] | undefined;
   private _listFilter: string = '';
-  private getblogsService: GetblogsService | undefined;
+  private getblogsService: GetblogsService | undefined
+  private userService: UserService | undefined
+  private locationService: LocationService | undefined
 
 
   constructor(private route: ActivatedRoute, private http: HttpClient) {
-    // this.blogEntrys = this.getBlogEntrys();
     this.getblogsService = new GetblogsService(http);
-     this.getblogsService.getBlogsShort().subscribe(response =>
-    response.forEach(blog =>{
-      this.blogEntrys.push(<IBlogEntry>this.getblogsService?.mapBlogShort(blog));
-    }))
+    this.userService = new UserService(http);
+    this.locationService = new LocationService(http);
+
+    this.getblogsService.getBlogsShort().subscribe(response =>
+      response.forEach(blog => {
+
+        this.userService?.getUserById(blog.authorId)
+          .subscribe(responseUser => {
+              let author = <IUser>this.userService?.mapUser(responseUser)
+
+
+              this.locationService?.getLocationById(blog.locationId)
+                .subscribe(responseLocation => {
+                  console.log(responseLocation)
+                  // @ts-ignore
+                  let location: ILocation = this.locationService.mapLocation(responseLocation)
+
+
+                  this.blogEntrys.push({
+                    author: author,
+                    blogentry: '',
+                    blogentryShort: atob(blog.textShort),
+                    comments: [],
+                    displayname: blog.url,
+                    location: location,
+                    review: blog.review,
+                    tags: blog.tags,
+                    title: blog.title
+
+                  })
+
+                })
+
+              console.log(author);
+            }
+          );
+      }))
 
 
     this.filteredBlogEntrys = this.blogEntrys;
