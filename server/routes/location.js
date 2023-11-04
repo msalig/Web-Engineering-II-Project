@@ -6,6 +6,30 @@ const router = express.Router();
 
 /**
  * @openapi
+ * /locations/{id}:
+ *    get:
+ *       summary: Get a location by Id
+ *       parameters:
+ *         - name: id
+ *           in: path
+ *           required: true
+ *           schema:
+ *             type: string
+ *       responses:
+ *         '200':
+ *           description: OK
+ *           content:
+ *             application/json:
+ *               schema:
+ *                 $ref: '#/components/schemas/Location'
+ *       tags:
+ *        - blogEntries
+ */
+router.route('/:id')
+  .get(asyncHandler(read));
+
+/**
+ * @openapi
  * /locations:
  *   post:
  *     summary: Fügt einen neuen Location hinzu
@@ -39,7 +63,7 @@ const router = express.Router();
  */
 router.route('/')
   .post(asyncHandler(insert))
-  .get(asyncHandler(read))
+  .get(asyncHandler(readAll))
 
 module.exports = router;
 
@@ -49,7 +73,12 @@ async function insert(req, res) {
   res.json(location);
 }
 
-async function read(req, res) {
-  let locations = await locationCtrl.read();
+async function readAll(req, res) {
+  let locations = await locationCtrl.readAll();
   res.json(locations);
+}
+
+async function read(req, res) {
+  let location = await locationCtrl.read(req.body.id);
+  res.json(location);
 }

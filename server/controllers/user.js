@@ -11,7 +11,7 @@ const userSchema = Joi.object({
 });
 
 module.exports = {
-  insert, read, update, deleteUser
+  insert, readAll, read, update, deleteUser, checkCred
 };
 
 async function insert(user) {
@@ -21,8 +21,17 @@ async function insert(user) {
   return await new User(user).save();
 }
 
-async function read() {
-  return User.find();
+async function readAll() {
+  return User.find({}, '_id displayname username '); //+Count BlogEntries
+}
+
+async function read(id) {
+  return User.findById(id);
+}
+
+async function checkCred(req) {
+  let user =  User.findOne({ username: req.body.username }, {lean: true});
+  return bcrypt.compareSync(req.body.password, user.hashedPassword);
 }
 
 async function update(user) {

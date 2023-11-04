@@ -10,6 +10,23 @@ const router = express.Router();
 /**
  * @openapi
  * /users/{id}:
+ *   get:
+ *       summary: Get a user by ID
+ *       parameters:
+ *         - name: id
+ *           in: path
+ *           required: true
+ *           schema:
+ *             type: string
+ *       responses:
+ *         '200':
+ *           description: OK
+ *           content:
+ *             application/json:
+ *               schema:
+ *                 $ref: '#/components/schemas/User'
+ *       tags:
+ *        - blogEntries
  *   put:
  *       summary: Aktualisieren eines Benutzers anhand der ID
  *       parameters:
@@ -54,6 +71,7 @@ const router = express.Router();
  *         - user
  */
 router.route('/{id}')
+  .get(asyncHandler(read))
   .put(asyncHandler(update))
   .delete(asyncHandler(deleteUser));
 
@@ -93,7 +111,7 @@ router.route('/{id}')
  */
 router.route('/')
   .post(asyncHandler(insert))
-  .get(asyncHandler(read))
+  .get(asyncHandler(readAll));
 
 module.exports = router;
 
@@ -102,9 +120,14 @@ async function insert(req, res) {
   res.json(user);
 }
 
-async function read(req, res) {
-  let users = await userCtrl.read();
+async function readAll(req, res) {
+  let users = await userCtrl.readAll();
   res.json(users);
+}
+
+async function read(req, res) {
+  let user = await userCtrl.read(req.body.id);
+  res.json(user);
 }
 
 async function update(req, res) {
