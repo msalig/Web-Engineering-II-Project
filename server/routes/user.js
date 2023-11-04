@@ -10,18 +10,48 @@ const router = express.Router();
 /**
  * @openapi
  * /users/{id}:
- *  update:
- *     description: Update a user by id
- *     responses:
- *       200:
- *         description: Returns a mysterious string.
- *  delete:
- *     description: Delete a user by id
- *     responses:
- *       200:
- *         description: Returns a mysterious string.
- *     tags:
- *      - users
+ *   put:
+ *       summary: Aktualisieren eines Benutzers anhand der ID
+ *       parameters:
+ *         - in: path
+ *           name: id
+ *           required: true
+ *           schema:
+ *             type: string
+ *           description: Die ID des Benutzers
+ *       requestBody:
+ *         required: true
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/User'
+ *       responses:
+ *         '200':
+ *           description: Erfolgreiche Anfrage
+ *           content:
+ *             application/json:
+ *               schema:
+ *                 $ref: '#/components/schemas/User'
+ *       tags:
+ *         - user
+ *   delete:
+ *       summary: Löschen eines Benutzers anhand der ID
+ *       parameters:
+ *         - in: path
+ *           name: id
+ *           required: true
+ *           schema:
+ *             type: string
+ *           description: Die ID des Benutzers
+ *       responses:
+ *         '200':
+ *           description: Erfolgreiche Anfrage
+ *           content:
+ *             application/json:
+ *               schema:
+ *                 $ref: '#/components/schemas/User'
+ *       tags:
+ *         - user
  */
 router.route('/{id}')
   .put(asyncHandler(update))
@@ -29,21 +59,37 @@ router.route('/{id}')
 
 /**
  * @openapi
- * /users/:
- *  get:
- *     description: Returns a List of all Users
- *     responses:
- *       200:
- *         description: Returns a mysterious string.
- *     tags:
- *      - users
- *  post:
- *     description: Creates a new User
- *     responses:
- *       200:
- *         description: Returns a mysterious string.
- *     tags:
- *      - users
+ * /users:
+ *   post:
+ *       summary: Erstellen eines neuen Benutzers
+ *       requestBody:
+ *         required: true
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/User'
+ *       responses:
+ *         '200':
+ *           description: Erfolgreiche Anfrage
+ *           content:
+ *             application/json:
+ *               schema:
+ *                 $ref: '#/components/schemas/User'
+ *       tags:
+ *         - user
+ *   get:
+ *       summary: Alle Benutzer abrufen
+ *       responses:
+ *         '200':
+ *           description: Erfolgreiche Anfrage
+ *           content:
+ *             application/json:
+ *               schema:
+ *                 type: array
+ *                 items:
+ *                   $ref: '#/components/schemas/User'
+ *       tags:
+ *         - user
  */
 router.route('/')
   .post(asyncHandler(insert))

@@ -1,32 +1,33 @@
-const Joi = require('joi');
+const Joi = require('joi-oid');
 const BlogEntry = require('../models/blogentry');
-const mongoose = require("mongoose");
 
-/*const blogEntrySchema = Joi.object({
-  _id: Joi.object(),
-  author: Joi.object(User).required(),
+const blogEntrySchema = Joi.object({
+  authorId: Joi.objectId().required(),
   title: Joi.string().required(),
-  location: Joi.object(Location),
+  locationId: Joi.objectId(),
   text: Joi.string().required(),
+  textShort: Joi.string().required(),
   review: Joi.number().min(0).max(5),
-  tags: Joi.array().string(),
-  comments: Joi.object < Comment > ().array()
-});*/
+  tags: Joi.array().items(Joi.string()),
+  comments: Joi.array().items(Joi.objectId())
+});
 
 module.exports = {
   insert,
   getAll,
   getAllShort,
-  getBlogByID,
+  getBlogById,
   getBlogsByAuthor,
   getBlogsByTag,
   getBlogsByCountry,
+  addComment,
   update,
   deleteBlogEntry
 };
 
 async function insert(blogEntry) {
-  //blogEntry = await blogEntrySchema.validateAsync(blogEntry, {abortEarly: false});
+  blogEntry = await blogEntrySchema.validateAsync(blogEntry, {abortEarly: false});
+  blogEntry.url = blogEntry.title.replace(/[^a-zA-Z0-9 ]/g, "").toLowerCase().replaceAll(" ", "-");
   return await new BlogEntry(blogEntry).save();
 }
 
@@ -35,7 +36,7 @@ async function getAll() {
 }
 
 async function getAllShort() {
-  return BlogEntry.find({}, '_id author title location text review tags');
+  return BlogEntry.find({}, '_id authorId title url locationId textShort review tags');
 }
 
 async function getBlogsByTag(tag) {
@@ -47,19 +48,23 @@ async function getBlogsByCountry(country) {
   return BlogEntry.find({location: {country: country}});
 }
 
-async function getBlogByID(id) {
-  console.log('Get blog by ID: ' + JSON.stringify(id, undefined, 2));
+async function getBlogById(id) {
+  console.log('Get blog by Id: ' + JSON.stringify(id, undefined, 2));
   return BlogEntry.findById(id);
 }
 
 async function getBlogsByAuthor(author) {
-  return BlogEntry.find({authorID: author});
+  return BlogEntry.find({authorId: author});
+}
+
+async function addComment(blogID, commentID) {
+  return BlogEntry.findOneAndUpdate({_id: blogID}, {$push: {comments: commentID}}, {new: true})
 }
 
 async function update(blog) {
-  return BlogEntry.updateOne({ id: blog.id});
+  return BlogEntry.findOneAndUpdate({_id: blog.id}, blog);
 }
 
 async function deleteBlogEntry(blogEntry) {
-  return BlogEntry.deleteOne({email: blogEntry.email});
+  return BlogEntry.findOneAndDelete({email: blogEntry.email});
 }
