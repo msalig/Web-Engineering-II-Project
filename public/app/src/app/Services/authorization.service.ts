@@ -14,9 +14,9 @@ export class AuthorizationService {
 }
 
   // static _User:IUser={
-  //   displayname:  "Kaninchen Stiermann",
-  //   mail:"kaninchen@stiermann.de",
-  //   name: "kaninchenstiermann",
+  //   displayname:  "Julia Meier",
+  //   mail:"julia.meier@example.com",
+  //   name: "julia_meier",
   //   publishedblogs: 0
   // };
 
@@ -46,6 +46,8 @@ register(user:ISendUserBackend){
    return this.http.post<IUserFromBackend>("http://localhost:3000/api/users",user)
 }
 
+
+// login(user:)
 
 
 

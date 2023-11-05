@@ -89,8 +89,8 @@ export class RegisterComponent {
     if (this._password.length >= 5 && this._displayName.length >= 5) {
 
       this.authorizationService.register({
-        displayName: this._displayName.toLowerCase().replace(/ /g,"_"),
-        username: this.displayName,
+        username: this._displayName.toLowerCase().replace(/ /g,"_"),
+        displayName: this.displayName,
         email: this.email,
         password: this._password
       }).subscribe(response => {
