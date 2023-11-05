@@ -64,7 +64,7 @@ export class BlogsComponent {
 
               let author = <IUser>this.userService.mapUser(responseUser[0])
 
-              this.locationService?.getLocationById(blog.locationId)
+              this.locationService.getLocationById(blog.locationId)
                 .subscribe(responseLocation => {
                   let location: ILocation = this.locationService.mapLocation(responseLocation)
 

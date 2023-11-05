@@ -1,3 +1,5 @@
+import {string} from "joi";
+
 export interface IUserFromBackend{
   _id: string;
   countBlogEntries: number;
@@ -10,4 +12,12 @@ export interface IAuthorFromBackend{
   _id:string,
   displayname:string;
   username:string;
+}
+
+
+export interface ISendUserBackend {
+  displayName: string;
+  username: string;
+  email: string;
+  password: string;
 }

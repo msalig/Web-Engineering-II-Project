@@ -34,6 +34,10 @@ export class UserService {
   }
 
 
+  getUserByUserName(userName:string):Observable<IAuthorFromBackend>{
+    return this.http.get<IAuthorFromBackend>("http://localhost:3000/api/users/byUsername/"+userName);
+  }
+
 
   mapAuthor(author:IAuthorFromBackend):IUser{
     return {

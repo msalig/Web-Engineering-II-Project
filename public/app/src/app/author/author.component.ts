@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {mockAuthorByDisplayName} from "../../MockData/mockAuthor";
 import {UserService} from "../Services/communication/user.service";
 import * as http from "http";
@@ -26,7 +26,7 @@ export class AuthorComponent {
   private _author: any;
   private _blogs: IBlogEntry[] = [];
 
-  constructor(private route: ActivatedRoute, private http: HttpClient) {
+  constructor(private route: ActivatedRoute, private http: HttpClient,private router:Router) {
     this.userService = new UserService(http);
     this.blogService = new GetblogsService(http);
     this.locationService = new LocationService(http);
@@ -44,15 +44,14 @@ export class AuthorComponent {
   private getAuthor() {
     const authorIdentifier = String(this.route.snapshot.paramMap.get('author'))
 
+    console.log(authorIdentifier)
+
+  this.userService.getUserByUserName(authorIdentifier).subscribe(responseAuthor=>{
+    console.log(responseAuthor)
+    this._author=this.userService.mapAuthor(responseAuthor);
+    console.log(this._author)
+
     this.blogService.getBlogByAuthor(authorIdentifier).subscribe(response => {
-
-      console.log(response)
-
-      this.userService.getUserById(response[0].authorId).subscribe(responseAuthor => {
-        this._author = this.userService.mapUser(responseAuthor[0])
-
-        console.log(this._author)
-        console.log(response)
 
         response.forEach(blogBackend => {
 
@@ -78,13 +77,16 @@ export class AuthorComponent {
 
               }
             );
-        })
+
       })
 
     })
-  }
+  })
+
+
+
 
 
   // return mockAuthorByDisplayName(authorIdentifier);
-}
+}}
 
