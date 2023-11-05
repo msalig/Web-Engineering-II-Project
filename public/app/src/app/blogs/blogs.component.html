@@ -1,7 +1,9 @@
 <div class="filter">
-    <th>Filter: <input [(ngModel)]="listFilter" placeholder="Titles, Authors, Tags, Places"  class="textfield"/>  </th>
+  <th>Filter: <input [(ngModel)]="listFilter" placeholder="Titles, Authors, Tags, Places" class="textfield"/></th>
 </div>
 
 <li *ngFor="let blog of filteredBlogEntrys" class="allblogs">
+  <div routerLink="/blog/{{blog.author.displayname}}/{{blog.displayname}}" class="oneblog2">
     <app-blogtile [blog]=blog></app-blogtile>
+  </div>
 </li>

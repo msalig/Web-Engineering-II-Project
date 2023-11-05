@@ -13,7 +13,7 @@ export class HomeComponent implements OnInit{
 
   ngOnInit() {
     console.log("Versuche Verbindung aufzubauen....");
-    this.http.get('http://localhost:4040/api').subscribe(response => {
+    this.http.get('http://localhost:3000/api/blogEntries').subscribe(response => {
       console.log("received message: ");
       console.log(response);
     })

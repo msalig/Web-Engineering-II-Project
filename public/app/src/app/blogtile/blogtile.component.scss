@@ -1,4 +1,5 @@
 @import "../../styles/tags";
+@import "../../styles/vars";
 
 .allblogs {
   //margin: 30px;
@@ -8,7 +9,7 @@
   margin-left: 20%;
 }
 
-$borderRadius: 30px;
+//$borderRadius: 30px;
 
 .oneblog2{
   //background-color: red;
@@ -41,7 +42,7 @@ $borderRadius: 30px;
 
 .textfield{
   border-radius: 10px;
-  border-color: #2ca7e9;
+  border-color: $main-color;
 }
 
 

@@ -1,25 +1,28 @@
+
+
+
 <div class="wholeblog">
-  <div class="title">{{blog.title}}</div>
+  <div class="title">{{blog?.title}}</div>
   <!--  <div class="subtitle">{{blog.blogentryShort}}</div>-->
-  <li *ngFor="let tag of blog.tags" class="tagAbove">
-    <div class="tag">{{tag}}</div>
+  <li *ngFor="let tag of blog?.tags" class="tagAbove">
+    <div class="tag" routerLink="#/blogs/search/tags/{{tag}}">{{tag}}</div>
   </li>
   <ul class=infos>
-    <li class=author routerLink="/blogger/{{blog.author.displayname}}">
+    <li class=author routerLink="/blogger/{{blog?.author?.name}}">
       <fa-icon [icon]="faUser"></fa-icon>
-      {{blog.author.displayname}}
+      {{blog?.author?.name}}
     </li>
     <li class="location">
-      {{blog.location.place}}, {{blog.location.country}} | {{blog.location.coordinates.x}}
-      °N, {{blog.location.coordinates.y}}°E
+      {{blog?.location?.place}}, {{blog?.location?.country}} | {{blog?.location?.coordinates?.x}}
+      °N, {{blog?.location?.coordinates?.y}}°E
     </li>
   </ul>
 
 
-  <div class="blogentry">{{blog.blogentry}}</div>
+  <div class="blogentry">{{blog?.blogentry}}</div>
 
 
-  <ul *ngFor="let comment of blog.comments" class="comments">
+  <ul *ngFor="let comment of blog?.comments" class="comments">
     <li class="commentTitle">
       {{comment.title}}
       <div class="commentAuthor">

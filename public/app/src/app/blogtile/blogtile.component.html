@@ -1,9 +1,9 @@
- <div routerLink="/blog/{{blog.author.displayname}}/{{blog.displayname}}" class="oneblog2">
+ <div class="oneblog2">
     <div class="oneblog">
       <div class="title">{{blog.title}}</div>
       <div class="blogpreview">
 <!--        {{blog.blogentryShort|slice: 0:200}}...-->
-        {{blog.blogentry|slice: 0:200}}...
+        {{blog.blogentryShort|slice: 0:200}}...
       </div>
       <ul class="blogfooter">
         <li class="blogfooter">
@@ -20,10 +20,11 @@
           {{blog.comments.length}}
         </li>
         <li>
-          {{blog.review}}
+            <fa-icon [icon]="faStar"></fa-icon>
+            {{blog.review}}
         </li>
         <li *ngFor="let tag of blog.tags">
-          <div class="tag">{{tag}}</div>
+          <div class="tag" routerLink="/blogs/search/tags/{{tag.toLowerCase()}}">{{tag}}  </div>
         </li>
       </ul>
     </div>

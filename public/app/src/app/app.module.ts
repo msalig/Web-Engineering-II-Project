@@ -18,21 +18,24 @@ import {NavbarComponent} from './navbar/navbar.component';
 import {HomeComponent} from './home/home.component';
 import {BlogsComponent} from './blogs/blogs.component';
 import {RatingsComponent} from './ratings/ratings.component';
-import {PreviewBlogComponent} from './preview-blog/preview-blog.component';
 import {BlogComponent} from './blog/blog.component';
 import {NotfoundComponent} from "./notfound/notfound.component";
-// import {ConvertToStarsPipe} from "../assets/convert-to-stars.pipe";
 import {AuthorsComponent} from "./authors/authors.component";
 import {AuthorComponent} from "./author/author.component";
-// import {StarPipe} from "./Pipes/star.pipe";
-import {BlogtileComponent}from "./blogtile/blogtile.component"
+import {BlogtileComponent}from "./blogtile/blogtile.component";
+import { AccountviewComponent } from './accountview/accountview.component';
+import { EditblogComponent } from './editblog/editblog.component'
+import { TagsearchComponent } from './tagsearch/tagsearch.component';
+import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component'
+
 
 const myRoutes: Routes = [
 
   {
     path: '',
     pathMatch: "full",
-    component: HomeComponent
+    redirectTo: '/blogs'
   },
   {
     path: 'blogs',
@@ -43,7 +46,7 @@ const myRoutes: Routes = [
     component: BlogComponent
   },
   {
-    path: 'blog/:author/:identifier',
+    path: 'blog/:identifier',
     component: BlogComponent
   },
   {
@@ -53,6 +56,26 @@ const myRoutes: Routes = [
   {
     path: 'blogger/:author',
     component: AuthorComponent
+  },
+  {
+    path: 'my-account',
+    component: AccountviewComponent
+  },
+  {
+    path: 'login',
+    component: LoginComponent
+  },
+  {
+    path: 'register',
+    component: RegisterComponent
+  },
+  {
+    path: 'editblog/:blogtitle',
+    component: EditblogComponent
+  },
+  {
+    path: 'blogs/search/tags/:tag',
+    component: TagsearchComponent
   },
 
 
@@ -76,7 +99,13 @@ const myRoutes: Routes = [
     BlogComponent,
     AuthorsComponent,
     AuthorComponent,
-    BlogtileComponent
+    BlogtileComponent,
+    AccountviewComponent,
+    EditblogComponent,
+    TagsearchComponent,
+    LoginComponent,
+    RegisterComponent,
+
     // StarPipe,
 /**/
     // ConvertToStarsPipe,
@@ -93,7 +122,7 @@ const myRoutes: Routes = [
     MatMenuModule,
     HttpClientModule,
     FontAwesomeModule,
-    FormsModule
+    FormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

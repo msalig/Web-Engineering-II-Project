@@ -1,0 +1,40 @@
+.name {
+  text-align: center;
+  font-size: large;
+font-style: italic;
+}
+
+.textfieldusername{
+  font-size: x-large;
+  border-color: white;
+}
+
+
+.allblogs {
+
+  //list-style: none;
+  display: inline;
+}
+
+.singleblogentry {
+  float: left;
+}
+
+
+.iconedit {
+  //vertical-align: center;
+  font-size: x-large;
+  cursor: pointer;
+  display: inline-flex;
+}
+
+
+.oneblog {
+  margin-right: 20%;
+  margin-left: 20%;
+  margin-top: 50px;
+}
+
+.filter{
+  margin-left: 20%;
+}
