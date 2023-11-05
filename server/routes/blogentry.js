@@ -132,11 +132,11 @@ router.route('/:id')
 
 /**
  * @openapi
- * /blogEntries/byAuthor/{author}:
+ * /blogEntries/byAuthor/{username}:
  *   get:
- *       summary: Get blog entries by author
+ *       summary: Get blog entries by the authors username
  *       parameters:
- *         - name: author
+ *         - name: username
  *           in: path
  *           required: true
  *           schema:
@@ -153,8 +153,29 @@ router.route('/:id')
  *       tags:
  *        - blogEntries
  */
-router.get('/byAuthor/:author', asyncHandler(getBlogsByAuthor));
+router.get('/byAuthor/:username', asyncHandler(getBlogsByAuthor));
 
+/**
+ * @openapi
+ * /blogEntries/byUrl/{url}:
+ *   get:
+ *       summary: Get a blog entry by its url
+ *       parameters:
+ *         - name: url
+ *           in: path
+ *           required: true
+ *           schema:
+ *             type: string
+ *       responses:
+ *         '200':
+ *           description: OK
+ *           content:
+ *             application/json:
+ *               schema:
+ *                   $ref: '#/components/schemas/BlogEntry'
+ *       tags:
+ *        - blogEntries
+ */
 router.get('/byUrl/:url', asyncHandler(getBlogsByUrl));
 
 /**
@@ -227,7 +248,7 @@ async function getBlogById(req, res) {
 }
 
 async function getBlogsByAuthor(req, res) {
-  let blogs = await blogEntryCtrl.getBlogsByAuthor(req.params.authorId);
+  let blogs = await blogEntryCtrl.getBlogsByAuthor(req.params.username);
   res.send(blogs);
 }
 
