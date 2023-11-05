@@ -39,6 +39,11 @@ export class BlogComponent implements OnInit {
 
     const blogIdentifier = String(this.route.snapshot.paramMap.get('identifier'));
 
+
+    this.getblogsService.getBlogByAuthor(blogIdentifier)
+
+
+
     this.getblogsService.getBlogById(blogIdentifier).subscribe(blog=>{
       this.userService?.getUserById(blog.authorId)
         .subscribe(responseUser => {
