@@ -76,6 +76,8 @@ export class AccountviewComponent implements OnInit {
   }
 
   ngOnInit() {
+    console.log("check if already logged in...")
+    console.log(AuthorizationService._User.name)
     if (AuthorizationService._User.name == '')
       this.router.navigateByUrl('/login');
   }

@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 import {UserService} from "../Services/communication/user.service";
 import {HttpClient} from "@angular/common/http";
-import {ISendUserBackend, IUserFromBackend} from "../../interfaces/userfrombackend";
+import {ISendUserBackendRegister, IUserFromBackend} from "../../interfaces/userfrombackend";
 import {IUser} from "../../interfaces/user";
 import {AuthorizationService} from "../Services/authorization.service";
 import {Router} from "@angular/router";
@@ -63,17 +63,6 @@ export class RegisterComponent {
   //User=this.authenticationService.currentUser;
 // .toLowerCase().replace(/ /g,"_")
   register() {
-
-    let checkAuthor:ISendUserBackend={
-      displayName: this._displayName.toLowerCase().replace(/ /g,"_"),
-      username: this.displayName,
-      email: this.email,
-      password: this._password
-    }
-    console.log(checkAuthor)
-
-
-
     if (this._password.length < 5) {
       this.errorText = "Password should have at least 5 characters";
 
@@ -90,7 +79,7 @@ export class RegisterComponent {
 
       this.authorizationService.register({
         username: this._displayName.toLowerCase().replace(/ /g,"_"),
-        displayName: this.displayName,
+        displayname: this.displayName,
         email: this.email,
         password: this._password
       }).subscribe(response => {

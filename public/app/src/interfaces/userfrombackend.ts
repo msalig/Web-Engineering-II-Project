@@ -15,9 +15,15 @@ export interface IAuthorFromBackend{
 }
 
 
-export interface ISendUserBackend {
-  displayName: string;
+export interface ISendUserBackendRegister {
+  displayname: string;
   username: string;
   email: string;
   password: string;
+}
+
+
+export interface IsendUserBackendLogin{
+  "username": string,
+  "password": string
 }

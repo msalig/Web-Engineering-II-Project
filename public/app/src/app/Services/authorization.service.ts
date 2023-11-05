@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import {IUser} from "../../interfaces/user";
 import {HttpClient, HttpResponse} from "@angular/common/http";
-import {ISendUserBackend, IUserFromBackend} from "../../interfaces/userfrombackend";
+import {IsendUserBackendLogin, ISendUserBackendRegister, IUserFromBackend} from "../../interfaces/userfrombackend";
 import {catchError} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
 })
+
 export class AuthorizationService {
 
 
@@ -42,12 +43,14 @@ export class AuthorizationService {
    return(AuthorizationService._User);
   }
 
-register(user:ISendUserBackend){
+register(user:ISendUserBackendRegister){
    return this.http.post<IUserFromBackend>("http://localhost:3000/api/users",user)
 }
 
 
-// login(user:)
+ login(user:IsendUserBackendLogin){
+   return this.http.post<IUserFromBackend>("http://localhost:3000/api/users/login",user)
+ }
 
 
 

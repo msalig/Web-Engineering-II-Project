@@ -1,5 +1,11 @@
 import {Component} from '@angular/core';
 import {mockBlogEntry} from "../../MockData/mockblogEntry";
+import {AuthorizationService} from "../Services/authorization.service";
+import * as http from "http";
+import {HttpClient} from "@angular/common/http";
+import {Router} from "@angular/router";
+import {response} from "express";
+import {UserService} from "../Services/communication/user.service";
 
 // import {AuthenticationService} from "../Service/authentication.service";
 
@@ -9,10 +15,17 @@ import {mockBlogEntry} from "../../MockData/mockblogEntry";
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent {
-
+private authorizationService:AuthorizationService;
+private userService:UserService;
   private _displayName = '';
   private _password = '';
   errorText = ""
+
+
+  constructor(private http: HttpClient, private router:Router) {
+    this.authorizationService =  new AuthorizationService(http);
+    this.userService = new UserService(http);
+  }
 
   get displayName(): any {
     return this._displayName;
@@ -30,29 +43,33 @@ export class LoginComponent {
     this._password = value;
   }
 
-  //authenticationService: AuthenticationService;
-
-
-  constructor() {
-    //this.authenticationService =  new AuthenticationService;
-
-    // console.log(btoa(mockBlogEntry().blogentry));
-    // console.log(atob(btoa(mockBlogEntry().blogentry)));
-  }
-
-  //User=this.authenticationService.currentUser;
-
-
   login() {
     if (this._displayName.length < 5) {
       this.errorText = "Username should have at least 5 characters";
     }
-    if (this._password.length < 5) {
+    if (this._password.length < 4) {
       this.errorText = "Password should have at least 5 characters";
     }
-    console.log(this.errorText)
 
-    if(this._displayName.length < 5 && this._password.length < 5){
+
+    if(this._displayName.length > 5 && this._password.length >= 4 ){
+      console.log(this.errorText)
+
+      console.log({
+        username: this._displayName.toLowerCase().replace(/ /g,"_"),
+        password: this._password
+      })
+
+      this.authorizationService.login({
+        username: this._displayName.toLowerCase().replace(/ /g,"_"),
+        password: this._password
+      }).subscribe(response=>{
+        console.log(response)
+        AuthorizationService._User = this.userService.mapUser(response);
+        this.router.navigateByUrl("/my-account")
+      })
+      this.errorText ="Registration was forbidden. Please Use other credentials or take a vacation"
+
 
     }
   }
