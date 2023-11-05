@@ -1,7 +1,7 @@
 const bcrypt = require('bcrypt');
 const Joi = require('joi');
 const User = require('../models/user');
-const BlogEntry = require("../models/blogentry");
+const mongoose = require('mongoose');
 
 const userSchema = Joi.object({
   displayname: Joi.string().required(),
@@ -23,11 +23,37 @@ async function insert(user) {
 }
 
 async function readAll() {
-  return User.find({}, '_id displayname username'); //+Count BlogEntries
+  return User.aggregate([{
+    $lookup: {
+      from: "blogentries", localField: "_id", foreignField: "authorId", as: "blogEntries"
+    }
+  }, {
+    $addFields: {
+      countBlogEntries: {$size: "$blogEntries"}
+    }
+  }, {
+    $project: {
+      blogEntries: 0, email: 0, hashedPassword: 0, __v: 0
+    }
+  }]).exec();
 }
 
 async function read(id) {
-  return User.findById(id, '-hashedPassword');
+  return User.aggregate([{
+    $match: {_id: new mongoose.Types.ObjectId(id)}
+  }, {
+    $lookup: {
+      from: "blogentries", localField: "_id", foreignField: "authorId", as: "blogEntries"
+    }
+  }, {
+    $addFields: {
+      countBlogEntries: {$size: "$blogEntries"}
+    }
+  }, {
+    $project: {
+      blogEntries: 0, hashedPassword: 0, __v: 0
+    }
+  }]).exec();
 }
 
 async function getUserByUsername(username, withPWD) {
@@ -41,7 +67,7 @@ async function getUserByUsername(username, withPWD) {
 }
 
 async function update(userId, user) {
-  return User.findByIdAndUpdate(userId, user, {new:true}).select('-hashedPassword');
+  return User.findByIdAndUpdate(userId, user, {new: true}).select('-hashedPassword');
 }
 
 async function deleteUser(userId) {

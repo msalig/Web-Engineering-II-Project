@@ -3,7 +3,7 @@ const {Schema} = require("mongoose");
 
 let blogEntrySchema = new Schema({
   authorId: {required: true, type: Schema.Types.ObjectId, ref: 'User'},
-  title: {required: true, type: String},
+  title: {required: true, type: String, unique: true},
   url: {required: true, type: String, unique: true},
   locationId: {type: Schema.Types.ObjectId, ref: 'Location'},
   text: {required: true, type: String},

@@ -20,7 +20,7 @@ module.exports = {
   getBlogsByAuthor,
   getBlogsByTag,
   getBlogsByCountry,
-  getByUrl: getBlogsByUrl,
+  getByUrl: getBlogByUrl,
   addComment,
   update,
   deleteBlogEntry
@@ -52,11 +52,12 @@ async function getBlogById(id) {
   return BlogEntry.findById(id);
 }
 
-async function getBlogsByAuthor(author) {
-  return BlogEntry.find({authorId: author});
+async function getBlogsByAuthor(username) {
+  let user = await require('../controllers/user').getUserByUsername(username, false);
+  return BlogEntry.find({authorId: user.id});
 }
 
-async function getBlogsByUrl(url) {
+async function getBlogByUrl(url) {
   return BlogEntry.findOne({url: url});
 }
 
