@@ -46,7 +46,7 @@ const myRoutes: Routes = [
     component: BlogComponent
   },
   {
-    path: 'blog/:author/:identifier',
+    path: 'blog/:identifier',
     component: BlogComponent
   },
   {

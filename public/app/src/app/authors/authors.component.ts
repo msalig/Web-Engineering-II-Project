@@ -1,7 +1,9 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {mockAuthors} from "../../MockData/mockAuthors";
 import {IUser} from "../../interfaces/user";
 import {filter} from "rxjs";
+import {UserService} from "../Services/communication/user.service";
+import {HttpClient} from "@angular/common/http";
 
 @Component({
   selector: 'app-authors',
@@ -11,9 +13,25 @@ import {filter} from "rxjs";
 export class AuthorsComponent {
 
 
-  private _listfilter : string = '';
-  private authors: IUser[];
-  private _filteredAuthors:IUser[];
+  private _listfilter: string = '';
+  private authors: IUser[]=[];
+  private _filteredAuthors: IUser[];
+
+  private userService:UserService;
+
+  constructor(private http:HttpClient) {
+    this.userService=new UserService(http);
+
+    this.userService.getUsers()
+      .subscribe(users=>{
+        users.forEach(user=>{
+          this.authors.push(this.userService.mapAuthor(user));
+        })
+      });
+
+    this._filteredAuthors = this.authors
+  }
+
   get listfilter() {
     return this._listfilter;
   }
@@ -23,20 +41,15 @@ export class AuthorsComponent {
     this.performFilter(value);
   }
 
+
   get filteredAuthors(): IUser[] {
     return this._filteredAuthors;
   }
 
-
-  constructor() {
-  this.authors=mockAuthors();
-  this._filteredAuthors=this.authors
-  }
-
-  private performFilter(filterBy: string):void {
+  private performFilter(filterBy: string): void {
     filterBy = filterBy.toLowerCase();
-    this._filteredAuthors=this.authors;
-    this._filteredAuthors = this.authors.filter((author:IUser)=>
+    this._filteredAuthors = this.authors;
+    this._filteredAuthors = this.authors.filter((author: IUser) =>
       author.displayname.toLowerCase().includes(filterBy)
     )
   }

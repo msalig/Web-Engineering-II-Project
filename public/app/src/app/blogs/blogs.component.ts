@@ -29,9 +29,9 @@ export class BlogsComponent {
   private blogEntrys: IBlogEntry[] = [];
   private backendRespond: IBlogEntryFromBackend[] | undefined;
   private _listFilter: string = '';
-  private getblogsService: GetblogsService | undefined
-  private userService: UserService | undefined
-  private locationService: LocationService | undefined
+  private getblogsService: GetblogsService
+  private userService: UserService
+  private locationService: LocationService
 
 
   constructor(private route: ActivatedRoute, private http: HttpClient) {
@@ -39,6 +39,14 @@ export class BlogsComponent {
     this.userService = new UserService(http);
     this.locationService = new LocationService(http);
 
+    this.getBlogEntrys();
+
+
+    this.filteredBlogEntrys = this.blogEntrys;
+  }
+
+
+  private getBlogEntrys() {
     this.getblogsService.getBlogsShort().subscribe(response =>
       response.forEach(blog => {
 
@@ -49,8 +57,6 @@ export class BlogsComponent {
 
               this.locationService?.getLocationById(blog.locationId)
                 .subscribe(responseLocation => {
-                  console.log(responseLocation)
-                  // @ts-ignore
                   let location: ILocation = this.locationService.mapLocation(responseLocation)
 
 
@@ -73,11 +79,7 @@ export class BlogsComponent {
             }
           );
       }))
-
-
-    this.filteredBlogEntrys = this.blogEntrys;
   }
-
 
   get listFilter(): string {
     return this._listFilter;
@@ -90,62 +92,7 @@ export class BlogsComponent {
   }
 
 
-  getBlogEntrys(): IBlogEntry[] {
 
-    //if it is part of the author-page
-    const authorIdentifier = String(this.route.snapshot.paramMap.get('author'))
-    if (authorIdentifier.length != 4) {
-      console.log("Author");
-      console.log(authorIdentifier.length);
-      return getBlogEntrysByAuthor(authorIdentifier);
-    }
-
-    //if it is part of the search for tags-page
-    const tagIdentifier = String(this.route.snapshot.paramMap.get('tag'))
-    if (tagIdentifier.length == 120) {
-      console.log('tagIdentifier');
-      return getBlogEntrys();
-    }
-
-
-    //if it is part of the regular blogs-page
-    let blogs: IBlogEntry[] = [];
-    console.log("Versuche Verbindung aufzubauen....");
-    this.http.get<IBlogEntryFromBackend[]>('http://localhost:3000/api/blogEntries/')
-      .subscribe(response => {
-        response.forEach(blogBE => {
-            let blog: IBlogEntry = {
-              displayname: blogBE._id.toString(),
-              author: {
-                displayname: "kreuzfahrtfan",
-                name: "cruiselover222",
-                mail: "cruiselover222@example.com",
-                publishedblogs: 7,
-              },
-              title: blogBE.title,
-              location: {
-                "country": "Deutschland",
-                "place": "Berlin",
-                "coordinates": {
-                  "x": 52.5200,
-                  "y": 13.4050
-                }
-              },
-              blogentryShort: atob(blogBE.text),
-              blogentry: atob(blogBE.text),
-              comments: [],
-              tags: blogBE.tags,
-              review: blogBE.review,
-            }
-            blogs.push(blog);
-          }
-        )
-        console.log(blogs);
-
-
-      })
-    return blogs;
-  }
 
   performFilter(filterBy: string): void {
     filterBy = filterBy.toLowerCase();

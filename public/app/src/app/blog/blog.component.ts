@@ -9,6 +9,10 @@ import {IBlogEntryFromBackend} from "../../interfaces/IBlogEntryFromBackend";
 import {response} from "express";
 import {GetblogsService} from "../Services/communication/getblogs.service";
 import {async} from "rxjs";
+import {IUser} from "../../interfaces/user";
+import {ILocation} from "../../interfaces/Iocation";
+import {UserService} from "../Services/communication/user.service";
+import {LocationService} from "../Services/communication/location.service";
 
 // import {BlogService}from '../Service/blog-service'
 
@@ -19,8 +23,9 @@ import {async} from "rxjs";
 })
 export class BlogComponent implements OnInit {
   blog: IBlogEntry | undefined;
-  anotherBlog: IBlogEntry | undefined;
   private getblogsService: GetblogsService | undefined;
+  private userService:UserService |undefined;
+  private locationService:LocationService|undefined;
   protected readonly faUser = faUser;
 
   async ngOnInit() {
@@ -29,10 +34,45 @@ export class BlogComponent implements OnInit {
 
   constructor(private route: ActivatedRoute, private http: HttpClient) {
     this.getblogsService = new GetblogsService(http);
-
+    this.userService = new UserService(http);
+    this.locationService = new LocationService(http);
 
     const blogIdentifier = String(this.route.snapshot.paramMap.get('identifier'));
-    const authorIdentifier = String(this.route.snapshot.paramMap.get('author'));
+
+    this.getblogsService.getBlogById(blogIdentifier).subscribe(blog=>{
+      this.userService?.getUserById(blog.authorId)
+        .subscribe(responseUser => {
+            let author = <IUser>this.userService?.mapUser(responseUser)
+
+
+            this.locationService?.getLocationById(blog.locationId)
+              .subscribe(responseLocation => {
+                console.log(responseLocation)
+                // @ts-ignore
+                let location: ILocation = this.locationService.mapLocation(responseLocation)
+
+
+                this.blog={
+                  author: author,
+                  blogentry: atob(blog.text),
+                  blogentryShort: atob(blog.textShort),
+                  comments: [],
+                  displayname: blog.url,
+                  location: location,
+                  review: blog.review,
+                  tags: blog.tags,
+                  title: blog.title
+
+                }
+
+              })
+
+            console.log(author);
+          }
+        );
+
+      }
+    )
 
     // this.getblogsService.getBlogById()
 

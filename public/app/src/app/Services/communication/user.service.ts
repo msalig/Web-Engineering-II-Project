@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import {IUser} from "../../../interfaces/user";
 import {HttpClient} from "@angular/common/http";
 import {catchError, Observable} from "rxjs";
-import {IUserFromBackend} from "../../../interfaces/userfrombackend";
+import {IAuthorFromBackend, IUserFromBackend} from "../../../interfaces/userfrombackend";
 import {IBlogEntry} from "../../../interfaces/blogEntry";
 
 @Injectable({
@@ -27,6 +27,19 @@ export class UserService {
 
   getUserById(id:string):Observable<IUserFromBackend> {
     return this.http.get<IUserFromBackend>("http://localhost:3000/api/users/" + id);
+  }
+
+  getUsers():Observable<IAuthorFromBackend[]>{
+    return this.http.get<IAuthorFromBackend[]>("http://localhost:3000/api/users");
+  }
+
+  mapAuthor(author:IAuthorFromBackend):IUser{
+    return {
+      displayname: author.username,
+      mail: '',
+      name: author.displayname,
+      publishedblogs: 3
+    }
   }
 
   mapUser(user:IUserFromBackend):IUser{

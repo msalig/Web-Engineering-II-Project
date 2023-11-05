@@ -1,13 +1,13 @@
 export interface IBlogEntryFromBackend {
   _id:number;
-  review:number;
-  tags:string[];
-  text:string;
-  textShort:string;
+  authorId:string;
   title:string;
   url:string;
-  authorId:string;
   locationId:string;
+  text:string;
+  textShort:string;
+  review:number;
+  tags:string[];
   __v:number;
 }
 

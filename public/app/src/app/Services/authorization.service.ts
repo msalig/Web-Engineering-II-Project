@@ -22,10 +22,16 @@ export class AuthorizationService {
   public static set User(value: IUser) {
     this._User = value;
   }
-  constructor() { }
+
 
 
   public getUser(){
    return(AuthorizationService._User);
   }
+
+
+
+
+
+
 }

@@ -3,3 +3,9 @@ export interface IUserFromBackend{
   username:string;
   email:string;
 }
+
+export interface IAuthorFromBackend{
+  _id:string,
+  displayname:string;
+  username:string;
+}
