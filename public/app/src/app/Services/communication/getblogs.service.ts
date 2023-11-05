@@ -28,9 +28,12 @@ export class GetblogsService {
     return this.http.get<IBlogEntryFromBackend>("http://localhost:3000/api/blogEntries/"+id);
   }
 
-getBlogByAuthor(displayName:string){
-    // return this.http.get<
-}
+  getBlogByAuthor(displayName:string){
+      return this.http.get<IBlogEntryFromBackend[]>("http://localhost:3000/api/blogEntries/byAuthor/"+displayName);
+  }
 
+getBlogByIdentifier(identifier:string){
+    return this.http.get<IBlogEntryFromBackend>("http://localhost:3000/api/blogEntries/byUrl/"+ identifier);
+}
 
 }

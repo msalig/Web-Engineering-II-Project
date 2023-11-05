@@ -21,16 +21,13 @@ import {LocationService} from "../Services/communication/location.service";
   templateUrl: './blog.component.html',
   styleUrls: ['./blog.component.scss']
 })
-export class BlogComponent implements OnInit {
+export class BlogComponent{
   blog: IBlogEntry | undefined;
-  private getblogsService: GetblogsService | undefined;
-  private userService:UserService |undefined;
-  private locationService:LocationService|undefined;
+  private getblogsService: GetblogsService;
+  private userService: UserService;
+  private locationService: LocationService;
   protected readonly faUser = faUser;
 
-  async ngOnInit() {
-
-  }
 
   constructor(private route: ActivatedRoute, private http: HttpClient) {
     this.getblogsService = new GetblogsService(http);
@@ -39,95 +36,34 @@ export class BlogComponent implements OnInit {
 
     const blogIdentifier = String(this.route.snapshot.paramMap.get('identifier'));
 
-    this.getblogsService.getBlogById(blogIdentifier).subscribe(blog=>{
-      this.userService?.getUserById(blog.authorId)
-        .subscribe(responseUser => {
-            let author = <IUser>this.userService?.mapUser(responseUser)
+    this.getblogsService.getBlogByIdentifier(blogIdentifier).subscribe(thisblog => {
 
 
-            this.locationService?.getLocationById(blog.locationId)
-              .subscribe(responseLocation => {
-                console.log(responseLocation)
-                // @ts-ignore
-                let location: ILocation = this.locationService.mapLocation(responseLocation)
+      this.userService.getUserById(thisblog.authorId).subscribe(responseUser => {
 
+          let author =this.userService.mapUser(responseUser[0])
 
-                this.blog={
-                  author: author,
-                  blogentry: atob(blog.text),
-                  blogentryShort: atob(blog.textShort),
-                  comments: [],
-                  displayname: blog.url,
-                  location: location,
-                  review: blog.review,
-                  tags: blog.tags,
-                  title: blog.title
+          this.locationService?.getLocationById(thisblog.locationId).subscribe(responseLocation => {
+              let location: ILocation = this.locationService.mapLocation(responseLocation)
 
-                }
+            console.log("asdf")
 
-              })
+              this.blog = {
+                author: author,
+                blogentry: atob(thisblog.text),
+                blogentryShort: atob(thisblog.textShort),
+                comments: [],
+                displayname: thisblog.url,
+                location: location,
+                review: thisblog.review,
+                tags: thisblog.tags,
+                title: thisblog.title
 
-            console.log(author);
-          }
-        );
+              }
 
-      }
-    )
-
-    // this.getblogsService.getBlogById()
-
-    // console.log("BlogEntrys:" && getblogsService.getBlogEntrys());
-
-    // this.blog = this.getBlog()[1];
-    // this.blog=mockBlogEntry();
-
-
+            })
+        }
+      )
+    })
   }
-
-
-  getBlog() {
-    const blogIdentifier = String(this.route.snapshot.paramMap.get('identifier'));
-    const authorIdentifier = String(this.route.snapshot.paramMap.get('author'));
-    let receivedblog: IBlogEntry[] = [];
-    let receivedfirstblog: IBlogEntry;
-
-    this.http.get<IBlogEntryFromBackend>('http://localhost:3000/api/blogEntries/' + blogIdentifier)
-      .subscribe(response => {
-        return {
-          displayname: response._id.toString(),
-          author: {
-            displayname: "kreuzfahrtfan",
-            name: "cruiselover222",
-            mail: "cruiselover222@example.com",
-            publishedblogs: 7,
-          },
-          title: response.title,
-          location: {
-            "country": "Deutschland",
-            "place": "Berlin",
-            "coordinates": {
-              "x": 52.5200,
-              "y": 13.4050
-            }
-          },
-          blogentryShort: response.text,
-          blogentry: response.text,
-          comments: [],
-          tags: response.tags,
-          review: response.review
-        };
-        console.log(receivedblog);
-        console.log(receivedblog[0]);
-        return receivedblog[0];
-      })
-
-
-    console.log(blogIdentifier);
-    console.log(authorIdentifier);
-    console.log(receivedblog);
-    return receivedblog[0];
-
-  }
-
-
 }

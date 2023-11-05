@@ -6,7 +6,7 @@
 
 <div class="userDisplay">
   <li class="name">
-    <ul class="name">Account from <input class="textfieldusername" [(ngModel)]="AuthorizationService._User.displayname" ></ul>
+    <ul class="name">Account from <input class="textfieldusername" [(ngModel)]="AuthorizationService._User.name" ></ul>
     <ul class="name">Mail: <input class="textfieldmail" [(ngModel)]="AuthorizationService._User.mail" ></ul>
     <ul>
       <button class="button" (click)="saveInfos()"  mat-raised-button>Save</button>
@@ -19,7 +19,7 @@
 
 <div class="blogsfromauthor">
   <div class="filter">
-    <th>Filter: <input [(ngModel)]="listFilter" placeholder="Titles, Authors, Tags, Places" class="textfield"/></th>
+    <th>Filter: <input [(ngModel)]="listFilter" placeholder="Titles, Tags, Places" class="textfield"/></th>
   </div>
 
   <li *ngFor="let blog of filteredBlogEntrys" class="allblogs">

@@ -25,29 +25,35 @@ export class UserService {
     // }
   }
 
-  getUserById(id:string):Observable<IUserFromBackend> {
-    return this.http.get<IUserFromBackend>("http://localhost:3000/api/users/" + id);
+  getUserById(id:string):Observable<IUserFromBackend[]> {
+    return this.http.get<IUserFromBackend[]>("http://localhost:3000/api/users/" + id);
   }
 
   getUsers():Observable<IAuthorFromBackend[]>{
     return this.http.get<IAuthorFromBackend[]>("http://localhost:3000/api/users");
   }
 
+
+  getUserByUserName(userName:string):Observable<IAuthorFromBackend>{
+    return this.http.get<IAuthorFromBackend>("http://localhost:3000/api/users/byUsername/"+userName);
+  }
+
+
   mapAuthor(author:IAuthorFromBackend):IUser{
     return {
       displayname: author.username,
       mail: '',
       name: author.displayname,
-      publishedblogs: 3
+      publishedblogs: 4
     }
   }
 
   mapUser(user:IUserFromBackend):IUser{
-    return{
+   return{
       displayname: user.displayName,
       mail: user.email,
       name: user.username,
-      publishedblogs: 3
+      publishedblogs: user.countBlogEntries
     }
   }
 

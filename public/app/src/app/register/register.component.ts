@@ -1,10 +1,11 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {UserService} from "../Services/communication/user.service";
 import {HttpClient} from "@angular/common/http";
-import {IUserFromBackend} from "../../interfaces/userfrombackend";
+import {ISendUserBackendRegister, IUserFromBackend} from "../../interfaces/userfrombackend";
 import {IUser} from "../../interfaces/user";
 import {AuthorizationService} from "../Services/authorization.service";
 import {Router} from "@angular/router";
+import {response} from "express";
 
 @Component({
   selector: 'app-register',
@@ -13,20 +14,19 @@ import {Router} from "@angular/router";
 })
 export class RegisterComponent {
 
-  private userService:UserService |undefined;
-  private authorizationService:AuthorizationService|undefined;
-
+  private userService: UserService;
+  private authorizationService: AuthorizationService;
 
 
   private _displayName = '';
   private _password = '';
-  private _email='';
+  private _email = '';
 
   errorText = ""
 
-  constructor(private http:HttpClient, private router:Router) {
-    this.userService=new UserService(http);
-    this.authorizationService=new AuthorizationService();
+  constructor(private http: HttpClient, private router: Router) {
+    this.userService = new UserService(http);
+    this.authorizationService = new AuthorizationService(http);
     // this.authorizationService =  new AuthorizationService();
 
     // console.log(btoa(mockBlogEntry().blogentry));
@@ -61,8 +61,7 @@ export class RegisterComponent {
   //authenticationService: AuthenticationService;
 
   //User=this.authenticationService.currentUser;
-
-
+// .toLowerCase().replace(/ /g,"_")
   register() {
     if (this._password.length < 5) {
       this.errorText = "Password should have at least 5 characters";
@@ -76,19 +75,21 @@ export class RegisterComponent {
     }
     console.log(this.errorText)
 
-    if(this._password.length >= 5 && this._displayName.length >= 5){
-      let newUser:IUserFromBackend= {
-        displayName: this.displayName,
-        username: this.displayName.toLowerCase().trim(),
-        email: this.email
-      }
-      AuthorizationService.User = {
-        displayname:  this.displayName,
-        name: this.displayName.toLowerCase().trim(),
-        mail:this.email,
-        publishedblogs: 0
-      };
-    this.router.navigateByUrl("/my-account")
+    if (this._password.length >= 5 && this._displayName.length >= 5) {
+
+      this.authorizationService.register({
+        username: this._displayName.toLowerCase().replace(/ /g,"_"),
+        displayname: this.displayName,
+        email: this.email,
+        password: this._password
+      }).subscribe(response => {
+
+console.log(response)
+          AuthorizationService._User = this.userService.mapUser(response);
+          this.router.navigateByUrl("/my-account")
+      })
     }
+    this.errorText ="Registration was forbidden. Please Use other credentials or take a vacation"
+
   }
 }

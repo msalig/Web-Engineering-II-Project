@@ -39,23 +39,32 @@ export class BlogsComponent {
     this.userService = new UserService(http);
     this.locationService = new LocationService(http);
 
-    this.getBlogEntrys();
 
+
+    this.getBlogEntrys();
 
     this.filteredBlogEntrys = this.blogEntrys;
   }
 
 
   private getBlogEntrys() {
+
+    let routeString = String(this.route.snapshot.paramMap.get('author'))
+      if(routeString.length!=4)
+  console.log("dercvbhufctukbhuyvfg")
+
+
+
+
     this.getblogsService.getBlogsShort().subscribe(response =>
       response.forEach(blog => {
 
         this.userService?.getUserById(blog.authorId)
           .subscribe(responseUser => {
-              let author = <IUser>this.userService?.mapUser(responseUser)
 
+              let author = <IUser>this.userService.mapUser(responseUser[0])
 
-              this.locationService?.getLocationById(blog.locationId)
+              this.locationService.getLocationById(blog.locationId)
                 .subscribe(responseLocation => {
                   let location: ILocation = this.locationService.mapLocation(responseLocation)
 
@@ -74,8 +83,6 @@ export class BlogsComponent {
                   })
 
                 })
-
-              console.log(author);
             }
           );
       }))
