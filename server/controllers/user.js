@@ -5,9 +5,9 @@ const mongoose = require('mongoose');
 
 const userSchema = Joi.object({
   displayname: Joi.string().required(),
-  username: Joi.string().required().length(5),
+  username: Joi.string().min(5).required(),
   email: Joi.string().email().required(),
-  password: Joi.string().required().length(5),
+  password: Joi.string().min(5).required(),
   hashedPassword: Joi.string()
 });
 
