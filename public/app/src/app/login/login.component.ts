@@ -64,8 +64,8 @@ private userService:UserService;
         username: this._displayName.toLowerCase().replace(/ /g,"_"),
         password: this._password
       }).subscribe(response=>{
-        console.log(response)
-        AuthorizationService._User = this.userService.mapUser(response);
+
+        AuthorizationService.setUser(this.userService.mapUser(response));
         this.router.navigateByUrl("/my-account")
       })
       this.errorText ="Registration was forbidden. Please Use other credentials or take a vacation"

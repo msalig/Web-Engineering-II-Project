@@ -12,7 +12,6 @@ import {UserService} from "../Services/communication/user.service";
 import {LocationService} from "../Services/communication/location.service";
 
 
-
 @Component({
   selector: 'app-accountview',
   templateUrl: './accountview.component.html',
@@ -30,19 +29,19 @@ export class AccountviewComponent implements OnInit {
   private _listFilter: string = '';
   private blogService: GetblogsService;
 
-  private userService:UserService;
-  private _locationService:LocationService;
+  private userService: UserService;
+  private _locationService: LocationService;
 
   constructor(private route: ActivatedRoute, private router: Router, private http: HttpClient) {
     this.blogService = new GetblogsService(http);
-    this.userService=new UserService(http);
-    this._locationService=new LocationService(http);
+    this.userService = new UserService(http);
+    this._locationService = new LocationService(http);
     this.getBlogs()
     this._filteredBlogEntrys = this.blogEntrys;
   }
 
   getBlogs() {
-    this.blogService.getBlogByAuthor(AuthorizationService._User.name).subscribe(response =>{
+    this.blogService.getBlogByAuthor(AuthorizationService._User.name).subscribe(response => {
       response.forEach(blog => {
 
         this.userService.getUserById(blog.authorId)
@@ -65,9 +64,7 @@ export class AccountviewComponent implements OnInit {
                     review: blog.review,
                     tags: blog.tags,
                     title: blog.title
-
                   })
-
                 })
             }
           );
@@ -78,7 +75,7 @@ export class AccountviewComponent implements OnInit {
   ngOnInit() {
     console.log("check if already logged in...")
     console.log(AuthorizationService._User.name)
-    if (AuthorizationService._User.name == '')
+    if (AuthorizationService.getUser().name == '')
       this.router.navigateByUrl('/login');
   }
 

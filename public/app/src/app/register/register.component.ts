@@ -84,8 +84,8 @@ export class RegisterComponent {
         password: this._password
       }).subscribe(response => {
 
-console.log(response)
-          AuthorizationService._User = this.userService.mapUser(response);
+          // AuthorizationService._User = this.userService.mapUser(response);
+          AuthorizationService.setUser(this.userService.mapUser(response))
           this.router.navigateByUrl("/my-account")
       })
     }

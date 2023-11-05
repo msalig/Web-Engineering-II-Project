@@ -10,7 +10,8 @@ import {IBlogEntry} from "../../../interfaces/blogEntry";
 })
 export class UserService {
 
-  constructor(private http:HttpClient) { }
+  constructor(private http:HttpClient) {
+  }
 
   postNewUser(user:IUserFromBackend){
 
