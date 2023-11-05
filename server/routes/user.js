@@ -42,13 +42,14 @@ router.post('/login', asyncHandler(checkUserCred));
  * @openapi
  * /users/{id}:
  *   get:
- *       summary: Get a user by ID
+ *       summary: Get a user by Id
  *       parameters:
  *         - name: id
  *           in: path
  *           required: true
  *           schema:
  *             type: string
+ *           description: The users Id
  *       responses:
  *         '200':
  *           description: OK
@@ -59,14 +60,14 @@ router.post('/login', asyncHandler(checkUserCred));
  *       tags:
  *        - user
  *   put:
- *       summary: Aktualisieren eines Benutzers anhand der ID
+ *       summary: Update a user by its Id
  *       parameters:
  *         - in: path
  *           name: id
  *           required: true
  *           schema:
  *             type: string
- *           description: Die ID des Benutzers
+ *           description: The users Id
  *       requestBody:
  *         required: true
  *         content:
@@ -83,14 +84,14 @@ router.post('/login', asyncHandler(checkUserCred));
  *       tags:
  *         - user
  *   delete:
- *       summary: Löschen eines Benutzers anhand der ID
+ *       summary: Delete a user by its Id
  *       parameters:
  *         - in: path
  *           name: id
  *           required: true
  *           schema:
  *             type: string
- *           description: Die ID des Benutzers
+ *           description: The users Id
  *       responses:
  *         '200':
  *           description: Erfolgreiche Anfrage
@@ -105,6 +106,31 @@ router.route('/:id')
   .get(asyncHandler(read))
   .put(asyncHandler(update))
   .delete(asyncHandler(deleteUser));
+
+/**
+ * @openapi
+ * /users/byUsername/{username}:
+ *   get:
+ *       summary: Get a user by its username
+ *       parameters:
+ *         - name: username
+ *           in: path
+ *           required: true
+ *           schema:
+ *             type: string
+ *           description: The users username
+ *       responses:
+ *         '200':
+ *           description: OK
+ *           content:
+ *             application/json:
+ *               schema:
+ *                 $ref: '#/components/schemas/User'
+ *       tags:
+ *        - user
+ */
+router.route('/byUsername/:username')
+  .get(asyncHandler(getUserByUsername))
 
 /**
  * @openapi
@@ -158,6 +184,11 @@ async function readAll(req, res) {
 
 async function read(req, res) {
   let user = await userCtrl.read(req.params.id);
+  res.json(user);
+}
+
+async function getUserByUsername(req, res) {
+  let user = await userCtrl.getUserByUsername(req.params.username, false);
   res.json(user);
 }
 
