@@ -80,7 +80,9 @@ export class RegisterComponent {
       let newUser:IUserFromBackend= {
         displayName: this.displayName,
         username: this.displayName.toLowerCase().trim(),
-        email: this.email
+        email: this.email,
+        countBlogEntries:0,
+        _id:'0'
       }
       AuthorizationService.User = {
         displayname:  this.displayName,
