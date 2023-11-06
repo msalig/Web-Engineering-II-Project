@@ -10,7 +10,7 @@
   <ul class=infos>
     <li class=author routerLink="/blogger/{{blog?.author?.name}}">
       <fa-icon [icon]="faUser"></fa-icon>
-      {{blog?.author?.name}}
+      {{blog?.author?.displayname}}
     </li>
     <li class="location">
       {{blog?.location?.place}}, {{blog?.location?.country}} | {{blog?.location?.coordinates?.x}}

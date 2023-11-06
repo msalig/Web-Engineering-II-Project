@@ -1,3 +1,6 @@
+@import "../../styles/vars";
+
+
 .name {
   text-align: center;
   font-size: large;
@@ -38,3 +41,38 @@ font-style: italic;
 .filter{
   margin-left: 20%;
 }
+
+.button{
+  margin:20px;
+}
+
+.newBlog{
+  border-radius: $borderRadius;
+  border-style: dotted;
+  text-align: center;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  margin-right: 30%;
+  margin-left: 30%;
+  margin-bottom: 20px;
+  margin-top: 20px;
+  cursor: pointer;
+
+  &:hover{
+    background: $main-color;
+    color: #ffffff;
+    transition: 0.4s ease-in-out;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+

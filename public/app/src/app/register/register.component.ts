@@ -78,18 +78,30 @@ export class RegisterComponent {
     if (this._password.length >= 5 && this._displayName.length >= 5) {
 
       this.authorizationService.register({
-        username: this._displayName.toLowerCase().replace(/ /g,"_"),
+        username: this.userService.getDisplayName(this._displayName),
         displayname: this.displayName,
         email: this.email,
         password: this._password
       }).subscribe(response => {
 
-console.log(response)
-          AuthorizationService._User = this.userService.mapUser(response);
+          // AuthorizationService._User = this.userService.mapUser(response);
+          AuthorizationService.setUser(response)
           this.router.navigateByUrl("/my-account")
       })
     }
     this.errorText ="Registration was forbidden. Please Use other credentials or take a vacation"
 
   }
+
+
+  keyDownEvent($event: KeyboardEvent) {
+    if($event.key=="Enter"){
+      console.log("HaTsChIe!!");
+      console.log("--Gesundheit")
+
+      this.register()
+    }
+  }
+
+
 }

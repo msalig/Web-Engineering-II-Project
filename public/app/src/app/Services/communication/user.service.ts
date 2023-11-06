@@ -10,7 +10,8 @@ import {IBlogEntry} from "../../../interfaces/blogEntry";
 })
 export class UserService {
 
-  constructor(private http:HttpClient) { }
+  constructor(private http:HttpClient) {
+  }
 
   postNewUser(user:IUserFromBackend){
 
@@ -50,13 +51,17 @@ export class UserService {
 
   mapUser(user:IUserFromBackend):IUser{
    return{
-      displayname: user.displayName,
+      displayname: user.displayname,
       mail: user.email,
       name: user.username,
       publishedblogs: user.countBlogEntries
     }
   }
 
+
+  getDisplayName(name:string):string{
+    return name.toLowerCase().replace(/ /g,"_");
+  }
 
 
 

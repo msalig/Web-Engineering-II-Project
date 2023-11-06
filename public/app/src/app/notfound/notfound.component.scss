@@ -1,5 +1,28 @@
+@import "../../styles/vars";
+
+
 .image{
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+
+.allText{
+font-family: $main-font;
+  text-align: center;
+  font-size: large;
+}
+.header{
+  font-weight: bold;
+  font-size: xxx-large;
+  margin: 30px;
+}
+.text{
+  margin: 10px;
+}
+
+.textfooter{
+  font-size: x-large;
+  font-style: italic;
 }
