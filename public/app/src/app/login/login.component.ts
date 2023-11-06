@@ -55,17 +55,15 @@ private userService:UserService;
     if(this._displayName.length > 5 && this._password.length >= 4 ){
       console.log(this.errorText)
 
-      console.log({
-        username: this._displayName.toLowerCase().replace(/ /g,"_"),
-        password: this._password
-      })
-
       this.authorizationService.login({
-        username: this._displayName.toLowerCase().replace(/ /g,"_"),
+        username: this.userService.getDisplayName(this._displayName),
         password: this._password
       }).subscribe(response=>{
 
-        AuthorizationService.setUser(this.userService.mapUser(response));
+        console.log(response)
+
+        AuthorizationService.setUser(response);
+
         this.router.navigateByUrl("/my-account")
       })
       this.errorText ="Registration was forbidden. Please Use other credentials or take a vacation"

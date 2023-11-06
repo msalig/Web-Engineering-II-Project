@@ -10,6 +10,8 @@ import {IUser} from "../../interfaces/user";
 import {ILocation} from "../../interfaces/Iocation";
 import {UserService} from "../Services/communication/user.service";
 import {LocationService} from "../Services/communication/location.service";
+import {response} from "express";
+
 
 
 @Component({
@@ -20,36 +22,49 @@ import {LocationService} from "../Services/communication/location.service";
 
 
 export class AccountviewComponent implements OnInit {
+  protected readonly AuthorizationService = AuthorizationService;
 
-  private _filteredBlogEntrys: IBlogEntry[] = [];
 
   private blogEntrys: IBlogEntry[] = [];
+  private _filteredBlogEntrys: IBlogEntry[] = [];
+
   protected readonly faUser = faUser;
   protected readonly faEdit = faEdit;
-  private _listFilter: string = '';
-  private blogService: GetblogsService;
 
+  infoText: string='';
+  passWord: string='';
+  private _listFilter: string = '';
+  private _nameVar = AuthorizationService.getUser().displayname;
+  private _mailVar = AuthorizationService.getUser().email;
+
+
+  private authorizationService:AuthorizationService
+  private blogService: GetblogsService;
   private userService: UserService;
   private _locationService: LocationService;
+
 
   constructor(private route: ActivatedRoute, private router: Router, private http: HttpClient) {
     this.blogService = new GetblogsService(http);
     this.userService = new UserService(http);
     this._locationService = new LocationService(http);
+    this.authorizationService = new AuthorizationService(http);
     this._filteredBlogEntrys = this.blogEntrys;
   }
 
   ngOnInit() {
     console.log("check if already logged in...")
-    console.log(AuthorizationService._User.name)
-    if (AuthorizationService.getUser().name == '')
+    console.log(AuthorizationService._User.username)
+    if (AuthorizationService.getUser().username == '')
       this.router.navigateByUrl('/login');
     this.getBlogs()
 
   }
 
   getBlogs() {
-    this.blogService.getBlogByAuthor(AuthorizationService.getUser().name).subscribe(response => {
+    console.log(AuthorizationService.getUser())
+    this.blogService.getBlogByAuthor(AuthorizationService.getUser().username).subscribe(response => {
+      console.log(response)
       response.forEach(blog => {
 
         this.userService.getUserById(blog.authorId)
@@ -100,13 +115,24 @@ export class AccountviewComponent implements OnInit {
       blog.author.name.toLowerCase().includes(filterBy) || blog.title.toLowerCase().includes(filterBy) || blog.tags.toLocaleString().toLowerCase().includes(filterBy) || blog.location.country.toLowerCase().includes(filterBy) || blog.location.place.toLowerCase().includes(filterBy));
   }
 
-  //
-  // saveInfos(){
-  //   console.log("save Infos");
 
-  // }
+
   saveInfos() {
 
+    if(AuthorizationService.getUser().displayname != this.nameVar || AuthorizationService.getUser().email!=this.mailVar || this.passWord!='') {
+      this.authorizationService.updateCredentials({
+        _id: AuthorizationService.getUser()._id,
+        countBlogEntries: 0,
+        displayname: this.nameVar,
+        username: this.userService.getDisplayName(this.nameVar),
+        email: this.mailVar
+      }).subscribe(response => {
+        AuthorizationService.setUser(response);
+      })
+    }
+    else {
+      this.infoText="You are the same Person. If you want to change your character we would recommend a vacation."
+    }
   }
 
   logOut(){
@@ -114,5 +140,23 @@ export class AccountviewComponent implements OnInit {
     this.router.navigateByUrl("/login");
   }
 
-  protected readonly AuthorizationService = AuthorizationService;
+
+
+
+  set nameVar(value: string) {
+    this._nameVar = value;
+  }
+
+  set mailVar(value: string) {
+    this._mailVar = value;
+  }
+  get nameVar(): string {
+    return this._nameVar;
+  }
+
+  get mailVar(): string {
+    return this._mailVar;
+  }
+
+
 }

@@ -9,12 +9,17 @@ import {catchError} from "rxjs";
 })
 
 export class AuthorizationService {
-  static _User: IUser = {
+  static _User: IUserFromBackend = {
+    _id: '',
+    countBlogEntries: 0,
     displayname: '',
-    name: '',
-    mail: '',
-    publishedblogs: 0
+    username: '',
+    email: ''
   };
+
+
+  constructor(private http: HttpClient) {
+  }
 
   // static _User:IUser={
   //   displayname:  "Julia Meier",
@@ -24,7 +29,7 @@ export class AuthorizationService {
   // };
 
 
-  public static getUser(): IUser {
+  public static getUser(): IUserFromBackend {
     if (localStorage.getItem("displayName") == null)
     {
       console.log("no credentials in storage.")
@@ -32,40 +37,48 @@ export class AuthorizationService {
     }
   else {
 
-      return { // @ts-ignore
+
+      return{// @ts-ignore
+        _id: localStorage.getItem("id"),
+        countBlogEntries: 0,  // @ts-ignore
         displayname: localStorage.getItem("displayName"), // @ts-ignore
-        mail: localStorage.getItem("mail"), // @ts-ignore
-        name: localStorage.getItem("name"),
-        publishedblogs: 0
+        email: localStorage.getItem("mail"), // @ts-ignore
+        username: localStorage.getItem("username")
       }
+      // return { // @ts-ignore
+      //   displayname: localStorage.getItem("displayName"), // @ts-ignore
+      //   mail: localStorage.getItem("mail"), // @ts-ignore
+      //   name: localStorage.getItem("username"),
+      //   id:localStorage.getItem("id"),
+      //   publishedblogs: 0
+      // }
     }
   }
 
 
-  constructor(private http: HttpClient) {
-  }
 
+  // public static get User(): IUser {
+  //   if (localStorage.getItem("displayName") == null)
+  //     return this._User;
+  //   else {
+  //
+  //     return { // @ts-ignore
+  //       displayname: localStorage.getItem("displayName"), // @ts-ignore
+  //       mail: localStorage.getItem("mail"), // @ts-ignore
+  //       name: localStorage.getItem("name"),
+  //       publishedblogs: 0
+  //     }
+  //   }
+  //
+  //
+  // }
 
-  public static get User(): IUser {
-    if (localStorage.getItem("displayName") == null)
-      return this._User;
-    else {
-
-      return { // @ts-ignore
-        displayname: localStorage.getItem("displayName"), // @ts-ignore
-        mail: localStorage.getItem("mail"), // @ts-ignore
-        name: localStorage.getItem("name"),
-        publishedblogs: 0
-      }
-    }
-
-
-  }
-
-  public static setUser(value: IUser) {
+  public static setUser(value: IUserFromBackend) {
+    console.log(value)
     localStorage.setItem("displayName", value.displayname)
-    localStorage.setItem("name", value.name)
-    localStorage.setItem("mail", value.mail)
+    localStorage.setItem("username", value.username)
+    localStorage.setItem("mail", value.email)
+    localStorage.setItem("id", value._id)
   }
 
 
@@ -76,6 +89,12 @@ export class AuthorizationService {
 
   login(user: IsendUserBackendLogin) {
     return this.http.post<IUserFromBackend>("http://localhost:3000/api/users/login", user)
+  }
+
+
+
+  updateCredentials(user:IUserFromBackend){
+    return this.http.put<IUserFromBackend>("http://localhost:3000/api/users/" + user._id,user)
   }
 
 

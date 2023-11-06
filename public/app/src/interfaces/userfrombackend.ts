@@ -3,7 +3,7 @@ import {string} from "joi";
 export interface IUserFromBackend{
   _id: string;
   countBlogEntries: number;
-  displayName:string;
+  displayname:string;
   username:string;
   email:string;
 }
