@@ -129,6 +129,8 @@ export class AccountviewComponent implements OnInit {
       }).subscribe(response => {
         AuthorizationService.setUser(response);
       })
+      this.infoText="You changed your character! Celebrate it with a vacation!"
+
     }
     else {
       this.infoText="You are the same Person. If you want to change your character we would recommend a vacation."
