@@ -92,4 +92,16 @@ export class RegisterComponent {
     this.errorText ="Registration was forbidden. Please Use other credentials or take a vacation"
 
   }
+
+
+  keyDownEvent($event: KeyboardEvent) {
+    if($event.key=="Enter"){
+      console.log("HaTsChIe!!");
+      console.log("--Gesundheit")
+
+      this.register()
+    }
+  }
+
+
 }

@@ -24,6 +24,24 @@ export class AuthorizationService {
   // };
 
 
+  public static getUser(): IUser {
+    if (localStorage.getItem("displayName") == null)
+    {
+      console.log("no credentials in storage.")
+      return this._User;
+    }
+  else {
+
+      return { // @ts-ignore
+        displayname: localStorage.getItem("displayName"), // @ts-ignore
+        mail: localStorage.getItem("mail"), // @ts-ignore
+        name: localStorage.getItem("name"),
+        publishedblogs: 0
+      }
+    }
+  }
+
+
   constructor(private http: HttpClient) {
   }
 
@@ -44,25 +62,10 @@ export class AuthorizationService {
 
   }
 
-
   public static setUser(value: IUser) {
     localStorage.setItem("displayName", value.displayname)
     localStorage.setItem("name", value.name)
     localStorage.setItem("mail", value.mail)
-  }
-
-  public static getUser(): IUser {
-    if (localStorage.getItem("displayName") == null)
-      return this._User;
-    else {
-
-      return { // @ts-ignore
-        displayname: localStorage.getItem("displayName"), // @ts-ignore
-        mail: localStorage.getItem("mail"), // @ts-ignore
-        name: localStorage.getItem("name"),
-        publishedblogs: 0
-      }
-    }
   }
 
 

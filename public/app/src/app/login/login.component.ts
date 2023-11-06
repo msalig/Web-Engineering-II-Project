@@ -73,4 +73,13 @@ private userService:UserService;
 
     }
   }
+
+  keyDownEvent($event: KeyboardEvent) {
+    if($event.key=="Enter"){
+      console.log("HaTsChIe!!");
+      console.log("--Gesundheit")
+
+      this.login()
+    }
+  }
 }

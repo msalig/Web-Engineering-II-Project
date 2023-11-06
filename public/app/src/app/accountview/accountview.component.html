@@ -9,7 +9,9 @@
     <ul class="name">Account from <input class="textfieldusername" [(ngModel)]="AuthorizationService._User.name" ></ul>
     <ul class="name">Mail: <input class="textfieldmail" [(ngModel)]="AuthorizationService._User.mail" ></ul>
     <ul>
-      <button class="button" (click)="saveInfos()"  mat-raised-button>Save</button>
+      <button class="button" (click)="saveInfos()"  mat-raised-button>Save Credentials</button>
+      <button class="button" (click)="logOut()"  mat-raised-button>Log Out</button>
+      <button class="button" (click)="saveInfos()"  mat-raised-button>delete Account</button>
 
     </ul>
 

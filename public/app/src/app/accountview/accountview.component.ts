@@ -36,12 +36,20 @@ export class AccountviewComponent implements OnInit {
     this.blogService = new GetblogsService(http);
     this.userService = new UserService(http);
     this._locationService = new LocationService(http);
-    this.getBlogs()
     this._filteredBlogEntrys = this.blogEntrys;
   }
 
+  ngOnInit() {
+    console.log("check if already logged in...")
+    console.log(AuthorizationService._User.name)
+    if (AuthorizationService.getUser().name == '')
+      this.router.navigateByUrl('/login');
+    this.getBlogs()
+
+  }
+
   getBlogs() {
-    this.blogService.getBlogByAuthor(AuthorizationService._User.name).subscribe(response => {
+    this.blogService.getBlogByAuthor(AuthorizationService.getUser().name).subscribe(response => {
       response.forEach(blog => {
 
         this.userService.getUserById(blog.authorId)
@@ -72,13 +80,6 @@ export class AccountviewComponent implements OnInit {
     })
   }
 
-  ngOnInit() {
-    console.log("check if already logged in...")
-    console.log(AuthorizationService._User.name)
-    if (AuthorizationService.getUser().name == '')
-      this.router.navigateByUrl('/login');
-  }
-
 
   get listFilter(): string {
     return this._listFilter;
@@ -106,6 +107,11 @@ export class AccountviewComponent implements OnInit {
   // }
   saveInfos() {
 
+  }
+
+  logOut(){
+    localStorage.clear()
+    this.router.navigateByUrl("/login");
   }
 
   protected readonly AuthorizationService = AuthorizationService;
