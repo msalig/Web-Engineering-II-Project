@@ -1,4 +1,4 @@
-export interface IUser{
+export interface IUser {
   displayname:string;
   name:string;
   mail: string;

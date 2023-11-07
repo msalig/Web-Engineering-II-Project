@@ -3,6 +3,7 @@ import {IBlogEntry} from "../interfaces/blogEntry";
 import {getBlogEntrys} from "../MockData/mockblogEntrys";
 import { HttpClient } from '@angular/common/http';
 import {IUser} from "../interfaces/user";
+import { initFlowbite } from 'flowbite';
 
 
 var blogEntrys:IBlogEntry[];
@@ -19,6 +20,7 @@ export class AppComponent implements OnInit{
   title = 'frontend';
 
   ngOnInit() {
+    initFlowbite();
     blogEntrys=getBlogEntrys();
 
 
