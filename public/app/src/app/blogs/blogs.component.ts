@@ -49,15 +49,10 @@ export class BlogsComponent {
 
   private getBlogEntrys() {
 
-    let routeString = String(this.route.snapshot.paramMap.get('author'))
-      if(routeString.length!=4)
-  console.log("dercvbhufctukbhuyvfg")
-
-
-
-
     this.getblogsService.getBlogsShort().subscribe(response =>
       response.forEach(blog => {
+
+        console.log(blog.comments.length)
 
         this.userService?.getUserById(blog.authorId)
           .subscribe(responseUser => {
@@ -71,7 +66,7 @@ export class BlogsComponent {
 
                   this.blogEntrys.push({
                     author: author,
-                    blogentry: '',
+                    blogentry: blog.comments.length.toString(),
                     blogentryShort: atob(blog.textShort),
                     comments: [],
                     displayname: blog.url,

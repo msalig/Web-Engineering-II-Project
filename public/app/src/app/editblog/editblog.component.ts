@@ -12,6 +12,7 @@ import {mockBlogEntry} from "../../MockData/mockblogEntry";
 export class EditblogComponent {
   editableBlogEntry: any;
   editableBlogtitleEntry: any;
+  infotext: string='';
 
 
   constructor(private _route: ActivatedRoute) {

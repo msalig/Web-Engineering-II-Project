@@ -122,7 +122,7 @@ export class AccountviewComponent implements OnInit {
     if(AuthorizationService.getUser().displayname != this.nameVar || AuthorizationService.getUser().email!=this.mailVar || this.passWord!='') {
       this.authorizationService.updateCredentials({
         _id: AuthorizationService.getUser()._id,
-        countBlogEntries: 0,
+        password: this.passWord,
         displayname: this.nameVar,
         username: this.userService.getDisplayName(this.nameVar),
         email: this.mailVar

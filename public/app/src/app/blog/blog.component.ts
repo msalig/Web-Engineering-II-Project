@@ -8,6 +8,7 @@ import {ILocation} from "../../interfaces/Iocation";
 import {UserService} from "../Services/communication/user.service";
 import {LocationService} from "../Services/communication/location.service";
 import {CommentService} from "../Services/communication/comment.service";
+import {AuthorizationService} from "../Services/authorization.service";
 
 // import {BlogService}from '../Service/blog-service'
 
@@ -23,7 +24,10 @@ export class BlogComponent {
   private locationService: LocationService;
   private commentService: CommentService;
   protected readonly faUser = faUser;
-
+  protected readonly AuthorizationService = AuthorizationService;
+  titlecomment: string='';
+  review: number=0;
+  leaveComment: string='';
 
   constructor(private route: ActivatedRoute, private http: HttpClient) {
     this.getblogsService = new GetblogsService(http);
@@ -63,4 +67,6 @@ export class BlogComponent {
       )
     })
   }
+
+
 }

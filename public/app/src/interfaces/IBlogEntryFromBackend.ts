@@ -18,6 +18,7 @@ export interface IBlogEntryFromBackendShort {
   authorId:string;
   review:number;
   tags:string[];
+  comments:string[];
   textShort:string;
   locationId:string;
   title:string;
