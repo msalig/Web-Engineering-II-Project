@@ -37,7 +37,7 @@ async function getAll() {
 }
 
 async function getAllShort() {
-  return BlogEntry.find({}, '_id authorId title url locationId textShort review tags');
+  return BlogEntry.find({}, '_id authorId title url locationId textShort review tags comments');
 }
 
 async function getBlogsByTag(tag) {
