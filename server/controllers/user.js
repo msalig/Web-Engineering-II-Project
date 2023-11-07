@@ -67,6 +67,9 @@ async function getUserByUsername(username, withPWD) {
 }
 
 async function update(userId, user) {
+  user = await userSchema.validateAsync(user, {abortEarly: false});
+  user.hashedPassword = bcrypt.hashSync(user.password, 10);
+  delete user.password;
   return User.findByIdAndUpdate(userId, user, {new: true}).select('-hashedPassword');
 }
 
