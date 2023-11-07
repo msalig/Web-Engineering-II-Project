@@ -53,6 +53,8 @@ const swaggerOptions = {
             },
             blogEntryId: {
               type: "string", description: "The ID of the blogEntry this comment belongs to"
+            }, title: {
+              type: "string", description: "The title of the comment"
             }, text: {
               type: "string", description: "The text content of the comment"
             }, review: {
