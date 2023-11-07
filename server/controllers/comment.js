@@ -10,7 +10,7 @@ const commentSchema = Joi.object({
 });
 
 module.exports = {
-  insert, read, readAll, update, deleteComment
+  insert, read, readAll, getByBlogEntryId, update, deleteComment
 };
 
 async function insert(comment) {
@@ -26,8 +26,12 @@ async function read(id) {
   return Comment.findById(id);
 }
 
+async function getByBlogEntryId(id) {
+  return Comment.find({blogEntryId: id});
+}
+
 async function update(commentId, comment) {
-  return Comment.findByIdAndUpdate(commentId, comment, {new:true});
+  return Comment.findByIdAndUpdate(commentId, comment, {new: true});
 }
 
 async function deleteComment(commentId) {

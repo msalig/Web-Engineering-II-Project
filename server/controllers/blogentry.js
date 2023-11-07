@@ -62,7 +62,7 @@ async function getBlogByUrl(url) {
 }
 
 async function addComment(blogEntryId, commentId) {
-  return BlogEntry.findOneAndUpdate(blogEntryId.id, {$push: {comments: commentId}}, {new: true})
+  return BlogEntry.findOneAndUpdate(blogEntryId, {$push: {comments: commentId}}, {new: true})
 }
 
 async function update(blogEntryId, blogEntry) {
