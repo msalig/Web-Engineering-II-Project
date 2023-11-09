@@ -47,9 +47,7 @@ export class AuthorComponent {
     console.log(authorIdentifier)
 
   this.userService.getUserByUserName(authorIdentifier).subscribe(responseAuthor=>{
-    console.log(responseAuthor)
     this._author=this.userService.mapAuthor(responseAuthor);
-    console.log(this._author)
 
     this.blogService.getBlogByAuthor(authorIdentifier).subscribe(response => {
 
@@ -60,10 +58,11 @@ export class AuthorComponent {
             .subscribe(responseLocation => {
                 let location: ILocation = this.locationService.mapLocation(responseLocation)
 
+              console.log(response)
 
                 this._blogs.push({
                   author: this._author,
-                  blogentry: atob(blogBackend.text),
+                  blogentry: blogBackend.comments.length.toString(),
                   blogentryShort: atob(blogBackend.textShort),
                   comments: [],
                   displayname: blogBackend.url,

@@ -1,6 +1,16 @@
-<input [(ngModel)]="editableBlogtitleEntry" class="blogTitle"/>
+<input [(ngModel)]="editableBlogtitleEntry" class="blogTitle" placeholder="Title"/>
 
+<div class="components">
+  <input [(ngModel)]="editBlockLocation" class="blogInfos" placeholder="Loacation"/>
+  <input [(ngModel)]="editBlockCountry" class="blogInfos" placeholder="Country"/>
+  <input [(ngModel)]="editBlockCoordinatesX" class="blogInfos" placeholder="CoordinatesX"/>
+  <input [(ngModel)]="editBlockCoordinatesY" class="blogInfos" placeholder="CoordinatesY"/>
+  <input [(ngModel)]="editBlockTags" class="blogInfos" placeholder="Tag1,Tag2,Tag3"/>
+</div>
 
+<div class="befortext">
+  <textarea [(ngModel)]="infotext" class="infotext" placeholder="a short introduction to your Blog"></textarea>
+</div>
 
 <div class="befortext">
   <textarea [(ngModel)]="editableBlogEntry" class="textforblog"></textarea>
@@ -8,5 +18,7 @@
 
 <div class="buttons">
   <button class="button" (click)="saveInfos()" mat-raised-button>Save</button>
-  <button class="button" (click)="saveInfos()"  mat-raised-button>Discard</button>
+  <button class="button" (click)="discardBlogEdit()" mat-raised-button>Discard</button>
+
+  <button *ngIf="isupdate==true" mat-button color="warn" >Delete</button>
 </div>

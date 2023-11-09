@@ -3,8 +3,10 @@ const mongoose = require('mongoose');
 let commentSchema = new mongoose.Schema({
   authorId: {type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true},
   blogEntryId: {type: mongoose.Schema.Types.ObjectId, ref: 'BlogEntry', required: true},
+  title: {type: String, required: true},
   text: {type: String, required: true},
-  review: {type: Number}
+  review: {type: Number},
+  //createdAt: {type: Date, required: true}
 });
 
 module.exports = mongoose.model('Comment', commentSchema);

@@ -66,7 +66,10 @@ private userService:UserService;
 
         this.router.navigateByUrl("/my-account")
       })
-      this.errorText ="Registration was forbidden. Please Use other credentials or take a vacation"
+
+      setTimeout(()=>{
+        this.errorText ="Registration was forbidden. Please Use other credentials or take a vacation"
+      },500)
 
 
     }
@@ -74,9 +77,7 @@ private userService:UserService;
 
   keyDownEvent($event: KeyboardEvent) {
     if($event.key=="Enter"){
-      console.log("HaTsChIe!!");
-      console.log("--Gesundheit")
-
+      console.log("sent vacation invitations!!");
       this.login()
     }
   }

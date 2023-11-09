@@ -40,12 +40,11 @@ export function mockBlogEntry(): IBlogEntry{
       "blogentryShort": "Entdecken Sie die faszinierende Stadt Sinsheim",
       "comments": [
       {
-        "commentid": 1,
+        "commentid": "1",
         "author": {
+          "_id": "1",
           "displayname": "Lisa Muster",
-          "name": "lisa_m",
-          "mail": "lisa.muster@email.com",
-          publishedblogs:3
+          "username": "lisa_m"
         },
         "review":3,
         "title": "Toller Beitrag!",

@@ -13,7 +13,7 @@
     <ul>
       <button class="button" (click)="saveInfos()"  mat-raised-button>Save Credentials</button>
       <button class="button" (click)="logOut()"  mat-raised-button>Log Out</button>
-      <button class="button" (click)="saveInfos()"  mat-raised-button>delete Account</button>
+      <button class="button" (click)="deleteAccount()"  mat-raised-button>delete Account</button>
     </ul>
   </li>
 </div>
@@ -26,7 +26,7 @@
     <th>Filter: <input [(ngModel)]="listFilter" placeholder="Titles, Tags, Places" class="textfield"/></th>
   </div>
 
-  <div class = "newBlog" routerLink="#/editblog/newBlog" >
+  <div class = "newBlog" routerLink="/editblog/newBlog" >
     <div> Share your last vacation impressions!</div>
   </div>
 

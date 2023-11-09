@@ -37,7 +37,7 @@ async function getAll() {
 }
 
 async function getAllShort() {
-  return BlogEntry.find({}, '_id authorId title url locationId textShort review tags');
+  return BlogEntry.find({}, '_id authorId title url locationId textShort review tags comments');
 }
 
 async function getBlogsByTag(tag) {
@@ -62,7 +62,7 @@ async function getBlogByUrl(url) {
 }
 
 async function addComment(blogEntryId, commentId) {
-  return BlogEntry.findOneAndUpdate(blogEntryId.id, {$push: {comments: commentId}}, {new: true})
+  return BlogEntry.findOneAndUpdate(blogEntryId, {$push: {comments: commentId}}, {new: true})
 }
 
 async function update(blogEntryId, blogEntry) {

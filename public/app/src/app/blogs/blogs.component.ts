@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {AfterContentInit, AfterViewChecked, Component, Input, OnInit} from '@angular/core';
 import {getBlogEntrys, getBlogEntrysByAuthor} from "../../MockData/mockblogEntrys";
 import {faComment, faUser} from "@fortawesome/free-solid-svg-icons";
 import {IBlogEntry} from "../../interfaces/blogEntry";
@@ -20,7 +20,7 @@ import {LocationService} from "../Services/communication/location.service";
   styleUrls: ['./blogs.component.scss']
 })
 
-export class BlogsComponent {
+export class BlogsComponent implements AfterContentInit{
 
   filteredBlogEntrys: IBlogEntry[] = [];
   protected readonly location = location;
@@ -41,23 +41,41 @@ export class BlogsComponent {
 
 
 
+
     this.getBlogEntrys();
 
     this.filteredBlogEntrys = this.blogEntrys;
+
+
+
+  }
+
+
+
+  ngAfterContentInit() {
+    setTimeout(()=>{
+    let tag = String(this.route.snapshot.paramMap.get('tag'));
+
+    console.log(tag)
+    if (tag.length != 4) {
+      console.log(this.blogEntrys)
+      this.blogEntrys = this.blogEntrys.filter((blog: IBlogEntry) =>
+        blog.tags.toLocaleString().toLowerCase().includes(tag.toLowerCase()))
+      this.filteredBlogEntrys=this.blogEntrys
+    }
+  },250)
   }
 
 
   private getBlogEntrys() {
 
-    let routeString = String(this.route.snapshot.paramMap.get('author'))
-      if(routeString.length!=4)
-  console.log("dercvbhufctukbhuyvfg")
-
 
 
 
     this.getblogsService.getBlogsShort().subscribe(response =>
+    {
       response.forEach(blog => {
+
 
         this.userService?.getUserById(blog.authorId)
           .subscribe(responseUser => {
@@ -71,7 +89,7 @@ export class BlogsComponent {
 
                   this.blogEntrys.push({
                     author: author,
-                    blogentry: '',
+                    blogentry: blog.comments.length.toString(),
                     blogentryShort: atob(blog.textShort),
                     comments: [],
                     displayname: blog.url,
@@ -82,10 +100,21 @@ export class BlogsComponent {
 
                   })
 
+
                 })
             }
           );
-      }))
+
+
+
+       })
+
+
+
+
+    })
+
+
   }
 
   get listFilter(): string {

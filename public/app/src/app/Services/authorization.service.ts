@@ -1,7 +1,12 @@
 import {Injectable} from '@angular/core';
 import {IUser} from "../../interfaces/user";
 import {HttpClient, HttpResponse} from "@angular/common/http";
-import {IsendUserBackendLogin, ISendUserBackendRegister, IUserFromBackend} from "../../interfaces/userfrombackend";
+import {
+  IsendUserBackendLogin,
+  ISendUserBackendRegister,
+  ISendUserBackendUpdate,
+  IUserFromBackend
+} from "../../interfaces/userfrombackend";
 import {catchError} from "rxjs";
 
 @Injectable({
@@ -45,13 +50,6 @@ export class AuthorizationService {
         email: localStorage.getItem("mail"), // @ts-ignore
         username: localStorage.getItem("username")
       }
-      // return { // @ts-ignore
-      //   displayname: localStorage.getItem("displayName"), // @ts-ignore
-      //   mail: localStorage.getItem("mail"), // @ts-ignore
-      //   name: localStorage.getItem("username"),
-      //   id:localStorage.getItem("id"),
-      //   publishedblogs: 0
-      // }
     }
   }
 
@@ -93,7 +91,9 @@ export class AuthorizationService {
 
 
 
-  updateCredentials(user:IUserFromBackend){
+  updateCredentials(user:ISendUserBackendUpdate){
+    console.log("updated Credentials:");
+    console.log(user)
     return this.http.put<IUserFromBackend>("http://localhost:3000/api/users/" + user._id,user)
   }
 

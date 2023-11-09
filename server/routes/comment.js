@@ -7,6 +7,32 @@ const router = express.Router();
 
 /**
  * @openapi
+ * /comments/byBlogEntry/{id}:
+ *    get:
+ *       summary: Get an array of comments by BlogEntryId
+ *       parameters:
+ *         - name: id
+ *           in: path
+ *           required: true
+ *           schema:
+ *             type: string
+ *       responses:
+ *         '200':
+ *           description: OK
+ *           content:
+ *             application/json:
+ *               schema:
+ *                  type: array
+ *                  items:
+ *                    $ref: '#/components/schemas/Comment'
+ *       tags:
+ *        - comment
+ */
+router.route('/byBlogEntry/:id')
+  .get(asyncHandler(getByBlogEntryId));
+
+/**
+ * @openapi
  * /comments/{id}:
  *    get:
  *       summary: Get a comment by Id
@@ -70,7 +96,7 @@ module.exports = router;
 
 async function insert(req, res) {
   let comment = await commentCtrl.insert(req.body);
-  let blogEntry = await blogEntryCtrl.addComment((await comment).blogEntryId, (await comment)._id)
+  let blogEntry = await blogEntryCtrl.addComment((await comment).blogEntryId, (await comment).id)
   res.json(blogEntry);
 }
 
@@ -80,8 +106,13 @@ async function readAll(req, res) {
 }
 
 async function read(req, res) {
-  let comment = await commentCtrl.read(req.body.id);
+  let comment = await commentCtrl.read(req.params.id);
   res.json(comment);
+}
+
+async function getByBlogEntryId(req, res) {
+  let comments = await commentCtrl.getByBlogEntryId(req.params.id);
+  res.json(comments);
 }
 
 async function update(req, res) {

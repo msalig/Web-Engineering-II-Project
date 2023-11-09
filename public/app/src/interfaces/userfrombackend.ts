@@ -27,3 +27,11 @@ export interface IsendUserBackendLogin{
   "username": string,
   "password": string
 }
+
+export interface ISendUserBackendUpdate{
+  _id:string;
+  displayname: string;
+  username: string;
+  email: string;
+  password: string;
+}

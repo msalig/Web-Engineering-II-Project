@@ -25,7 +25,8 @@ const UserSchema = new mongoose.Schema(
     hashedPassword: {
       type: String,
       required: true,
-    }
+    },
+    //createdAt: {type: Date, required: true}
   }
 );
 
