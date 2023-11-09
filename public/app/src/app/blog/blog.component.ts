@@ -93,4 +93,8 @@ export class BlogComponent {
     else
     console.log('something went wrong')}
   }
+
+  replaceSpacesWithDashes(s: string) {
+    return s.replace(/\s+/g, '-');
+  }
 }

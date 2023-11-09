@@ -24,7 +24,7 @@
             {{blog.review}}
         </li>
         <li *ngFor="let tag of blog.tags">
-          <div class="tag" routerLink="/blogs/search/tags/{{tag.toLowerCase()}}">{{tag}}  </div>
+          <div class="tag" routerLink="/blogs/search/tags/{{replaceSpacesWithDashes(tag.toLowerCase())}}">{{tag}}  </div>
         </li>
       </ul>
     </div>
