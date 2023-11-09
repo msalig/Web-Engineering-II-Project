@@ -1,3 +1,4 @@
+
 .blogTitle{
   margin-right: auto;
   margin-left: auto;
@@ -15,16 +16,23 @@
 .textforblog{
   margin-right: auto;
   margin-left: auto;
+  border-color: #838383;
+  border-radius: 10px;
+  text-align: left;
+  width: 1000px;
+  height: 700px;
+  display: block;
+}
+
+.infotext{
+  margin-right: auto;
+  margin-left: auto;
   border-color: #b9b9b9;
   border-radius: 10px;
   text-align: left;
   width: 1000px;
-  height: 800px;
+  height: 100px;
   display: block;
-}
-
-.buttons{
-
 }
 
 .button{
@@ -32,9 +40,14 @@
 
 }
 
-
-.infoText{
-  font-size: small;
-  font-style: italic;
+.components{
   text-align: center;
+}
+
+.blogInfos{
+  margin: 10px;
+}
+
+.befortext{
+  margin-top: 20px;
 }

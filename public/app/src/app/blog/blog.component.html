@@ -65,7 +65,7 @@
     <textarea [(ngModel)]="titlecomment" class="commentTitle" placeholder="Title"></textarea>
     <textarea [(ngModel)]="review" class="commentReview" placeholder="1-5"></textarea>
     <textarea [(ngModel)]="leaveComment" class="commentleave"></textarea>
-    <button mat-raised-button >Send Comment</button>
+    <button mat-raised-button (click)="sendComment()">Send Comment</button>
   </div>
 
 <!--<div *ngFor="let comment of blog?.comments">-->

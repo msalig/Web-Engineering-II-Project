@@ -8,3 +8,11 @@ export interface ICommentFromBackend {
   text: string;
   review: number;
 }
+
+export interface ICommentSendBackendPut{
+  "authorId": string,
+  "blogEntryId": string,
+  "title": string,
+  "text": string,
+  "review": number
+}

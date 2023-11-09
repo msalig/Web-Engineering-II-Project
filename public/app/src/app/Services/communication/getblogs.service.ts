@@ -1,6 +1,10 @@
 import { Injectable } from '@angular/core';
 import {IBlogEntry} from "../../../interfaces/blogEntry";
-import {IBlogEntryFromBackend, IBlogEntryFromBackendShort} from "../../../interfaces/IBlogEntryFromBackend";
+import {
+  IBlogEntryFromBackend,
+  IBlogEntryFromBackendShort,
+  IBlogEntryPutPost
+} from "../../../interfaces/IBlogEntryFromBackend";
 import {HttpClient} from "@angular/common/http";
 import {number} from "joi";
 import {Observable} from "rxjs";
@@ -34,6 +38,15 @@ export class GetblogsService {
 
     getBlogByIdentifier(identifier:string){
         return this.http.get<IBlogEntryFromBackend>("http://localhost:3000/api/blogEntries/byUrl/"+ identifier);
+    }
+
+    putBlogEntry(blog:IBlogEntryPutPost,id:string){
+    return this.http.put<IBlogEntryPutPost>('http://localhost:3000/api/blogEntries/'+id,blog)
+    }
+
+
+    postBlogEntry(blog:IBlogEntryPutPost){
+    return this.http.post<IBlogEntryPutPost>('http://localhost:3000/api/blogEntries',blog)
     }
 
 }

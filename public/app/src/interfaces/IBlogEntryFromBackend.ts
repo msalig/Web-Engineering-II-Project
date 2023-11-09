@@ -23,3 +23,15 @@ export interface IBlogEntryFromBackendShort {
   locationId:string;
   title:string;
 }
+
+export interface IBlogEntryPutPost{
+  "authorId": string;
+  "title": string;
+  "url": string;
+  "locationId": string;
+  "text": string;
+  "textShort": string;
+  "review": number,
+  "tags": string[],
+  "comments": string[];
+}

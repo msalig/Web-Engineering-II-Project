@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
+import {ICommentFromBackend, ICommentSendBackendPut} from "../../../interfaces/ICommentFromBackend";
 import {IComment} from "../../../interfaces/comment";
-import {ICommentFromBackend} from "../../../interfaces/ICommentFromBackend";
 
 @Injectable({
   providedIn: 'root'
@@ -19,6 +19,13 @@ export class CommentService {
   getCommentsByBlogEntryId(id: string): Observable<ICommentFromBackend[]> {
     return this.http.get<ICommentFromBackend[]>("http://localhost:3000/api/comments/byBlogEntry/" + id)
   }
+
+  sendComment(comment:ICommentSendBackendPut){
+    return this.http.post<ICommentSendBackendPut>('http://localhost:3000/api/comments',comment)
+  }
+
+
+
 
   mapComment(comment: ICommentFromBackend): IComment {
     return {

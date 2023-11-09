@@ -50,13 +50,6 @@ export class AuthorizationService {
         email: localStorage.getItem("mail"), // @ts-ignore
         username: localStorage.getItem("username")
       }
-      // return { // @ts-ignore
-      //   displayname: localStorage.getItem("displayName"), // @ts-ignore
-      //   mail: localStorage.getItem("mail"), // @ts-ignore
-      //   name: localStorage.getItem("username"),
-      //   id:localStorage.getItem("id"),
-      //   publishedblogs: 0
-      // }
     }
   }
 

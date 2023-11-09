@@ -74,9 +74,7 @@ private userService:UserService;
 
   keyDownEvent($event: KeyboardEvent) {
     if($event.key=="Enter"){
-      console.log("HaTsChIe!!");
-      console.log("--Gesundheit")
-
+      console.log("sent vacation invitations!!");
       this.login()
     }
   }
