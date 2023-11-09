@@ -11,6 +11,7 @@ import {ILocation} from "../../interfaces/Iocation";
 import {UserService} from "../Services/communication/user.service";
 import {LocationService} from "../Services/communication/location.service";
 import {response} from "express";
+import {A} from "@angular/cdk/keycodes";
 
 
 
@@ -142,6 +143,10 @@ export class AccountviewComponent implements OnInit {
     this.router.navigateByUrl("/login");
   }
 
+  deleteAccount() {
+    this.userService.deleteUser(AuthorizationService.getUser()._id)
+  }
+
 
 
 
@@ -159,6 +164,7 @@ export class AccountviewComponent implements OnInit {
   get mailVar(): string {
     return this._mailVar;
   }
+
 
 
 }

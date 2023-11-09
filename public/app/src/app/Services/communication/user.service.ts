@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import {IUser} from "../../../interfaces/user";
 import {HttpClient} from "@angular/common/http";
 import {catchError, Observable} from "rxjs";
-import {IAuthorFromBackend, IUserFromBackend} from "../../../interfaces/userfrombackend";
+import {IAuthorFromBackend, ISendUserBackendRegister, IUserFromBackend} from "../../../interfaces/userfrombackend";
 import {IBlogEntry} from "../../../interfaces/blogEntry";
 
 @Injectable({
@@ -38,6 +38,22 @@ export class UserService {
   getUserByUserName(userName:string):Observable<IAuthorFromBackend>{
     return this.http.get<IAuthorFromBackend>("http://localhost:3000/api/users/byUsername/"+userName);
   }
+
+
+  deleteUser(id:string){
+    return this.http.delete<ISendUserBackendRegister>('http://localhost:3000/api/users/'+id)
+  }
+
+
+
+
+
+
+
+
+
+
+
 
 
   mapAuthor(author:IAuthorFromBackend):IUser{
