@@ -66,7 +66,10 @@ private userService:UserService;
 
         this.router.navigateByUrl("/my-account")
       })
-      this.errorText ="Registration was forbidden. Please Use other credentials or take a vacation"
+
+      setTimeout(()=>{
+        this.errorText ="Registration was forbidden. Please Use other credentials or take a vacation"
+      },500)
 
 
     }
