@@ -144,7 +144,8 @@ export class AccountviewComponent implements OnInit {
   }
 
   deleteAccount() {
-    this.userService.deleteUser(AuthorizationService.getUser()._id)
+    this.userService.deleteUser(AuthorizationService.getUser()._id).subscribe()
+    this.logOut()
   }
 
 
