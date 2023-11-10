@@ -14,10 +14,8 @@ export class BlogtileComponent {
   protected readonly faUser = faUser;
   protected readonly faComment = faComment;
   protected readonly faStar = faStar;
-  protected readonly atob = atob;
 
   replaceSpacesWithDashes(inputString: string): string {
-    // Verwende die `replace`-Methode mit einem regulären Ausdruck
     return inputString.replace(/\s+/g, '-');
   }
 }

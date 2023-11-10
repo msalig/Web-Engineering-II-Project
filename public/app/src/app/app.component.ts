@@ -1,11 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {IBlogEntry} from "../interfaces/blogEntry";
-import {getBlogEntrys} from "../MockData/mockblogEntrys";
-import {IUser} from "../interfaces/user";
 import {initFlowbite} from 'flowbite';
 
-var blogEntrys: IBlogEntry[];
-var currentUser: IUser;
 
 @Component({
   selector: 'app-root',
@@ -17,8 +12,5 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     initFlowbite();
-    blogEntrys = getBlogEntrys();
-
-    //console.log(blogEntrys);
   }
 }
