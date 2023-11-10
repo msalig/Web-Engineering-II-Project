@@ -27,7 +27,6 @@ export interface IBlogEntryFromBackendShort {
 export interface IBlogEntryPutPost {
   "authorId": string;
   "title": string;
-  "url": string;
   "locationId": string;
   "text": string;
   "textShort": string;

@@ -122,6 +122,8 @@ router.get('/byCountry/:country', asyncHandler(getBlogsByCountry));
  *       responses:
  *         '200':
  *           description: OK
+ *         '404':
+ *           description: Not Found
  *       tags:
  *        - blogEntries
  */
@@ -263,6 +265,9 @@ async function updateBlog(req, res) {
 }
 
 async function deleteBlogById(req, res) {
-  let success = await blogEntryCtrl.deleteBlogEntry(req.params.id);
-  res.json(success);
+  await blogEntryCtrl.deleteBlogEntry(req.params.id).then(() => {
+    res.status(200).end();
+  }).catch((error) => {
+    res.status(404).json(error).end();
+  });
 }

@@ -4,7 +4,7 @@ import {ILocation} from "../../interfaces/Iocation";
 import {GetblogsService} from "../Services/communication/getblogs.service";
 import {UserService} from "../Services/communication/user.service";
 import {LocationService} from "../Services/communication/location.service";
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpErrorResponse, HttpResponse, HttpStatusCode} from "@angular/common/http";
 import {IBlogEntryFromBackend, IBlogEntryPutPost} from "../../interfaces/IBlogEntryFromBackend";
 import {AuthorizationService} from "../Services/authorization.service";
 
@@ -74,8 +74,7 @@ export class EditblogComponent {
   }
 
   saveInfos() {
-    console.log('url:')
-    console.log(this.userService.getDisplayName(this.editableBlogtitleEntry))
+    console.log('url: ' + this.userService.getDisplayName(this.editableBlogtitleEntry))
 
     this.locationService.postLocation({      // @ts-ignore
       country: this.editBlockCountry,// @ts-ignore
@@ -87,7 +86,6 @@ export class EditblogComponent {
       let update: IBlogEntryPutPost = {
         authorId: AuthorizationService.getUser()._id,
         title: this.editableBlogtitleEntry,
-        url: this.editableBlogtitleEntry.toLowerCase().replace(/ /g, "-"),
         locationId: result._id,
         text: btoa(this.editableBlogEntry),
         textShort: btoa(this.infotext),
@@ -125,5 +123,15 @@ export class EditblogComponent {
 
   discardBlogEdit() {
     this.router.navigateByUrl("/my-account")
+  }
+
+  deleteBlog() {
+    if (this._isupdate && this.blogId != null) {
+      this.getblogsService.deleteBlogEntry(this.blogId).subscribe((response) => {
+        if (response.status === HttpStatusCode.Ok) {
+          this.router.navigateByUrl("/my-account");
+        }
+      })
+    }
   }
 }

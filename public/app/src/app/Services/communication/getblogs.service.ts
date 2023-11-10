@@ -4,7 +4,7 @@ import {
   IBlogEntryFromBackendShort,
   IBlogEntryPutPost
 } from "../../../interfaces/IBlogEntryFromBackend";
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpResponse} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {UserService} from "./user.service";
 
@@ -40,5 +40,9 @@ export class GetblogsService {
 
   postBlogEntry(blog: IBlogEntryPutPost) {
     return this.http.post<IBlogEntryPutPost>('http://localhost:3000/api/blogEntries', blog)
+  }
+
+  deleteBlogEntry(id: string) {
+    return this.http.delete(`http://localhost:3000/api/blogEntries/${id}`, {observe: 'response'})
   }
 }
