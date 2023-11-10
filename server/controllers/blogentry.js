@@ -66,7 +66,7 @@ async function addComment(blogEntryId, commentId) {
 }
 
 async function update(blogEntryId, blogEntry) {
-  return BlogEntry.findByIdAndUpdate(blogEntryId, blogEntry, {new:true});
+  return BlogEntry.findByIdAndUpdate(blogEntryId, blogEntry, {new: true});
 }
 
 async function deleteBlogEntry(blogEntryId) {

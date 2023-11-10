@@ -34,7 +34,8 @@ async function read(id) {
     }
   }, {
     $addFields: {
-      author: { $arrayElemAt: ["$authors", 0] }    }
+      author: {$arrayElemAt: ["$authors", 0]}
+    }
   }, {
     $project: {
       "author.hashedPassword": 0, "author.__v": 0, "author.email": 0, authors: 0, __v: 0
@@ -51,7 +52,8 @@ async function getByBlogEntryId(id) {
     }
   }, {
     $addFields: {
-      author: { $arrayElemAt: ["$authors", 0] }    }
+      author: {$arrayElemAt: ["$authors", 0]}
+    }
   }, {
     $project: {
       "author.hashedPassword": 0, "author.__v": 0, authors: 0, __v: 0
