@@ -1,9 +1,7 @@
 <div class="authorname">{{author.name}}</div>
 <div class="publishedblogs">{{author.publishedblogs}} published Blogs</div>
 
-
-<div class="infoText" *ngIf="blogs.length < 1">{{author.name}} does not have published any Blogs til now. Stay Tuned!</div>
-
+<div class="infoText" *ngIf="blogs.length < 1">{{author.name}} does not have published any Blogs till now. Stay Tuned!</div>
 
 <li *ngFor="let blog of blogs" class="allblogs">
   <div routerLink="/blog/{{blog.displayname}}" class="oneblog2">

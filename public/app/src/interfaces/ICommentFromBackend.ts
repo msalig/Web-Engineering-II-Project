@@ -9,7 +9,7 @@ export interface ICommentFromBackend {
   review: number;
 }
 
-export interface ICommentSendBackendPut{
+export interface ICommentSendBackendPut {
   "authorId": string,
   "blogEntryId": string,
   "title": string,

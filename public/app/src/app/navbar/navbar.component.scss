@@ -1,24 +1,20 @@
 @import "../../styles/vars";
 
-
 header {
   padding: 12px 0;
   //background-color: rgb(53, 122, 159);
   //background-image: url("../../assets/urlaubsfotos/strand.jpeg");
 }
 
-
-.filterBlog{
+.filterBlog {
   font-size: xx-large;
 }
 
-.filter{
+.filter {
   font-size: xx-large;
 }
 
-
-
-.logoimg{
+.logoimg {
   margin-left: 48px;
   //max-width: 10px;
   //display: inline-block;
@@ -32,9 +28,6 @@ header {
   padding-top: 20px;
   margin-right: 40px;
   text-align: right;
-
-
-
 
   ul {
     padding: 0;
@@ -52,8 +45,6 @@ header {
         color: #333;
         font-family: "Droid Sans Georgian";
         font-size: 24px;
-
-
 
         &:hover {
           color: $main-color;
@@ -86,13 +77,13 @@ header {
       }
     }
   }
+
   .menu_icon {
     display: inline-block;
     position: relative;
     right: 0;
     top: 80px;
     margin-left: 20px;
-
 
     span {
       width: 32px;
@@ -106,6 +97,7 @@ header {
       }
     }
   }
+
   .menu_iconClass {
     span {
       &:nth-child(2) {
@@ -122,6 +114,7 @@ header {
       }
     }
   }
+
   .menuClasse {
     right: 0;
     transition: 0.4s ease-in-out;

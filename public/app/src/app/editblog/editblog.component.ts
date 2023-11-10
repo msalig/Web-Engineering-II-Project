@@ -1,16 +1,12 @@
 import {Component} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
-import {mockBlogEntry} from "../../MockData/mockblogEntry";
 import {ILocation} from "../../interfaces/Iocation";
 import {GetblogsService} from "../Services/communication/getblogs.service";
 import {UserService} from "../Services/communication/user.service";
 import {LocationService} from "../Services/communication/location.service";
 import {HttpClient} from "@angular/common/http";
-import {IBlogEntry} from "../../interfaces/blogEntry";
 import {IBlogEntryFromBackend, IBlogEntryPutPost} from "../../interfaces/IBlogEntryFromBackend";
 import {AuthorizationService} from "../Services/authorization.service";
-import {response} from "express";
-
 
 
 @Component({
@@ -19,7 +15,6 @@ import {response} from "express";
   styleUrls: ['./editblog.component.scss']
 })
 export class EditblogComponent {
-
   editableBlogEntry: any;
   editableBlogtitleEntry: any;
   infotext: string = '';
@@ -42,8 +37,6 @@ export class EditblogComponent {
     this.locationService = new LocationService(http);
 
     this.getInfos();
-
-
   }
 
   getInfos() {
@@ -53,8 +46,7 @@ export class EditblogComponent {
       this._isupdate = true;
 
       this.getblogsService.getBlogByIdentifier(blogName).subscribe(thisblog => {
-          this.blogId=thisblog._id;
-
+          this.blogId = thisblog._id;
 
           this.userService.getUserById(thisblog.authorId).subscribe(responseUser => {
 
@@ -76,57 +68,48 @@ export class EditblogComponent {
           })
         }
       )
-    } else this._isupdate = false
+    } else {
+      this._isupdate = false
+    }
   }
 
   saveInfos() {
-
     console.log('url:')
     console.log(this.userService.getDisplayName(this.editableBlogtitleEntry))
 
+    this.locationService.postLocation({      // @ts-ignore
+      country: this.editBlockCountry,// @ts-ignore
+      place: this.editBlockLocation,// @ts-ignore
+      lat: this.editBlockCoordinatesX,// @ts-ignore
+      lon: this.editBlockCoordinatesY
+    }).subscribe(result => {
 
-      this.locationService.postLocation({      // @ts-ignore
-        country: this.editBlockCountry,// @ts-ignore
-        place: this.editBlockLocation,// @ts-ignore
-        lat: this.editBlockCoordinatesX,// @ts-ignore
-        lon: this.editBlockCoordinatesY
-      }).subscribe(result => {
+      let update: IBlogEntryPutPost = {
+        authorId: AuthorizationService.getUser()._id,
+        title: this.editableBlogtitleEntry,
+        url: this.editableBlogtitleEntry.toLowerCase().replace(/ /g, "-"),
+        locationId: result._id,
+        text: btoa(this.editableBlogEntry),
+        textShort: btoa(this.infotext),
+        review: 0,// @ts-ignore
+        tags: this.stringToArray(this.editBlockTags),
+        comments: []
+      }
 
-
-
-        let update :IBlogEntryPutPost={
-          authorId: AuthorizationService.getUser()._id,
-            title: this.editableBlogtitleEntry,
-            url: this.editableBlogtitleEntry.toLowerCase().replace(/ /g,"-"),
-            locationId: result._id,
-            text: btoa(this.editableBlogEntry),
-            textShort: btoa(this.infotext),
-            review: 0,// @ts-ignore
-            tags: this.stringToArray(this.editBlockTags),
-            comments: []
-        }
-
-
-        if (this._isupdate == true) {
-          // @ts-ignore
-          this.getblogsService.putBlogEntry(update,this.blogId).subscribe(response => {
-            if (response.authorId == AuthorizationService.getUser()._id)
-              this.router.navigateByUrl("/my-account")
-          })
-        }
-        else {
-          this.getblogsService.postBlogEntry(update).subscribe(response=>{
-            if (response.authorId == AuthorizationService.getUser()._id)
-              this.router.navigateByUrl("/my-account")
-          })
-        }
-      })
-
-
-
-
+      if (this._isupdate) {
+        // @ts-ignore
+        this.getblogsService.putBlogEntry(update, this.blogId).subscribe(response => {
+          if (response.authorId == AuthorizationService.getUser()._id)
+            this.router.navigateByUrl("/my-account")
+        })
+      } else {
+        this.getblogsService.postBlogEntry(update).subscribe(response => {
+          if (response.authorId == AuthorizationService.getUser()._id)
+            this.router.navigateByUrl("/my-account")
+        })
+      }
+    })
   }
-
 
   stringToArray(inputString: string): string[] {
     const stringArray = inputString.split(',');
@@ -135,7 +118,6 @@ export class EditblogComponent {
 
     return trimmedArray;
   }
-
 
   get isupdate(): boolean {
     return this._isupdate;

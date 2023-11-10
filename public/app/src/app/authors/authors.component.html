@@ -1,14 +1,12 @@
 <div class="title">This are our Bloggers:</div>
 
 <div class="filter">
-  <th>Filter: <input [(ngModel)]="listfilter" class = textfield></th>
+  <th>Filter: <input [(ngModel)]="listfilter" class=textfield></th>
 </div>
 
 <li *ngFor="let author of filteredAuthors" class="author">
   <div routerLink="/blogger/{{author.displayname}}">
     <div class="authorName">{{author.name}}</div>
     <div class="publishedBlogs">published Blogs: {{author.publishedblogs}}</div>
-
-
   </div>
 </li>

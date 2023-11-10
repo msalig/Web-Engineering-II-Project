@@ -7,19 +7,16 @@
   margin-left: 30%;
   margin-right: 30%;
 
-
   border-bottom-style: solid;
   border-width: 2px;
   border-color: #777777;
   list-style: none;
-
 
   &:hover {
     //background-color: #dadada;
     color: #2ca7e9;
   }
 }
-
 
 .title {
   font-size: x-large;
@@ -35,12 +32,9 @@
 
 .publishedBlogs {
   font-style: italic;
-
-
 }
 
-
-.filter{
+.filter {
   //margin-left: 30%;
   margin-left: 40%;
   list-style: none;

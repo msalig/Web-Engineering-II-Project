@@ -1,13 +1,8 @@
 import {Component} from '@angular/core';
-import {mockBlogEntry} from "../../MockData/mockblogEntry";
 import {AuthorizationService} from "../Services/authorization.service";
-import * as http from "http";
 import {HttpClient} from "@angular/common/http";
 import {Router} from "@angular/router";
-import {response} from "express";
 import {UserService} from "../Services/communication/user.service";
-
-// import {AuthenticationService} from "../Service/authentication.service";
 
 @Component({
   selector: 'app-login',
@@ -15,15 +10,14 @@ import {UserService} from "../Services/communication/user.service";
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent {
-private authorizationService:AuthorizationService;
-private userService:UserService;
+  private authorizationService: AuthorizationService;
+  private userService: UserService;
   private _displayName = '';
   private _password = '';
   errorText = ""
 
-
-  constructor(private http: HttpClient, private router:Router) {
-    this.authorizationService =  new AuthorizationService(http);
+  constructor(private http: HttpClient, private router: Router) {
+    this.authorizationService = new AuthorizationService(http);
     this.userService = new UserService(http);
   }
 
@@ -51,14 +45,13 @@ private userService:UserService;
       this.errorText = "Password should have at least 5 characters";
     }
 
-
-    if(this._displayName.length > 5 && this._password.length >= 4 ){
+    if (this._displayName.length > 5 && this._password.length >= 4) {
       console.log(this.errorText)
 
       this.authorizationService.login({
         username: this.userService.getDisplayName(this._displayName),
         password: this._password
-      }).subscribe(response=>{
+      }).subscribe(response => {
 
         console.log(response)
 
@@ -67,16 +60,14 @@ private userService:UserService;
         this.router.navigateByUrl("/my-account")
       })
 
-      setTimeout(()=>{
-        this.errorText ="Registration was forbidden. Please Use other credentials or take a vacation"
-      },500)
-
-
+      setTimeout(() => {
+        this.errorText = "Registration was forbidden. Please Use other credentials or take a vacation"
+      }, 500)
     }
   }
 
   keyDownEvent($event: KeyboardEvent) {
-    if($event.key=="Enter"){
+    if ($event.key == "Enter") {
       console.log("sent vacation invitations!!");
       this.login()
     }

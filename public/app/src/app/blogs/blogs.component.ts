@@ -20,7 +20,7 @@ import {LocationService} from "../Services/communication/location.service";
   styleUrls: ['./blogs.component.scss']
 })
 
-export class BlogsComponent implements AfterContentInit{
+export class BlogsComponent implements AfterContentInit {
 
   filteredBlogEntrys: IBlogEntry[] = [];
   protected readonly location = location;
@@ -39,43 +39,29 @@ export class BlogsComponent implements AfterContentInit{
     this.userService = new UserService(http);
     this.locationService = new LocationService(http);
 
-
-
-
     this.getBlogEntrys();
 
     this.filteredBlogEntrys = this.blogEntrys;
-
-
-
   }
-
-
 
   ngAfterContentInit() {
-    setTimeout(()=>{
-    let tag = String(this.route.snapshot.paramMap.get('tag'));
+    setTimeout(() => {
+      let tag = String(this.route.snapshot.paramMap.get('tag'));
 
-    console.log(tag)
-    if (tag.length != 4) {
-      console.log(this.blogEntrys)
-      this.blogEntrys = this.blogEntrys.filter((blog: IBlogEntry) =>
-        blog.tags.toLocaleString().toLowerCase().includes(tag.toLowerCase()))
-      this.filteredBlogEntrys=this.blogEntrys
-    }
-  },250)
+      console.log(tag)
+      if (tag.length != 4) {
+        console.log(this.blogEntrys)
+        this.blogEntrys = this.blogEntrys.filter((blog: IBlogEntry) =>
+          blog.tags.toLocaleString().toLowerCase().includes(tag.toLowerCase()))
+        this.filteredBlogEntrys = this.blogEntrys
+      }
+    }, 250)
   }
-
 
   private getBlogEntrys() {
 
-
-
-
-    this.getblogsService.getBlogsShort().subscribe(response =>
-    {
+    this.getblogsService.getBlogsShort().subscribe(response => {
       response.forEach(blog => {
-
 
         this.userService?.getUserById(blog.authorId)
           .subscribe(responseUser => {
@@ -85,7 +71,6 @@ export class BlogsComponent implements AfterContentInit{
               this.locationService.getLocationById(blog.locationId)
                 .subscribe(responseLocation => {
                   let location: ILocation = this.locationService.mapLocation(responseLocation)
-
 
                   this.blogEntrys.push({
                     author: author,
@@ -97,38 +82,22 @@ export class BlogsComponent implements AfterContentInit{
                     review: blog.review,
                     tags: blog.tags,
                     title: blog.title
-
                   })
-
-
                 })
             }
           );
-
-
-
-       })
-
-
-
-
+      })
     })
-
-
   }
 
   get listFilter(): string {
     return this._listFilter;
   }
 
-
   set listFilter(value: string) {
     this._listFilter = value;
     this.performFilter(value);
   }
-
-
-
 
   performFilter(filterBy: string): void {
     filterBy = filterBy.toLowerCase();

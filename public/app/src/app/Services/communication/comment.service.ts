@@ -20,12 +20,9 @@ export class CommentService {
     return this.http.get<ICommentFromBackend[]>("http://localhost:3000/api/comments/byBlogEntry/" + id)
   }
 
-  sendComment(comment:ICommentSendBackendPut){
-    return this.http.post<ICommentSendBackendPut>('http://localhost:3000/api/comments',comment)
+  sendComment(comment: ICommentSendBackendPut) {
+    return this.http.post<ICommentSendBackendPut>('http://localhost:3000/api/comments', comment)
   }
-
-
-
 
   mapComment(comment: ICommentFromBackend): IComment {
     return {

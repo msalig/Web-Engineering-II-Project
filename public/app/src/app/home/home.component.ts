@@ -6,10 +6,9 @@ import {HttpClient} from "@angular/common/http";
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent implements OnInit{
-  constructor(private http:HttpClient) {}
-
-
+export class HomeComponent implements OnInit {
+  constructor(private http: HttpClient) {
+  }
 
   ngOnInit() {
     console.log("Versuche Verbindung aufzubauen....");
@@ -18,5 +17,4 @@ export class HomeComponent implements OnInit{
       console.log(response);
     })
   }
-
 }

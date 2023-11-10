@@ -1,6 +1,5 @@
 $main-color: #3f7a74;
 
-
 .tag {
   font-size: smaller;
   padding: 2px;
@@ -14,13 +13,11 @@ $main-color: #3f7a74;
   border-radius: 5px;
   border-width: 1px;
 
-
   &:hover {
     color: $main-color;
     background-color: white;
     border-color: $main-color;
 
     transition: 0.3s ease-in-out;
-
   }
 }

@@ -1,6 +1,5 @@
 @import "../../styles/vars";
 
-
 $color_1: #FFFFFF;
 $color_2: #b3b3b3;
 
@@ -9,11 +8,13 @@ $background-color_1: #fff;
 $background-color_2: #328f8a;
 
 @import "https://fonts.googleapis.com/css?family=Roboto:300";
+
 header {
   .header {
     background-color: $background-color_1;
     height: 45px;
   }
+
   a {
     img {
       width: 134px;
@@ -21,10 +22,12 @@ header {
     }
   }
 }
+
 .login-page {
   width: 360px;
   padding: 8% 0 0;
   margin: auto;
+
   .form {
     .login {
       margin-top: -31px;
@@ -32,6 +35,7 @@ header {
     }
   }
 }
+
 .form {
   position: relative;
   z-index: 1;
@@ -42,6 +46,7 @@ header {
   text-align: center;
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
   border-radius: $borderRadius;
+
   input {
     font-family: $font-family_1;
     outline: 0;
@@ -53,13 +58,14 @@ header {
     box-sizing: border-box;
     font-size: 14px;
   }
+
   button {
     border-radius: $borderRadius;
     font-family: $font-family_1;
     text-transform: uppercase;
     outline: 0;
     background-color: $background-color_2;
-    background-image: linear-gradient(45deg,darken($main-color,10),$main-color);
+    background-image: linear-gradient(45deg, darken($main-color, 10), $main-color);
     width: 100%;
     border: 0;
     padding: 15px;
@@ -69,30 +75,35 @@ header {
     //transition: all 0.3 ease;
     cursor: pointer;
   }
+
   .message {
     margin: 15px 0 0;
     color: $color_2;
     font-size: 12px;
+
     a {
       color: $main-color;
       text-decoration: none;
     }
   }
 }
+
 .container {
   position: relative;
   z-index: 1;
   max-width: 300px;
   margin: 0 auto;
 }
+
 body {
   background-color: $background-color_2;
-  background-image: linear-gradient(45deg,darken($main-color,10),$main-color);
+  background-image: linear-gradient(45deg, darken($main-color, 10), $main-color);
   font-family: $font-family_1;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-#error{
+
+#error {
   font-weight: lighter;
   font-style: italic;
   font-size: small;

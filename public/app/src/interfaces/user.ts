@@ -1,6 +1,6 @@
 export interface IUser {
-  displayname:string;
-  name:string;
+  displayname: string;
+  name: string;
   mail: string;
-  publishedblogs:number;
+  publishedblogs: number;
 }

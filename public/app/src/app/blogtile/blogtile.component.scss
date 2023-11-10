@@ -11,14 +11,13 @@
 
 //$borderRadius: 30px;
 
-.oneblog2{
+.oneblog2 {
   //background-color: red;
   border-radius: 33px;
   //max-width: 30px;
   background-image: url("../../assets/urlaubsfotos/strand.jpeg");
-background-position: left;
+  background-position: left;
   cursor: pointer;
-
 }
 
 .oneblog {
@@ -40,12 +39,10 @@ background-position: left;
   }
 }
 
-.textfield{
+.textfield {
   border-radius: 10px;
   border-color: $main-color;
 }
-
-
 
 ul {
   padding: 0;
@@ -56,7 +53,6 @@ ul {
     list-style: none;
     display: inline-block;
     margin-left: 24px;
-
   }
 }
 
@@ -93,11 +89,11 @@ ul {
 //  }
 //}
 
-.blogpreview{
+.blogpreview {
   font-style: italic;
 }
 
-.filter{
+.filter {
   //align-items: center;
   margin-left: 20%;
 }

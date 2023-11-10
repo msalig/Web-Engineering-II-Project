@@ -1,19 +1,16 @@
-import {string} from "joi";
-
-export interface IUserFromBackend{
+export interface IUserFromBackend {
   _id: string;
   countBlogEntries: number;
-  displayname:string;
-  username:string;
-  email:string;
+  displayname: string;
+  username: string;
+  email: string;
 }
 
-export interface IAuthorFromBackend{
-  _id:string,
-  displayname:string;
-  username:string;
+export interface IAuthorFromBackend {
+  _id: string,
+  displayname: string;
+  username: string;
 }
-
 
 export interface ISendUserBackendRegister {
   displayname: string;
@@ -22,14 +19,13 @@ export interface ISendUserBackendRegister {
   password: string;
 }
 
-
-export interface IsendUserBackendLogin{
+export interface IsendUserBackendLogin {
   "username": string,
   "password": string
 }
 
-export interface ISendUserBackendUpdate{
-  _id:string;
+export interface ISendUserBackendUpdate {
+  _id: string;
   displayname: string;
   username: string;
   email: string;
