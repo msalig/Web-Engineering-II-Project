@@ -58,7 +58,7 @@
     </li>
 
   </ul>
-  <div class="leavecomment">Did you feel in vacation while you rode this blog? share your expreience.</div>
+  <div class="leavecomment">Did you feel in vacation while you rode this blog? Share your experience.</div>
 
   <div *ngIf="AuthorizationService.getUser().displayname.length>0">
 
@@ -66,6 +66,10 @@
     <textarea [(ngModel)]="review" class="commentReview" placeholder="1-5"></textarea>
     <textarea [(ngModel)]="leaveComment" class="commentleave"></textarea>
     <button mat-raised-button (click)="sendComment()">Send Comment</button>
+  </div>
+
+  <div *ngIf="AuthorizationService.getUser().displayname.length == 0">
+    <a href="/login">Login</a>
   </div>
 
 <!--<div *ngFor="let comment of blog?.comments">-->
