@@ -10,7 +10,7 @@
     <div class="login-form">
       <input [(ngModel)]="displayName" placeholder="Username" (keydown)="keyDownEvent($event)">
       <input [(ngModel)]="email" placeholder="E-mail" (keydown)="keyDownEvent($event)">
-      <input [(ngModel)]="password" placeholder="Password" (keydown)="keyDownEvent($event)">
+      <input [(ngModel)]="password" placeholder="Password" (keydown)="keyDownEvent($event)" type="password">
       <button (click)="register()">Register</button>
       <p class="message">Registered? <a href="/login">Login</a></p>
     </div>

@@ -9,7 +9,7 @@
     </div>
     <div class="login-form">
       <input [(ngModel)]="displayName" placeholder="Username" (keydown)="keyDownEvent($event)">
-      <input [(ngModel)]="password" placeholder="Password" (keydown)="keyDownEvent($event)">
+      <input [(ngModel)]="password" placeholder="Password" (keydown)="keyDownEvent($event)" type="password">
       <button (click)="login()">login</button>
       <p class="message">Not registered? <a href="/register">Create an account</a></p>
     </div>

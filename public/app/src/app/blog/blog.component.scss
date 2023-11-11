@@ -75,3 +75,9 @@
   font-size: medium;
   border-color: #777777;
 }
+
+.login {
+  &:hover {
+    color: #2ca7e9;
+  }
+}
