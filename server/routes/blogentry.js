@@ -1,6 +1,7 @@
 const express = require('express');
 const asyncHandler = require('express-async-handler');
 const blogEntryCtrl = require('../controllers/blogentry');
+const HttpStatus = require('http-status-codes');
 
 const router = express.Router();
 
@@ -18,6 +19,8 @@ const router = express.Router();
  *                 type: array
  *                 items:
  *                   $ref: '#/components/schemas/BlogEntryShort'
+ *         '400':
+ *            description: BAD REQUEST
  *       tags:
  *        - blogEntries
  */
@@ -43,6 +46,8 @@ router.get('/short', asyncHandler(getAllBlogsShort));
  *                 type: array
  *                 items:
  *                   $ref: '#/components/schemas/BlogEntry'
+ *         '404':
+ *            description: NOT FOUND
  *      tags:
  *        - blogEntries
  */
@@ -68,6 +73,8 @@ router.get('/byTag/:tag', asyncHandler(getBlogsByTag));
  *                 type: array
  *                 items:
  *                   $ref: '#/components/schemas/BlogEntry'
+ *         '404':
+ *            description: NOT FOUND
  *       tags:
  *        - blogEntries
  */
@@ -91,6 +98,8 @@ router.get('/byCountry/:country', asyncHandler(getBlogsByCountry));
  *             application/json:
  *               schema:
  *                 $ref: '#/components/schemas/BlogEntry'
+ *         '404':
+ *            description: NOT FOUND
  *       tags:
  *        - blogEntries
  *   put:
@@ -109,6 +118,12 @@ router.get('/byCountry/:country', asyncHandler(getBlogsByCountry));
  *       responses:
  *         '200':
  *           description: OK
+ *           content:
+ *             application/json:
+ *               schema:
+ *                 $ref: '#/components/schemas/BlogEntry'
+ *         '404':
+ *            description: NOT FOUND
  *       tags:
  *        - blogEntries
  *   delete:
@@ -122,6 +137,8 @@ router.get('/byCountry/:country', asyncHandler(getBlogsByCountry));
  *       responses:
  *         '200':
  *           description: OK
+ *         '404':
+ *           description: Not Found
  *       tags:
  *        - blogEntries
  */
@@ -150,6 +167,8 @@ router.route('/:id')
  *                 type: array
  *                 items:
  *                   $ref: '#/components/schemas/BlogEntry'
+ *         '404':
+ *            description: NOT FOUND
  *       tags:
  *        - blogEntries
  */
@@ -173,6 +192,8 @@ router.get('/byAuthor/:username', asyncHandler(getBlogsByAuthor));
  *             application/json:
  *               schema:
  *                   $ref: '#/components/schemas/BlogEntry'
+ *         '404':
+ *            description: NOT FOUND
  *       tags:
  *        - blogEntries
  */
@@ -195,6 +216,8 @@ router.get('/byUrl/:url', asyncHandler(getBlogsByUrl));
  *             application/json:
  *               schema:
  *                 $ref: '#/components/schemas/BlogEntry'
+ *         '400':
+ *            description: BAD REQUEST
  *      tags:
  *        - blogEntries
  *   get:
@@ -208,61 +231,102 @@ router.get('/byUrl/:url', asyncHandler(getBlogsByUrl));
  *                 type: array
  *                 items:
  *                   $ref: '#/components/schemas/BlogEntry'
+ *         '400':
+ *            description: BAD REQUEST
  *      tags:
  *        - blogEntries
  */
 router.route('/')
-  .post(asyncHandler(insert))
+  .post(asyncHandler(create))
   .get(asyncHandler(getAll));
 
 module.exports = router;
 
-async function insert(req, res) {
-  let blogEntry = await blogEntryCtrl.insert(req.body);
-  res.json(blogEntry);
+async function create(req, res) {
+  let blog = await blogEntryCtrl.create(req.body);
+  if(blog != null) {
+    res.status(HttpStatus.CREATED).json(blog);
+  } else {
+    res.status(HttpStatus.BAD_REQUEST).end();
+  }
 }
 
 async function getAll(req, res) {
-  let blogEntries = await blogEntryCtrl.getAll();
-  res.json(blogEntries);
+  let blogs = await blogEntryCtrl.getAll();
+  if(blogs != null) {
+    res.json(blogs);
+  } else {
+    res.status(HttpStatus.BAD_REQUEST).end();
+  }
 }
 
 async function getAllBlogsShort(req, res) {
   let blogs = await blogEntryCtrl.getAllShort();
-  res.json(blogs);
+  if(blogs != null) {
+    res.json(blogs);
+  } else {
+    res.status(HttpStatus.BAD_REQUEST).end();
+  }
 }
 
 async function getBlogsByTag(req, res) {
   let blogs = await blogEntryCtrl.getBlogsByTag(req.params.tag);
-  res.json(blogs);
+  if(blogs != null) {
+    res.json(blogs);
+  } else {
+    res.status(HttpStatus.NOT_FOUND).end();
+  }
 }
 
 async function getBlogsByCountry(req, res) {
   let blogs = await blogEntryCtrl.getBlogsByCountry(req.params.country);
-  res.send(blogs);
+  if(blogs != null) {
+    res.json(blogs);
+  } else {
+    res.status(HttpStatus.NOT_FOUND).end();
+  }
 }
 
 async function getBlogById(req, res) {
   let blog = await blogEntryCtrl.getBlogById(req.params.id);
-  res.send(blog);
+  if (blog != null) {
+    res.json(blog);
+  } else {
+    res.status(HttpStatus.NOT_FOUND).end();
+  }
 }
 
 async function getBlogsByAuthor(req, res) {
   let blogs = await blogEntryCtrl.getBlogsByAuthor(req.params.username);
-  res.send(blogs);
+  if (blogs != null) {
+    res.json(blogs);
+  } else {
+    res.status(HttpStatus.NOT_FOUND).end();
+  }
 }
 
 async function getBlogsByUrl(req, res) {
-  let blogs = await blogEntryCtrl.getByUrl(req.params.url);
-  res.send(blogs);
+  let blogs = await blogEntryCtrl.getBlogByUrl(req.params.url);
+  if (blogs != null) {
+    res.json(blogs);
+  } else {
+    res.status(HttpStatus.NOT_FOUND).end();
+  }
 }
 
 async function updateBlog(req, res) {
-  let user = await blogEntryCtrl.update(req.params.id, req.body);
-  res.json(user);
+  let blog = await blogEntryCtrl.update(req.params.id, req.body);
+  if (blog != null) {
+    res.json(blog);
+  } else {
+    res.status(HttpStatus.NOT_FOUND).end();
+  }
 }
 
 async function deleteBlogById(req, res) {
-  let success = await blogEntryCtrl.deleteBlogEntry(req.params.id);
-  res.json(success);
+  await blogEntryCtrl.deleteBlog(req.params.id).then(() => {
+    res.status(HttpStatus.OK).end();
+  }).catch((error) => {
+    res.status(HttpStatus.NOT_FOUND).json(error).end();
+  });
 }

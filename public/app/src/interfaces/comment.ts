@@ -5,7 +5,5 @@ export interface IComment {
   author: IAuthorFromBackend;
   title: string;
   comment: string;
-  review:number;
+  review: number;
 }
-
-

@@ -22,16 +22,15 @@ import {BlogComponent} from './blog/blog.component';
 import {NotfoundComponent} from "./notfound/notfound.component";
 import {AuthorsComponent} from "./authors/authors.component";
 import {AuthorComponent} from "./author/author.component";
-import {BlogtileComponent}from "./blogtile/blogtile.component";
-import { AccountviewComponent } from './accountview/accountview.component';
-import { EditblogComponent } from './editblog/editblog.component'
-import { TagsearchComponent } from './tagsearch/tagsearch.component';
-import { LoginComponent } from './login/login.component';
-import { RegisterComponent } from './register/register.component'
+import {BlogtileComponent} from "./blogtile/blogtile.component";
+import {AccountviewComponent} from './accountview/accountview.component';
+import {EditblogComponent} from './editblog/editblog.component'
+import {TagsearchComponent} from './tagsearch/tagsearch.component';
+import {LoginComponent} from './login/login.component';
+import {RegisterComponent} from './register/register.component'
 
 
 const myRoutes: Routes = [
-
   {
     path: '',
     pathMatch: "full",
@@ -77,16 +76,10 @@ const myRoutes: Routes = [
     path: 'blogs/search/tags/:tag',
     component: TagsearchComponent
   },
-
-
   {
-    path: 'ratings',
-    component: RatingsComponent
-  }, {
     path: '**',
     component: NotfoundComponent
   }
-
 ];
 
 @NgModule({
@@ -105,9 +98,8 @@ const myRoutes: Routes = [
     TagsearchComponent,
     LoginComponent,
     RegisterComponent,
-
     // StarPipe,
-/**/
+    /**/
     // ConvertToStarsPipe,
   ],
   imports: [

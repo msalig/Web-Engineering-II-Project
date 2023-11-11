@@ -9,7 +9,7 @@
 </div>
 
 <div class="befortext">
-  <textarea [(ngModel)]="infotext" class="infotext" placeholder="a short introduction to your Blog"></textarea>
+  <textarea [(ngModel)]="infotext" class="infotext" placeholder="a short introduction to your Blog (up to 200 characters)"></textarea>
 </div>
 
 <div class="befortext">
@@ -20,5 +20,5 @@
   <button class="button" (click)="saveInfos()" mat-raised-button>Save</button>
   <button class="button" (click)="discardBlogEdit()" mat-raised-button>Discard</button>
 
-  <button *ngIf="isupdate==true" mat-button color="warn" >Delete</button>
+  <button *ngIf="isupdate==true" (click)="deleteBlog()" mat-button color="warn">Delete</button>
 </div>

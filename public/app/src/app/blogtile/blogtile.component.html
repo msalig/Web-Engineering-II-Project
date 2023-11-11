@@ -1,32 +1,30 @@
- <div class="oneblog2">
-    <div class="oneblog">
-      <div class="title">{{blog.title}}</div>
-      <div class="blogpreview">
-<!--        {{blog.blogentryShort|slice: 0:200}}...-->
-        {{blog.blogentryShort|slice: 0:200}}...
-      </div>
-      <ul class="blogfooter">
-        <li class="blogfooter">
-          <div class="author">
-            <fa-icon [icon]="faUser"></fa-icon>
-            {{blog.author.displayname}}
-          </div>
-        </li >
-        <li class="location">
-          {{blog.location.place}}, {{blog.location.country}}
-        </li>
-        <li>
-          <fa-icon [icon]="faComment"></fa-icon>
-          {{blog.blogentry}}
-        </li>
-        <li>
-            <fa-icon [icon]="faStar"></fa-icon>
-            {{blog.review}}
-        </li>
-        <li *ngFor="let tag of blog.tags">
-          <div class="tag" routerLink="/blogs/search/tags/{{replaceSpacesWithDashes(tag.toLowerCase())}}">{{tag}}  </div>
-        </li>
-      </ul>
+<div class="oneblog2">
+  <div class="oneblog">
+    <div class="title">{{blog.title}}</div>
+    <div class="blogpreview">
+      {{blog.blogentryShort|slice: 0:200}}...
     </div>
+    <ul class="blogfooter">
+      <li class="blogfooter">
+        <div class="author">
+          <fa-icon [icon]="faUser"></fa-icon>
+          {{blog.author.displayname}}
+        </div>
+      </li>
+      <li class="location">
+        {{blog.location.place}}, {{blog.location.country}}
+      </li>
+      <li>
+        <fa-icon [icon]="faComment"></fa-icon>
+        {{blog.blogentry}}
+      </li>
+      <li>
+        <fa-icon [icon]="faStar"></fa-icon>
+        {{blog.review}}
+      </li>
+      <li *ngFor="let tag of blog.tags">
+        <div class="tag" routerLink="/blogs/search/tags/{{replaceSpacesWithDashes(tag.toLowerCase())}}">{{tag}}  </div>
+      </li>
+    </ul>
   </div>
-
+</div>

@@ -1,7 +1,5 @@
 const Joi = require('joi-oid')
 const Comment = require('../models/comment');
-const BlogEntry = require("../models/blogentry");
-const User = require("../models/user");
 const mongoose = require("mongoose");
 
 const commentSchema = Joi.object({
@@ -13,19 +11,19 @@ const commentSchema = Joi.object({
 });
 
 module.exports = {
-  insert, read, readAll, getByBlogEntryId, update, deleteComment
+  create, getById: getById, getAll, getByBlogEntryId, deleteComment
 };
 
-async function insert(comment) {
+async function create(comment) {
   comment = await commentSchema.validateAsync(comment, {abortEarly: false});
   return await new Comment(comment).save();
 }
 
-async function readAll() {
+async function getAll() {
   return Comment.find();
 }
 
-async function read(id) {
+async function getById(id) {
   return Comment.aggregate([{
     $match: {_id: new mongoose.Types.ObjectId(id)}
   }, {
@@ -34,7 +32,8 @@ async function read(id) {
     }
   }, {
     $addFields: {
-      author: { $arrayElemAt: ["$authors", 0] }    }
+      author: {$arrayElemAt: ["$authors", 0]}
+    }
   }, {
     $project: {
       "author.hashedPassword": 0, "author.__v": 0, "author.email": 0, authors: 0, __v: 0
@@ -51,16 +50,13 @@ async function getByBlogEntryId(id) {
     }
   }, {
     $addFields: {
-      author: { $arrayElemAt: ["$authors", 0] }    }
+      author: {$arrayElemAt: ["$authors", 0]}
+    }
   }, {
     $project: {
       "author.hashedPassword": 0, "author.__v": 0, authors: 0, __v: 0
     }
   }]).exec();
-}
-
-async function update(commentId, comment) {
-  return Comment.findByIdAndUpdate(commentId, comment, {new: true});
 }
 
 async function deleteComment(commentId) {

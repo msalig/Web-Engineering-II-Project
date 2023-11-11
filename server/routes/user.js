@@ -1,12 +1,10 @@
 const express = require('express');
-const passport = require('passport');
 const asyncHandler = require('express-async-handler');
 const userCtrl = require('../controllers/user');
 const bcrypt = require("bcrypt");
+const HttpStatus = require('http-status-codes');
 
 const router = express.Router();
-
-//router.use(passport.authenticate('jwt', { session: false }));
 
 /**
  * @openapi
@@ -26,17 +24,17 @@ const router = express.Router();
  *                   type: string
  *       responses:
  *         '200':
- *           description: Erfolgreiche Anfrage
+ *           description: Successful login
  *           content:
  *             application/json:
  *               schema:
  *                 $ref: '#/components/schemas/User'
  *         '401':
- *           description: Ungültige Anmeldedaten
+ *           description: UNAUTHORIZED
  *       tag:
  *        - user
  */
-router.post('/login', asyncHandler(checkUserCred));
+router.post('/login', asyncHandler(login));
 
 /**
  * @openapi
@@ -57,6 +55,8 @@ router.post('/login', asyncHandler(checkUserCred));
  *             application/json:
  *               schema:
  *                 $ref: '#/components/schemas/User'
+ *         '404':
+ *            description: NOT FOUND
  *       tags:
  *        - user
  *   put:
@@ -81,6 +81,8 @@ router.post('/login', asyncHandler(checkUserCred));
  *             application/json:
  *               schema:
  *                 $ref: '#/components/schemas/User'
+ *         '404':
+ *            description: NOT FOUND
  *       tags:
  *         - user
  *   delete:
@@ -99,11 +101,13 @@ router.post('/login', asyncHandler(checkUserCred));
  *             application/json:
  *               schema:
  *                 $ref: '#/components/schemas/User'
+ *         '404':
+ *            description: NOT FOUND
  *       tags:
  *         - user
  */
 router.route('/:id')
-  .get(asyncHandler(read))
+  .get(asyncHandler(getById))
   .put(asyncHandler(update))
   .delete(asyncHandler(deleteUser));
 
@@ -126,6 +130,8 @@ router.route('/:id')
  *             application/json:
  *               schema:
  *                 $ref: '#/components/schemas/User'
+ *         '404':
+ *            description: NOT FOUND
  *       tags:
  *        - user
  */
@@ -136,7 +142,7 @@ router.route('/byUsername/:username')
  * @openapi
  * /users:
  *   post:
- *       summary: Erstellen eines neuen Benutzers
+ *       summary: Create a new user (register)
  *       requestBody:
  *         required: true
  *         content:
@@ -144,71 +150,99 @@ router.route('/byUsername/:username')
  *             schema:
  *               $ref: '#/components/schemas/User'
  *       responses:
- *         '200':
- *           description: Erfolgreiche Anfrage
+ *         '201':
+ *           description: CREATED
  *           content:
  *             application/json:
  *               schema:
  *                 $ref: '#/components/schemas/User'
+ *         '400':
+ *            description: BAD REQUEST
  *       tags:
  *         - user
  *   get:
- *       summary: Alle Benutzer abrufen
+ *       summary: Get all users
  *       responses:
  *         '200':
- *           description: Erfolgreiche Anfrage
+ *           description: OK
  *           content:
  *             application/json:
  *               schema:
  *                 type: array
  *                 items:
  *                   $ref: '#/components/schemas/User'
+ *         '400':
+ *            description: BAD REQUEST
  *       tags:
  *         - user
  */
 router.route('/')
-  .post(asyncHandler(insert))
-  .get(asyncHandler(readAll));
+  .post(asyncHandler(create))
+  .get(asyncHandler(getAll));
 
 module.exports = router;
 
-async function insert(req, res) {
-  let user = await userCtrl.insert(req.body);
-  res.json(user);
+async function create(req, res) {
+  let user = await userCtrl.create(req.body);
+  if (user != null) {
+    res.status(HttpStatus.CREATED).json(user);
+  } else {
+    res.status(HttpStatus.BAD_REQUEST).end();
+  }
 }
 
-async function readAll(req, res) {
-  let users = await userCtrl.readAll();
-  res.json(users);
+async function getAll(req, res) {
+  let users = await userCtrl.getAll();
+  if(users != null) {
+    res.json(users);
+  } else {
+    res.status(HttpStatus.BAD_REQUEST).end();
+  }
 }
 
-async function read(req, res) {
-  let user = await userCtrl.read(req.params.id);
-  res.json(user);
+async function getById(req, res) {
+  let user = await userCtrl.getById(req.params.id);
+  if (user != null) {
+    res.json(user);
+  } else {
+    res.status(HttpStatus.NOT_FOUND).end();
+  }
 }
 
 async function getUserByUsername(req, res) {
-  let user = await userCtrl.getUserByUsername(req.params.username, false);
-  res.json(user);
+  let user = await userCtrl.getByUsername(req.params.username, false);
+  if (user[0] != null) {
+    res.json(user[0]);
+  } else {
+    res.status(HttpStatus.NOT_FOUND).end();
+  }
 }
 
-async function checkUserCred(req, res) {
-  let user = await userCtrl.getUserByUsername(req.body.username, true);
-  if (user != null) {
-    if (bcrypt.compareSync(req.body.password, user.hashedPassword)) {
-      user = await userCtrl.getUserByUsername(req.body.username, false);
-      res.status(201).json(user);
+async function login(req, res) {
+  let user = await userCtrl.getByUsername(req.body.username, true);
+  if (user[0] != null) {
+    if (bcrypt.compareSync(req.body.password, user[0].hashedPassword)) {
+      user = await userCtrl.getByUsername(req.body.username, false);
+      res.json(user[0]);
     }
   }
-  res.status(401).json({message: "Invalid Credentials"});
+  res.status(HttpStatus.UNAUTHORIZED).json({message: "Invalid Credentials"});
 }
 
 async function update(req, res) {
   let user = await userCtrl.update(req.params.id, req.body);
-  res.json(user);
+  if(user != null) {
+    res.json(user);
+  } else {
+    res.status(HttpStatus.NOT_FOUND).end();
+  }
 }
 
 async function deleteUser(req, res) {
-  let success = await userCtrl.deleteUser(req.body.id);
-  res.json(success);
+  let user = await userCtrl.deleteUser(req.body.id);
+  if(user != null) {
+    res.status(HttpStatus.OK).end();
+  } else {
+    res.status(HttpStatus.NOT_FOUND).end();
+  }
 }

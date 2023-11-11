@@ -1,18 +1,15 @@
 import {Injectable} from '@angular/core';
-import {IUser} from "../../interfaces/user";
-import {HttpClient, HttpResponse} from "@angular/common/http";
+import {HttpClient} from "@angular/common/http";
 import {
   IsendUserBackendLogin,
   ISendUserBackendRegister,
   ISendUserBackendUpdate,
   IUserFromBackend
 } from "../../interfaces/userfrombackend";
-import {catchError} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
 })
-
 export class AuthorizationService {
   static _User: IUserFromBackend = {
     _id: '',
@@ -21,7 +18,6 @@ export class AuthorizationService {
     username: '',
     email: ''
   };
-
 
   constructor(private http: HttpClient) {
   }
@@ -33,17 +29,12 @@ export class AuthorizationService {
   //   publishedblogs: 0
   // };
 
-
   public static getUser(): IUserFromBackend {
-    if (localStorage.getItem("displayName") == null)
-    {
+    if (localStorage.getItem("displayName") == null) {
       console.log("no credentials in storage.")
       return this._User;
-    }
-  else {
-
-
-      return{// @ts-ignore
+    } else {
+      return {// @ts-ignore
         _id: localStorage.getItem("id"),
         countBlogEntries: 0,  // @ts-ignore
         displayname: localStorage.getItem("displayName"), // @ts-ignore
@@ -52,8 +43,6 @@ export class AuthorizationService {
       }
     }
   }
-
-
 
   // public static get User(): IUser {
   //   if (localStorage.getItem("displayName") == null)
@@ -79,23 +68,17 @@ export class AuthorizationService {
     localStorage.setItem("id", value._id)
   }
 
-
   register(user: ISendUserBackendRegister) {
     return this.http.post<IUserFromBackend>("http://localhost:3000/api/users", user)
   }
-
 
   login(user: IsendUserBackendLogin) {
     return this.http.post<IUserFromBackend>("http://localhost:3000/api/users/login", user)
   }
 
-
-
-  updateCredentials(user:ISendUserBackendUpdate){
+  updateCredentials(user: ISendUserBackendUpdate) {
     console.log("updated Credentials:");
     console.log(user)
-    return this.http.put<IUserFromBackend>("http://localhost:3000/api/users/" + user._id,user)
+    return this.http.put<IUserFromBackend>("http://localhost:3000/api/users/" + user._id, user)
   }
-
-
 }

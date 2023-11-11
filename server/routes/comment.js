@@ -2,6 +2,7 @@ const express = require('express');
 const asyncHandler = require('express-async-handler');
 const commentCtrl = require('../controllers/comment');
 const blogEntryCtrl = require('../controllers/blogentry');
+const HttpStatus = require("http-status-codes");
 
 const router = express.Router();
 
@@ -51,15 +52,31 @@ router.route('/byBlogEntry/:id')
  *                 $ref: '#/components/schemas/Comment'
  *       tags:
  *        - comment
+ *    delete:
+ *       summary: Delete a comment by id
+ *       parameters:
+ *         - name: id
+ *           in: path
+ *           required: true
+ *           schema:
+ *             type: string
+ *       responses:
+ *         '200':
+ *           description: OK
+ *         '404':
+ *           description: Not Found
+ *       tags:
+ *        - comment
  */
 router.route('/:id')
-  .get(asyncHandler(read));
+  .get(asyncHandler(getCommentById))
+  .delete(asyncHandler(deleteComment));
 
 /**
  * @openapi
  * /comments:
  *   post:
- *     summary: Fügt einen neuen Kommentar hinzu
+ *     summary: Creates a new comment
  *     requestBody:
  *       content:
  *         application/json:
@@ -75,7 +92,7 @@ router.route('/:id')
  *     tags:
  *       - comment
  *   get:
- *     summary: Ruft alle Kommentare ab
+ *     summary: Returns all comments
  *     responses:
  *       '200':
  *         description: OK
@@ -89,38 +106,54 @@ router.route('/:id')
  *       - comment
  */
 router.route('/')
-  .post(asyncHandler(insert))
-  .get(asyncHandler(read))
+  .post(asyncHandler(create))
+  .get(asyncHandler(getAllComments))
 
 module.exports = router;
 
-async function insert(req, res) {
-  let comment = await commentCtrl.insert(req.body);
-  let blogEntry = await blogEntryCtrl.addComment((await comment).blogEntryId, (await comment).id)
-  res.json(blogEntry);
+async function create(req, res) {
+  let comment = await commentCtrl.create(req.body);
+  let blogEntry = await blogEntryCtrl.addComment(comment.blogEntryId, comment._id)
+  if(blogEntry != null) {
+    res.status(HttpStatus.CREATED).json(comment);
+  } else {
+    res.status(404).end();
+  }
 }
 
-async function readAll(req, res) {
-  let comments = await commentCtrl.readAll();
-  res.json(comments);
+async function getAllComments(req, res) {
+  let comments = await commentCtrl.getAll();
+  if(comments != null) {
+    res.json(comments);
+  } else {
+    res.status(404).end();
+  }
 }
 
-async function read(req, res) {
-  let comment = await commentCtrl.read(req.params.id);
-  res.json(comment);
+async function getCommentById(req, res) {
+  let comment = await commentCtrl.getById(req.params.id);
+  if(comment != null) {
+    res.json(comment);
+  } else {
+    res.status(404).end();
+  }
 }
 
 async function getByBlogEntryId(req, res) {
   let comments = await commentCtrl.getByBlogEntryId(req.params.id);
-  res.json(comments);
-}
-
-async function update(req, res) {
-  let comment = await commentCtrl.update(req.params.id, req.body);
-  res.json(comment);
+  if(comments != null) {
+    res.json(comments);
+  } else {
+    res.status(404).end();
+  }
 }
 
 async function deleteComment(req, res) {
-  let success = await commentCtrl.deleteComment(req.params.id);
-  res.json(success);
+  let comment = await commentCtrl.deleteComment(req.params.id);
+  if(comment != null) {
+    await blogEntryCtrl.removeComment(comment.blogEntryId, comment.id);
+    res.json(comment);
+  } else {
+    res.status(404).end();
+  }
 }

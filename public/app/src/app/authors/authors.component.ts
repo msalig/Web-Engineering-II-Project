@@ -1,7 +1,5 @@
 import {Component} from '@angular/core';
-import {mockAuthors} from "../../MockData/mockAuthors";
 import {IUser} from "../../interfaces/user";
-import {filter} from "rxjs";
 import {UserService} from "../Services/communication/user.service";
 import {HttpClient} from "@angular/common/http";
 
@@ -11,21 +9,21 @@ import {HttpClient} from "@angular/common/http";
   styleUrls: ['./authors.component.scss']
 })
 export class AuthorsComponent {
-
-
   private _listfilter: string = '';
-  private authors: IUser[]=[];
+  private authors: IUser[] = [];
   private _filteredAuthors: IUser[];
 
-  private userService:UserService;
+  private userService: UserService;
 
-  constructor(private http:HttpClient) {
-    this.userService=new UserService(http);
+  constructor(private http: HttpClient) {
+    this.userService = new UserService(http);
 
     this.userService.getUsers()
-      .subscribe(users=>{
-        users.forEach(user=>{
-          this.authors.push(this.userService.mapAuthor(user));
+      .subscribe(users => {
+        users.forEach(user => {
+          if (user.countBlogEntries > 0) {
+            this.authors.push(this.userService.mapAuthor(user));
+          }
         })
       });
 
@@ -40,7 +38,6 @@ export class AuthorsComponent {
     this._listfilter = value;
     this.performFilter(value);
   }
-
 
   get filteredAuthors(): IUser[] {
     return this._filteredAuthors;

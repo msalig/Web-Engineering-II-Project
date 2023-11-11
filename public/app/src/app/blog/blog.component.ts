@@ -2,16 +2,14 @@ import {Component} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {IBlogEntry} from "../../interfaces/blogEntry";
 import {faUser} from "@fortawesome/free-solid-svg-icons";
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpStatusCode} from "@angular/common/http";
 import {GetblogsService} from "../Services/communication/getblogs.service";
 import {ILocation} from "../../interfaces/Iocation";
 import {UserService} from "../Services/communication/user.service";
 import {LocationService} from "../Services/communication/location.service";
 import {CommentService} from "../Services/communication/comment.service";
 import {AuthorizationService} from "../Services/authorization.service";
-import {response} from "express";
 
-// import {BlogService}from '../Service/blog-service'
 
 @Component({
   selector: 'app-blog',
@@ -20,16 +18,16 @@ import {response} from "express";
 })
 export class BlogComponent {
   blog: IBlogEntry | undefined;
-  private blogId:string|undefined;
+  private blogId: string | undefined;
   private getblogsService: GetblogsService;
   private userService: UserService;
   private locationService: LocationService;
   private commentService: CommentService;
   protected readonly faUser = faUser;
   protected readonly AuthorizationService = AuthorizationService;
-  titlecomment: string='';
-  review: number=0;
-  leaveComment: string='';
+  titlecomment: string = '';
+  review: number = 0;
+  leaveComment: string = '';
 
   constructor(private route: ActivatedRoute, private http: HttpClient) {
     this.getblogsService = new GetblogsService(http);
@@ -52,7 +50,7 @@ export class BlogComponent {
 
               let comments = this.commentService.mapCommentArray(responseComments);
 
-              this.blogId=thisblog._id;
+              this.blogId = thisblog._id;
 
               this.blog = {
                 author: author,
@@ -72,29 +70,41 @@ export class BlogComponent {
     })
   }
 
-
   sendComment() {
     // @ts-ignore
-    if(this.blogId?.length>1){
+    if (this.blogId?.length > 1) {
       console.log("senden...")
-    if(this.titlecomment.length>4 && (this.leaveComment.length>10 || (this.review>=1 && this.review<=5))){
-      this.commentService.sendComment({      // @ts-ignore
-        authorId: localStorage.getItem('id'),  // @ts-ignore
-        blogEntryId: this.blogId,
-        title: this.titlecomment,
-        text: this.leaveComment,
-        review: 0
-      }).subscribe(response=>{
-        if(response.review>0 && response.review == this.review){
-          console.log('everything worked')
-        }
-      })
+      if (this.titlecomment.length > 4 && (this.leaveComment.length > 10 || (this.review >= 1 && this.review <= 5))) {
+        this.commentService.sendComment({      // @ts-ignore
+          authorId: localStorage.getItem('id'),  // @ts-ignore
+          blogEntryId: this.blogId,
+          title: this.titlecomment,
+          text: this.leaveComment,
+          review: this.review
+        }).subscribe(response => {
+          console.log(response)
+          if (response.review > 0 && response.review == this.review) {
+            window.location.reload();
+          }
+        })
+      } else
+        console.log('something went wrong')
     }
-    else
-    console.log('something went wrong')}
   }
 
   replaceSpacesWithDashes(s: string) {
     return s.replace(/\s+/g, '-');
+  }
+
+  isDeleteAllowed(displayname: string): boolean {
+    return AuthorizationService.getUser().displayname.length > 0 && AuthorizationService.getUser().displayname == displayname;
+  }
+
+  deleteComment(id: string) {
+    this.commentService.deleteComment(id).subscribe((response) => {
+      if (response.status === HttpStatusCode.Ok) {
+        window.location.reload();
+      }
+    })
   }
 }

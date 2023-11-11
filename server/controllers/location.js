@@ -9,18 +9,18 @@ const locationSchema = Joi.object({
 });
 
 module.exports = {
-  insert, readAll, read
+  create, getAll, getById
 };
 
-async function insert(location) {
+async function create(location) {
   location = await locationSchema.validateAsync(location, {abortEarly: false});
   return await new Location(location).save();
 }
 
-async function readAll() {
+async function getAll() {
   return Location.find();
 }
 
-async function read(id) {
+async function getById(id) {
   return Location.findById(id);
 }

@@ -1,6 +1,7 @@
 const express = require('express');
 const asyncHandler = require('express-async-handler');
 const locationCtrl = require('../controllers/location');
+const HttpStatus = require("http-status-codes");
 
 const router = express.Router();
 
@@ -22,17 +23,19 @@ const router = express.Router();
  *             application/json:
  *               schema:
  *                 $ref: '#/components/schemas/Location'
+ *         '404':
+ *            description: NOT FOUND
  *       tags:
  *        - location
  */
 router.route('/:id')
-  .get(asyncHandler(read));
+  .get(asyncHandler(getById));
 
 /**
  * @openapi
  * /locations:
  *   post:
- *     summary: Fügt einen neuen Location hinzu
+ *     summary: Adds a new location
  *     requestBody:
  *       content:
  *         application/json:
@@ -45,10 +48,12 @@ router.route('/:id')
  *           application/json:
  *             schema:
  *               $ref: '#/components/schemas/Location'
+ *       '400':
+ *          description: BAD REQUEST
  *     tags:
  *       - location
  *   get:
- *     summary: Ruft alle Locations ab
+ *     summary: Returns all locations
  *     responses:
  *       '200':
  *         description: OK
@@ -58,27 +63,40 @@ router.route('/:id')
  *               type: array
  *               items:
  *                 $ref: '#/components/schemas/Location'
+ *       '400':
+ *          description: BAD REQUEST
  *     tags:
  *       - location
  */
 router.route('/')
-  .post(asyncHandler(insert))
-  .get(asyncHandler(readAll))
+  .post(asyncHandler(create))
+  .get(asyncHandler(getAll))
 
 module.exports = router;
 
-async function insert(req, res) {
-  let location = await locationCtrl.insert(req.body);
-  //let blogEntry = await blogEntryCtrl.addComment((await location).blogEntryId, (await location)._id)
-  res.json(location);
+async function create(req, res) {
+  let location = await locationCtrl.create(req.body);
+  if(location != null) {
+    res.status(HttpStatus.CREATED).json(location);
+  } else {
+    res.status(HttpStatus.BAD_REQUEST).end();
+  }
 }
 
-async function readAll(req, res) {
-  let locations = await locationCtrl.readAll();
-  res.json(locations);
+async function getAll(req, res) {
+  let locations = await locationCtrl.getAll();
+  if(locations != null) {
+    res.json(locations);
+  } else {
+    res.status(HttpStatus.BAD_REQUEST).end();
+  }
 }
 
-async function read(req, res) {
-  let location = await locationCtrl.read(req.params.id);
-  res.json(location);
+async function getById(req, res) {
+  let location = await locationCtrl.getById(req.params.id);
+  if(location != null) {
+    res.json(location);
+  } else {
+    res.status(HttpStatus.NOT_FOUND).end();
+  }
 }
