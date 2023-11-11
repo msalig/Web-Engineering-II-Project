@@ -2,6 +2,7 @@ const express = require('express');
 const asyncHandler = require('express-async-handler');
 const userCtrl = require('../controllers/user');
 const bcrypt = require("bcrypt");
+const HttpStatus = require('http-status-codes');
 
 const router = express.Router();
 
@@ -171,41 +172,65 @@ module.exports = router;
 
 async function insert(req, res) {
   let user = await userCtrl.insert(req.body);
-  res.json(user);
+  if (user != null) {
+    res.status(HttpStatus.CREATED).json(user);
+  } else {
+    res.status(404).end();
+  }
 }
 
 async function readAll(req, res) {
   let users = await userCtrl.readAll();
-  res.json(users);
+  if(users != null) {
+    res.json(users);
+  } else {
+    res.status(404).end();
+  }
 }
 
 async function read(req, res) {
   let user = await userCtrl.read(req.params.id);
-  res.json(user);
+  if (user != null) {
+    res.json(user);
+  } else {
+    res.status(404).end();
+  }
 }
 
 async function getUserByUsername(req, res) {
   let user = await userCtrl.getUserByUsername(req.params.username, false);
-  res.json(user);
+  if (user[0] != null) {
+    res.json(user[0]);
+  } else {
+    res.status(HttpStatus.NOT_FOUND).end();
+  }
 }
 
 async function checkUserCred(req, res) {
   let user = await userCtrl.getUserByUsername(req.body.username, true);
-  if (user != null) {
-    if (bcrypt.compareSync(req.body.password, user.hashedPassword)) {
+  if (user[0] != null) {
+    if (bcrypt.compareSync(req.body.password, user[0].hashedPassword)) {
       user = await userCtrl.getUserByUsername(req.body.username, false);
-      res.status(201).json(user);
+      res.json(user[0]);
     }
   }
-  res.status(401).json({message: "Invalid Credentials"});
+  res.status(HttpStatus.UNAUTHORIZED).json({message: "Invalid Credentials"});
 }
 
 async function update(req, res) {
   let user = await userCtrl.update(req.params.id, req.body);
-  res.json(user);
+  if(user != null) {
+    res.json(user);
+  } else {
+    res.status(404).end();
+  }
 }
 
 async function deleteUser(req, res) {
-  let success = await userCtrl.deleteUser(req.body.id);
-  res.json(success);
+  let user = await userCtrl.deleteUser(req.body.id);
+  if(user != null) {
+    res.status(HttpStatus.OK).end();
+  } else {
+    res.status(404).end();
+  }
 }

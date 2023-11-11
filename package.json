@@ -41,6 +41,7 @@
     "flowbite": "^2.0.0",
     "font-awesome": "^4.7.0",
     "http-errors": "^2.0.0",
+    "http-status-codes": "^2.3.0",
     "joi": "^17.11.0",
     "joi-oid": "^1.1.2",
     "mongoose": "^7.6.3",

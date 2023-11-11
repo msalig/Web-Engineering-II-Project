@@ -13,7 +13,7 @@ let options = {
 };
 let url = `mongodb+srv://${config.mongoHost}`;
 
-if (config.env === "development") {
+if (config.env === "production") {
   url = `mongodb://localhost:27017/travel-blog`;
   options = {};
 }

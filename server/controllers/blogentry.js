@@ -22,6 +22,7 @@ module.exports = {
   getBlogsByCountry,
   getByUrl: getBlogByUrl,
   addComment,
+  removeComment,
   update,
   deleteBlogEntry
 };
@@ -54,7 +55,7 @@ async function getBlogById(id) {
 
 async function getBlogsByAuthor(username) {
   let user = await require('../controllers/user').getUserByUsername(username, false);
-  return BlogEntry.find({authorId: user.id});
+  return BlogEntry.find({authorId: user[0]._id}, '-__v');
 }
 
 async function getBlogByUrl(url) {
@@ -62,7 +63,11 @@ async function getBlogByUrl(url) {
 }
 
 async function addComment(blogEntryId, commentId) {
-  return BlogEntry.findOneAndUpdate(blogEntryId, {$push: {comments: commentId}}, {new: true})
+  return BlogEntry.findOneAndUpdate(blogEntryId, {$push: {comments: commentId}}, {new: true});
+}
+
+async function removeComment(blogEntryId, commentId) {
+  return BlogEntry.findOneAndUpdate(blogEntryId, {$pull: {comments: commentId}}, {new: true});
 }
 
 async function update(blogEntryId, blogEntry) {

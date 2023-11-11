@@ -9,7 +9,6 @@ export interface IBlogEntryFromBackend {
   review: number;
   tags: string[];
   comments: string[];
-  __v: number;
 }
 
 export interface IBlogEntryFromBackendShort {

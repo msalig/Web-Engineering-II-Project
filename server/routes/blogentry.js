@@ -1,6 +1,7 @@
 const express = require('express');
 const asyncHandler = require('express-async-handler');
 const blogEntryCtrl = require('../controllers/blogentry');
+const HttpStatus = require('http-status-codes');
 
 const router = express.Router();
 
@@ -220,54 +221,90 @@ router.route('/')
 module.exports = router;
 
 async function insert(req, res) {
-  let blogEntry = await blogEntryCtrl.insert(req.body);
-  res.json(blogEntry);
+  let blog = await blogEntryCtrl.insert(req.body);
+  if(blog != null) {
+    res.status(HttpStatus.CREATED).json(blog);
+  } else {
+    res.status(HttpStatus.NOT_FOUND).end();
+  }
 }
 
 async function getAll(req, res) {
-  let blogEntries = await blogEntryCtrl.getAll();
-  res.json(blogEntries);
+  let blogs = await blogEntryCtrl.getAll();
+  if(blogs != null) {
+    res.json(blogs);
+  } else {
+    res.status(HttpStatus.NOT_FOUND).end();
+  }
 }
 
 async function getAllBlogsShort(req, res) {
   let blogs = await blogEntryCtrl.getAllShort();
-  res.json(blogs);
+  if(blogs != null) {
+    res.json(blogs);
+  } else {
+    res.status(HttpStatus.NOT_FOUND).end();
+  }
 }
 
 async function getBlogsByTag(req, res) {
   let blogs = await blogEntryCtrl.getBlogsByTag(req.params.tag);
-  res.json(blogs);
+  if(blogs != null) {
+    res.json(blogs);
+  } else {
+    res.status(HttpStatus.NOT_FOUND).end();
+  }
 }
 
 async function getBlogsByCountry(req, res) {
   let blogs = await blogEntryCtrl.getBlogsByCountry(req.params.country);
-  res.send(blogs);
+  if(blogs != null) {
+    res.json(blogs);
+  } else {
+    res.status(HttpStatus.NOT_FOUND).end();
+  }
 }
 
 async function getBlogById(req, res) {
   let blog = await blogEntryCtrl.getBlogById(req.params.id);
-  res.send(blog);
+  if (blog != null) {
+    res.json(blog);
+  } else {
+    res.status(HttpStatus.NOT_FOUND).end();
+  }
 }
 
 async function getBlogsByAuthor(req, res) {
   let blogs = await blogEntryCtrl.getBlogsByAuthor(req.params.username);
-  res.send(blogs);
+  if (blogs != null) {
+    res.json(blogs);
+  } else {
+    res.status(HttpStatus.NOT_FOUND).end();
+  }
 }
 
 async function getBlogsByUrl(req, res) {
   let blogs = await blogEntryCtrl.getByUrl(req.params.url);
-  res.send(blogs);
+  if (blogs != null) {
+    res.json(blogs);
+  } else {
+    res.status(404).end();
+  }
 }
 
 async function updateBlog(req, res) {
-  let user = await blogEntryCtrl.update(req.params.id, req.body);
-  res.json(user);
+  let blog = await blogEntryCtrl.update(req.params.id, req.body);
+  if (blog != null) {
+    res.json(blog);
+  } else {
+    res.status(404).end();
+  }
 }
 
 async function deleteBlogById(req, res) {
   await blogEntryCtrl.deleteBlogEntry(req.params.id).then(() => {
-    res.status(200).end();
+    res.status(HttpStatus.OK).end();
   }).catch((error) => {
-    res.status(404).json(error).end();
+    res.status(HttpStatus.NOT_FOUND).json(error).end();
   });
 }

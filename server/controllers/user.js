@@ -57,13 +57,27 @@ async function read(id) {
 }
 
 async function getUserByUsername(username, withPWD) {
-  let projection;
+  let agg = User.aggregate([{
+    $match: {username: username}
+  }, {
+    $lookup: {
+      from: "blogentries", localField: "_id", foreignField: "authorId", as: "blogEntries"
+    }
+  }, {
+    $addFields: {
+      countBlogEntries: {$size: "$blogEntries"}
+    }
+  }, {
+    $project: {
+      blogEntries: 0, __v: 0
+    }
+  }]);
+
   if (!withPWD) {
-    projection = '-hashedPassword'
-  } else {
-    projection = undefined
+    agg.project({hashedPassword: 0});
   }
-  return User.findOne({username: username}, projection);
+
+  return agg.exec();
 }
 
 async function update(userId, user) {

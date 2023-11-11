@@ -1,6 +1,7 @@
 const express = require('express');
 const asyncHandler = require('express-async-handler');
 const locationCtrl = require('../controllers/location');
+const HttpStatus = require("http-status-codes");
 
 const router = express.Router();
 
@@ -69,16 +70,27 @@ module.exports = router;
 
 async function insert(req, res) {
   let location = await locationCtrl.insert(req.body);
-  //let blogEntry = await blogEntryCtrl.addComment((await location).blogEntryId, (await location)._id)
-  res.json(location);
+  if(location != null) {
+    res.status(HttpStatus.CREATED).json(location);
+  } else {
+    res.status(404).end();
+  }
 }
 
 async function readAll(req, res) {
   let locations = await locationCtrl.readAll();
-  res.json(locations);
+  if(locations != null) {
+    res.json(locations);
+  } else {
+    res.status(404).end();
+  }
 }
 
 async function read(req, res) {
   let location = await locationCtrl.read(req.params.id);
-  res.json(location);
+  if(location != null) {
+    res.json(location);
+  } else {
+    res.status(404).end();
+  }
 }

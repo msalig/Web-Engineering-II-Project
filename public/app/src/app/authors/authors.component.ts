@@ -21,7 +21,9 @@ export class AuthorsComponent {
     this.userService.getUsers()
       .subscribe(users => {
         users.forEach(user => {
-          this.authors.push(this.userService.mapAuthor(user));
+          if (user.countBlogEntries > 0) {
+            this.authors.push(this.userService.mapAuthor(user));
+          }
         })
       });
 

@@ -2,7 +2,7 @@ import {Component} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {IBlogEntry} from "../../interfaces/blogEntry";
 import {faUser} from "@fortawesome/free-solid-svg-icons";
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpStatusCode} from "@angular/common/http";
 import {GetblogsService} from "../Services/communication/getblogs.service";
 import {ILocation} from "../../interfaces/Iocation";
 import {UserService} from "../Services/communication/user.service";
@@ -80,10 +80,10 @@ export class BlogComponent {
           blogEntryId: this.blogId,
           title: this.titlecomment,
           text: this.leaveComment,
-          review: 0
+          review: this.review
         }).subscribe(response => {
           if (response.review > 0 && response.review == this.review) {
-            console.log('everything worked')
+            window.location.reload();
           }
         })
       } else
@@ -93,5 +93,13 @@ export class BlogComponent {
 
   replaceSpacesWithDashes(s: string) {
     return s.replace(/\s+/g, '-');
+  }
+
+  deleteComment(id: string) {
+    this.commentService.deleteComment(id).subscribe((response) => {
+      if (response.status === HttpStatusCode.Ok) {
+        window.location.reload();
+      }
+    })
   }
 }

@@ -23,19 +23,19 @@ export class GetblogsService {
   }
 
   getBlogById(id: string): Observable<IBlogEntryFromBackend> {
-    return this.http.get<IBlogEntryFromBackend>("http://localhost:3000/api/blogEntries/" + id);
+    return this.http.get<IBlogEntryFromBackend>(`http://localhost:3000/api/blogEntries/${id}`);
   }
 
   getBlogByAuthor(displayName: string) {
-    return this.http.get<IBlogEntryFromBackend[]>("http://localhost:3000/api/blogEntries/byAuthor/" + displayName);
+    return this.http.get<IBlogEntryFromBackend[]>(`http://localhost:3000/api/blogEntries/byAuthor/${displayName}`);
   }
 
   getBlogByIdentifier(identifier: string) {
-    return this.http.get<IBlogEntryFromBackend>("http://localhost:3000/api/blogEntries/byUrl/" + identifier);
+    return this.http.get<IBlogEntryFromBackend>(`http://localhost:3000/api/blogEntries/byUrl/${identifier}`);
   }
 
   putBlogEntry(blog: IBlogEntryPutPost, id: string) {
-    return this.http.put<IBlogEntryPutPost>('http://localhost:3000/api/blogEntries/' + id, blog)
+    return this.http.put<IBlogEntryPutPost>(`http://localhost:3000/api/blogEntries/${id}`, blog)
   }
 
   postBlogEntry(blog: IBlogEntryPutPost) {

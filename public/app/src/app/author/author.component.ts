@@ -6,6 +6,7 @@ import {GetblogsService} from "../Services/communication/getblogs.service";
 import {IBlogEntry} from "../../interfaces/blogEntry";
 import {ILocation} from "../../interfaces/Iocation";
 import {LocationService} from "../Services/communication/location.service";
+import {IUser} from "../../interfaces/user";
 
 
 @Component({
@@ -17,28 +18,28 @@ export class AuthorComponent {
   private userService: UserService;
   private blogService: GetblogsService;
   private locationService: LocationService;
-  private _author: any;
+  private _author: IUser = {
+    displayname: "", mail: "", name: "", publishedblogs: 0
+  };
   private _blogs: IBlogEntry[] = [];
 
   constructor(private route: ActivatedRoute, private http: HttpClient, private router: Router) {
     this.userService = new UserService(http);
     this.blogService = new GetblogsService(http);
     this.locationService = new LocationService(http);
-    this._author = this.getAuthor();
+    this.getAuthor();
   }
 
   get blogs(): IBlogEntry[] {
     return this._blogs;
   }
 
-  get author(): any {
+  get author(): IUser {
     return this._author;
   }
 
   private getAuthor() {
     const authorIdentifier = String(this.route.snapshot.paramMap.get('author'))
-
-    console.log(authorIdentifier)
 
     this.userService.getUserByUserName(authorIdentifier).subscribe(responseAuthor => {
       this._author = this.userService.mapAuthor(responseAuthor);

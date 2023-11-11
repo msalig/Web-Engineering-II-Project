@@ -77,9 +77,6 @@ const myRoutes: Routes = [
     component: TagsearchComponent
   },
   {
-    path: 'ratings',
-    component: RatingsComponent
-  }, {
     path: '**',
     component: NotfoundComponent
   }

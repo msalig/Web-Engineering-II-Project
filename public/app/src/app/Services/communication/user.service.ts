@@ -24,27 +24,27 @@ export class UserService {
   }
 
   getUserById(id: string): Observable<IUserFromBackend[]> {
-    return this.http.get<IUserFromBackend[]>("http://localhost:3000/api/users/" + id);
+    return this.http.get<IUserFromBackend[]>(`http://localhost:3000/api/users/${id}`);
   }
 
-  getUsers(): Observable<IAuthorFromBackend[]> {
-    return this.http.get<IAuthorFromBackend[]>("http://localhost:3000/api/users");
+  getUsers(): Observable<IUserFromBackend[]> {
+    return this.http.get<IUserFromBackend[]>("http://localhost:3000/api/users");
   }
 
-  getUserByUserName(userName: string): Observable<IAuthorFromBackend> {
-    return this.http.get<IAuthorFromBackend>("http://localhost:3000/api/users/byUsername/" + userName);
+  getUserByUserName(userName: string): Observable<IUserFromBackend> {
+    return this.http.get<IUserFromBackend>(`http://localhost:3000/api/users/byUsername/${userName}`)
   }
 
   deleteUser(id: string) {
-    return this.http.delete<ISendUserBackendRegister>('http://localhost:3000/api/users/' + id)
+    return this.http.delete<ISendUserBackendRegister>(`http://localhost:3000/api/users/${id}`)
   }
 
-  mapAuthor(author: IAuthorFromBackend): IUser {
+  mapAuthor(author: IUserFromBackend): IUser {
     return {
       displayname: author.username,
-      mail: '',
+      mail: author.email,
       name: author.displayname,
-      publishedblogs: 4
+      publishedblogs: author.countBlogEntries
     }
   }
 
