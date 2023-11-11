@@ -32,7 +32,7 @@
     <li>
       {{comment.comment}}
     </li>
-    <li *ngIf="AuthorizationService.getUser().displayname.length>0">
+    <li *ngIf="isDeleteAllowed(comment.author.displayname)">
       <button (click)="deleteComment(comment.commentid)" mat-button color="warn">Delete</button>
     </li>
   </ul>

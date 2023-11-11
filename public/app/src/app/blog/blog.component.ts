@@ -95,6 +95,10 @@ export class BlogComponent {
     return s.replace(/\s+/g, '-');
   }
 
+  isDeleteAllowed(displayname: string): boolean {
+    return AuthorizationService.getUser().displayname.length > 0 && AuthorizationService.getUser().displayname == displayname;
+  }
+
   deleteComment(id: string) {
     this.commentService.deleteComment(id).subscribe((response) => {
       if (response.status === HttpStatusCode.Ok) {
