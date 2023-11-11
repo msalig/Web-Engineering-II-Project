@@ -13,7 +13,7 @@ const router = express.Router();
  *     description: Returns OK when the service is available.
  *     responses:
  *       200:
- *         description: Returns a mysterious string.
+ *         description: OK
  */
 router.get('/health-check', (req, res) => res.send('OK'));
 

@@ -69,14 +69,14 @@ router.route('/byBlogEntry/:id')
  *        - comment
  */
 router.route('/:id')
-  .get(asyncHandler(read))
+  .get(asyncHandler(getCommentById))
   .delete(asyncHandler(deleteComment));
 
 /**
  * @openapi
  * /comments:
  *   post:
- *     summary: Fügt einen neuen Kommentar hinzu
+ *     summary: Creates a new comment
  *     requestBody:
  *       content:
  *         application/json:
@@ -92,7 +92,7 @@ router.route('/:id')
  *     tags:
  *       - comment
  *   get:
- *     summary: Ruft alle Kommentare ab
+ *     summary: Returns all comments
  *     responses:
  *       '200':
  *         description: OK
@@ -106,13 +106,13 @@ router.route('/:id')
  *       - comment
  */
 router.route('/')
-  .post(asyncHandler(insert))
-  .get(asyncHandler(readAll))
+  .post(asyncHandler(create))
+  .get(asyncHandler(getAllComments))
 
 module.exports = router;
 
-async function insert(req, res) {
-  let comment = await commentCtrl.insert(req.body);
+async function create(req, res) {
+  let comment = await commentCtrl.create(req.body);
   let blogEntry = await blogEntryCtrl.addComment(comment.blogEntryId, comment._id)
   if(blogEntry != null) {
     res.status(HttpStatus.CREATED).json(comment);
@@ -121,8 +121,8 @@ async function insert(req, res) {
   }
 }
 
-async function readAll(req, res) {
-  let comments = await commentCtrl.readAll();
+async function getAllComments(req, res) {
+  let comments = await commentCtrl.getAll();
   if(comments != null) {
     res.json(comments);
   } else {
@@ -130,8 +130,8 @@ async function readAll(req, res) {
   }
 }
 
-async function read(req, res) {
-  let comment = await commentCtrl.read(req.params.id);
+async function getCommentById(req, res) {
+  let comment = await commentCtrl.getById(req.params.id);
   if(comment != null) {
     res.json(comment);
   } else {
@@ -143,15 +143,6 @@ async function getByBlogEntryId(req, res) {
   let comments = await commentCtrl.getByBlogEntryId(req.params.id);
   if(comments != null) {
     res.json(comments);
-  } else {
-    res.status(404).end();
-  }
-}
-
-async function update(req, res) {
-  let comment = await commentCtrl.update(req.params.id, req.body);
-  if(comment != null) {
-    res.json(comment);
   } else {
     res.status(404).end();
   }

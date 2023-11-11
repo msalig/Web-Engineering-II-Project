@@ -1,7 +1,7 @@
 const swaggerOptions = {
   definition: {
     openapi: '3.0.0', info: {
-      title: 'Web Engineering II Project API', description: "Hier Beschreibung einfügen", version: '1.0.0',
+      title: 'Web Engineering II Project API', description: "Add description", version: '1.0.0',
     }, servers: [{
       url: "http://localhost:3000/api", description: "Main (production) server"
     }, {

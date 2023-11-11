@@ -1,5 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import {initFlowbite} from 'flowbite';
 
 
 @Component({
@@ -11,6 +10,5 @@ export class AppComponent implements OnInit {
   title = 'frontend';
 
   ngOnInit() {
-    initFlowbite();
   }
 }

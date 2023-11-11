@@ -13,21 +13,21 @@ const blogEntrySchema = Joi.object({
 });
 
 module.exports = {
-  insert,
+  create,
   getAll,
   getAllShort,
   getBlogById,
   getBlogsByAuthor,
   getBlogsByTag,
   getBlogsByCountry,
-  getByUrl: getBlogByUrl,
+  getBlogByUrl,
   addComment,
   removeComment,
   update,
-  deleteBlogEntry
+  deleteBlog
 };
 
-async function insert(blogEntry) {
+async function create(blogEntry) {
   blogEntry = await blogEntrySchema.validateAsync(blogEntry, {abortEarly: false});
   blogEntry.url = blogEntry.title.replace(/[^a-zA-Z0-9 ]/g, "").toLowerCase().replaceAll(" ", "-");
   return await new BlogEntry(blogEntry).save();
@@ -54,7 +54,7 @@ async function getBlogById(id) {
 }
 
 async function getBlogsByAuthor(username) {
-  let user = await require('../controllers/user').getUserByUsername(username, false);
+  let user = await require('../controllers/user').getByUsername(username, false);
   return BlogEntry.find({authorId: user[0]._id}, '-__v');
 }
 
@@ -74,6 +74,6 @@ async function update(blogEntryId, blogEntry) {
   return BlogEntry.findByIdAndUpdate(blogEntryId, blogEntry, {new: true});
 }
 
-async function deleteBlogEntry(blogEntryId) {
+async function deleteBlog(blogEntryId) {
   return BlogEntry.findByIdAndDelete(blogEntryId);
 }

@@ -6,7 +6,7 @@
   "license": "MIT",
   "scripts": {
     "ng": "ng",
-    "start": "concurrently -c \"yellow.bold,green.bold\" -n \"SERVER,BUILD\" \"nodemon server\" \"ng serve\"",
+    "start": "concurrently -c \"yellow.bold,green.bold\" -n \"SERVER,BUILD\" \"nodemon server\" \"ng serve --configuration production\"",
     "serve": "node server",
     "build:prod": "ng build --configuration production",
     "watch": "ng build --watch --configuration development",
@@ -38,8 +38,9 @@
     "dotenv": "^16.3.1",
     "express": "^4.18.2",
     "express-async-handler": "^1.2.0",
-    "flowbite": "^2.0.0",
+    "flowbite": "^2.1.1",
     "font-awesome": "^4.7.0",
+    "helmet": "^7.1.0",
     "http-errors": "^2.0.0",
     "http-status-codes": "^2.3.0",
     "joi": "^17.11.0",
@@ -51,6 +52,7 @@
     "rxjs": "~7.8.0",
     "swagger-jsdoc": "^6.2.8",
     "swagger-ui-express": "^5.0.0",
+    "tailwindcss": "^3.3.5",
     "tslib": "^2.3.0",
     "zone.js": "~0.13.0"
   },
@@ -65,7 +67,6 @@
     "karma-coverage": "~2.2.0",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
-    "tailwindcss": "^3.3.5",
     "typescript": "~5.1.3"
   }
 }

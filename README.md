@@ -81,14 +81,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-The objective of this project was to develop a website of our choice
-using HTML, CSS, and JavaScript. The project aimed to assess our skills in web
-development and focused on implementing best practices, user experience, and
-responsive design principles.
-
-If you want to see the entire project description, take a look here: [Project Description](./docs/Project%20Description.pdf)
-
-A live preview can be seen here: [Github Pages](https://msalig.github.io/Web-Engineering-II-Project/index.html)
+Objective: The goal of this project is to create a contemporary blogging platform with the flexibility to adopt a general customized theme. The project's primary purpose is to evaluate your web development skills, with particular emphasis on backend development while considering frontend requirements.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -101,8 +94,8 @@ A live preview can be seen here: [Github Pages](https://msalig.github.io/Web-Eng
 * [![Angular][Angular.io]][Angular-url]
 * [![NodeJS][NodeJS.org]][NodeJS-url]
 
-* [![Passport][PassportJS.org]][PassportJS-url]
-* [![QuillJS][QuillJS.com]][QuillJS-url]
+<!--* [![Passport][PassportJS.org]][PassportJS-url]
+* [![QuillJS][QuillJS.com]][QuillJS-url]-->
 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -116,10 +109,10 @@ To get a local copy up and running follow these simple example steps.
 
 ### Pre-requisites
 
-- git - [Installation guide](https://www.linode.com/docs/development/version-control/how-to-install-git-on-linux-mac-and-windows/) .
-- node.js - [Download page](https://nodejs.org/en/download/) .
-- npm - comes with node or download yarn - [Download page](https://yarnpkg.com/lang/en/docs/install) .
-- mongodb - [Download page](https://www.mongodb.com/download-center/community) .
+- git - [Installation guide](https://www.linode.com/docs/development/version-control/how-to-install-git-on-linux-mac-and-windows/)
+- node.js - [Download page](https://nodejs.org/en/download/)
+- npm - comes with node or download yarn - [Download page](https://yarnpkg.com/lang/en/docs/install)
+- (mongodb - [Download page](https://www.mongodb.com/download-center/community))
 
 ### Installation
 
@@ -136,12 +129,12 @@ To get a local copy up and running follow these simple example steps.
 
 
 <!-- USAGE EXAMPLES -->
-## Usage
+<!--## Usage
 
 Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
-
+-->
 
 <!-- LICENSE -->
 ## License
@@ -157,7 +150,7 @@ Distributed under the MIT License. See [LICENSE](./LICENSE) for more information
 * [Best-README-Template](https://github.com/othneildrew/Best-README-Template)
 * [Choose an Open Source License](https://choosealicense.com)
 * [Img Shields](https://shields.io)
-* [GitHub Pages](https://pages.github.com)
+<!--* [GitHub Pages](https://pages.github.com)-->
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 

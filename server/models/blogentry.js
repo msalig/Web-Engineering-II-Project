@@ -11,7 +11,6 @@ let blogEntrySchema = new Schema({
   review: {type: Number},
   tags: [{type: String}],
   comments: [{type: Schema.Types.ObjectId, ref: 'Comment'}],
-  //createdAt: {type: Date, required: true}
 });
 
 module.exports = mongoose.model('BlogEntry', blogEntrySchema);

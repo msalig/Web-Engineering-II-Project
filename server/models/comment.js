@@ -6,7 +6,6 @@ let commentSchema = new mongoose.Schema({
   title: {type: String, required: true},
   text: {type: String, required: true},
   review: {type: Number},
-  //createdAt: {type: Date, required: true}
 });
 
 module.exports = mongoose.model('Comment', commentSchema);

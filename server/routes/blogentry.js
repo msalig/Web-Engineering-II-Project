@@ -19,6 +19,8 @@ const router = express.Router();
  *                 type: array
  *                 items:
  *                   $ref: '#/components/schemas/BlogEntryShort'
+ *         '400':
+ *            description: BAD REQUEST
  *       tags:
  *        - blogEntries
  */
@@ -44,6 +46,8 @@ router.get('/short', asyncHandler(getAllBlogsShort));
  *                 type: array
  *                 items:
  *                   $ref: '#/components/schemas/BlogEntry'
+ *         '404':
+ *            description: NOT FOUND
  *      tags:
  *        - blogEntries
  */
@@ -69,6 +73,8 @@ router.get('/byTag/:tag', asyncHandler(getBlogsByTag));
  *                 type: array
  *                 items:
  *                   $ref: '#/components/schemas/BlogEntry'
+ *         '404':
+ *            description: NOT FOUND
  *       tags:
  *        - blogEntries
  */
@@ -92,6 +98,8 @@ router.get('/byCountry/:country', asyncHandler(getBlogsByCountry));
  *             application/json:
  *               schema:
  *                 $ref: '#/components/schemas/BlogEntry'
+ *         '404':
+ *            description: NOT FOUND
  *       tags:
  *        - blogEntries
  *   put:
@@ -110,6 +118,12 @@ router.get('/byCountry/:country', asyncHandler(getBlogsByCountry));
  *       responses:
  *         '200':
  *           description: OK
+ *           content:
+ *             application/json:
+ *               schema:
+ *                 $ref: '#/components/schemas/BlogEntry'
+ *         '404':
+ *            description: NOT FOUND
  *       tags:
  *        - blogEntries
  *   delete:
@@ -153,6 +167,8 @@ router.route('/:id')
  *                 type: array
  *                 items:
  *                   $ref: '#/components/schemas/BlogEntry'
+ *         '404':
+ *            description: NOT FOUND
  *       tags:
  *        - blogEntries
  */
@@ -176,6 +192,8 @@ router.get('/byAuthor/:username', asyncHandler(getBlogsByAuthor));
  *             application/json:
  *               schema:
  *                   $ref: '#/components/schemas/BlogEntry'
+ *         '404':
+ *            description: NOT FOUND
  *       tags:
  *        - blogEntries
  */
@@ -198,6 +216,8 @@ router.get('/byUrl/:url', asyncHandler(getBlogsByUrl));
  *             application/json:
  *               schema:
  *                 $ref: '#/components/schemas/BlogEntry'
+ *         '400':
+ *            description: BAD REQUEST
  *      tags:
  *        - blogEntries
  *   get:
@@ -211,21 +231,23 @@ router.get('/byUrl/:url', asyncHandler(getBlogsByUrl));
  *                 type: array
  *                 items:
  *                   $ref: '#/components/schemas/BlogEntry'
+ *         '400':
+ *            description: BAD REQUEST
  *      tags:
  *        - blogEntries
  */
 router.route('/')
-  .post(asyncHandler(insert))
+  .post(asyncHandler(create))
   .get(asyncHandler(getAll));
 
 module.exports = router;
 
-async function insert(req, res) {
-  let blog = await blogEntryCtrl.insert(req.body);
+async function create(req, res) {
+  let blog = await blogEntryCtrl.create(req.body);
   if(blog != null) {
     res.status(HttpStatus.CREATED).json(blog);
   } else {
-    res.status(HttpStatus.NOT_FOUND).end();
+    res.status(HttpStatus.BAD_REQUEST).end();
   }
 }
 
@@ -234,7 +256,7 @@ async function getAll(req, res) {
   if(blogs != null) {
     res.json(blogs);
   } else {
-    res.status(HttpStatus.NOT_FOUND).end();
+    res.status(HttpStatus.BAD_REQUEST).end();
   }
 }
 
@@ -243,7 +265,7 @@ async function getAllBlogsShort(req, res) {
   if(blogs != null) {
     res.json(blogs);
   } else {
-    res.status(HttpStatus.NOT_FOUND).end();
+    res.status(HttpStatus.BAD_REQUEST).end();
   }
 }
 
@@ -284,11 +306,11 @@ async function getBlogsByAuthor(req, res) {
 }
 
 async function getBlogsByUrl(req, res) {
-  let blogs = await blogEntryCtrl.getByUrl(req.params.url);
+  let blogs = await blogEntryCtrl.getBlogByUrl(req.params.url);
   if (blogs != null) {
     res.json(blogs);
   } else {
-    res.status(404).end();
+    res.status(HttpStatus.NOT_FOUND).end();
   }
 }
 
@@ -297,12 +319,12 @@ async function updateBlog(req, res) {
   if (blog != null) {
     res.json(blog);
   } else {
-    res.status(404).end();
+    res.status(HttpStatus.NOT_FOUND).end();
   }
 }
 
 async function deleteBlogById(req, res) {
-  await blogEntryCtrl.deleteBlogEntry(req.params.id).then(() => {
+  await blogEntryCtrl.deleteBlog(req.params.id).then(() => {
     res.status(HttpStatus.OK).end();
   }).catch((error) => {
     res.status(HttpStatus.NOT_FOUND).json(error).end();

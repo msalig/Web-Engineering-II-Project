@@ -12,17 +12,17 @@ const userSchema = Joi.object({
 });
 
 module.exports = {
-  insert, readAll, read, update, deleteUser, getUserByUsername
+  create, getAll, getById, update, deleteUser, getByUsername
 };
 
-async function insert(user) {
+async function create(user) {
   user = await userSchema.validateAsync(user, {abortEarly: false});
   user.hashedPassword = bcrypt.hashSync(user.password, 10);
   delete user.password;
   return await new User(user).save();
 }
 
-async function readAll() {
+async function getAll() {
   return User.aggregate([{
     $lookup: {
       from: "blogentries", localField: "_id", foreignField: "authorId", as: "blogEntries"
@@ -38,7 +38,7 @@ async function readAll() {
   }]).exec();
 }
 
-async function read(id) {
+async function getById(id) {
   return User.aggregate([{
     $match: {_id: new mongoose.Types.ObjectId(id)}
   }, {
@@ -56,7 +56,7 @@ async function read(id) {
   }]).exec();
 }
 
-async function getUserByUsername(username, withPWD) {
+async function getByUsername(username, withPWD) {
   let agg = User.aggregate([{
     $match: {username: username}
   }, {
