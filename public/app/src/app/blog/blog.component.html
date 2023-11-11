@@ -21,7 +21,7 @@
   <ul *ngFor="let comment of blog?.comments" class="comments">
     <li class="commentTitle">
       {{comment.title}}
-      <div class="commentAuthor">
+      <div class="commentAuthor" routerLink="/blogger/{{comment.author.displayname}}">
         <fa-icon [icon]="faUser"></fa-icon>
 
         {{comment.author.displayname}}</div>

@@ -43,7 +43,9 @@
 
 .newBlog {
   border-radius: $borderRadius;
-  border-style: dotted;
+  border-style: solid;
+border-color: darken($main-color,10);
+  border-width: 2px;
   text-align: center;
   padding-top: 5px;
   padding-bottom: 5px;

@@ -82,6 +82,7 @@ export class BlogComponent {
           text: this.leaveComment,
           review: this.review
         }).subscribe(response => {
+          console.log(response)
           if (response.review > 0 && response.review == this.review) {
             window.location.reload();
           }
